@@ -14,10 +14,22 @@
 \usepackage[T1]{fontenc}
 \usepackage[portuguese]{babel}
 \usepackage{braket}
+\usepackage{thmtools} 
+\usepackage{hyperref}
+\usepackage{environ}
+\usepackage{enumitem}
 \usepackage[backend=biber, style=numeric]{biblatex} %Imports biblatex package
 \addbibresource{references.bib} %Import the bibliography file
-
+%
 \usepackage{lipsum} % Pode tirar esse :D
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+	pdftitle={Quântica Avançada - L1 - Lucas Froguel}
+}
 
 
 \def\be{\begin{equation}}
@@ -29,36 +41,8 @@
 \def\beaa{\begin{eqnarray}}
 	\def\eeaa{\end{eqnarray}}
 
-\def\bl{\begin{lemma}}
-	\def\el{\end{lemma}}
-\def\bt{\begin{theorem}}
-	\def\et{\end{theorem}}
-\def\bc{\begin{corollary}}
-	\def\ec{\end{corollary}}
-
-\def\bp{\begin{proof}}
-	\def\ep{\end{proof}}
-
-\def\bd{\begin{definition}}
-	\def\ed{\end{definition}}
-\def\br{\begin{remark}}
-	\def\er{\end{remark}}
-
-\def\bex{\begin{exercise}}
-	\def\eex{\end{exercise}}
-\def\bexa{\begin{example}}
-	\def\eexa{\end{example}}
-\def\bm{\begin{method}}
-	\def\em{\end{method}}
-
-\def\benu{\begin{enumerate}}
-	\def\eenu{\end{enumerate}}
-\def\bpr{\begin{proposition}}
-	\def\epr{\end{proposition}}
-
 \def\f{\frac}
 \def\del{\partial}
-
 
 \def\R{\mathbb{R}}
 \def\K{\mathbb{K}}
@@ -81,7 +65,6 @@
 \def\curl{\nabla\times}
 \def\grad{\nabla}
 \def\lap{\nabla^2}
-\def\e{\varepsilon}
 
 \def\s{\quad}
 \def\ss{\qquad}
@@ -92,10 +75,16 @@
 \def\ds{\oplus}
 
 
+
 \newtheorem{exercise}{Exercise}
-\newtheorem{answer}{Answer}
+\newtheorem{partinner}{Part}[exercise]
 
+\newlist{exercises}{enumerate}{1}
+\setlist[exercises]{wide = 0pt, listparindent=\parindent,labelsep = 0pt,leftmargin =\labelwidth}
+\setlist[exercises, 1]{label =\itshape \bfseries Part~\arabic*.\; }
 
+\newenvironment{answer}{\noindent\textbf{\textit{Answer.}} \normalfont }{\par\noindent\rule{\textwidth}{0.4pt}}
+\newenvironment{multianswer}{\\ \noindent\textbf{\textit{Answer.}} \normalfont }{ \par\noindent\rule{0.7\textwidth}{0.1pt}}
 
 \newcommand\norm[1]{\left\lVert#1\right\rVert}
 
@@ -108,15 +97,8 @@
 \DeclareMathOperator{\acosh}{acosh}
 \DeclareMathOperator{\acsch}{acsch}
 \DeclareMathOperator{\asech}{asech}
-\DeclareMathOperator{\im}{Im}
 \DeclareMathOperator{\D}{D}
 \DeclareMathOperator{\Tr}{tr}
-\DeclareMathOperator{\graph}{graph}
-\DeclareMathOperator{\spann}{span}
-\DeclareMathOperator{\aut}{Aut}
-\DeclareMathOperator{\res}{Res}
-%\DeclareMathOperator{\det}{det}
-%\DeclareMathOperator{\dim}{dim}
 
 \title{Mecânica Quântica Avançada \\ Lista 1}
 \author{Lucas Froguel \\ IFT}
@@ -124,8 +106,8 @@
 
 \begin{document}
 	\maketitle
-	
-	
+	\listoftheorems[title={List of Exercises}]
+
 	\begin{exercise}[4.1]
 		Show that a necessary and sufficient condition for $|\psi\rangle$ to be an eigenvector of a Hermitian
 		operator A is that the dispersion (4.8) $\Delta_\psi A = 0$.
@@ -238,8 +220,268 @@
 			E_m \leq \braket{H}_{\varphi(\alpha_0)} \leq E_M
 		\ee
 		
-		
 	\end{answer}
 
+	\begin{exercise}[4.4.2 - 3]
+		If $H$ acts in a two-dimensional space, its most general form is
+		$$
+		H=\left(\begin{array}{cc}
+			a+c & b \\
+			b & a-c
+		\end{array}\right),
+		$$
+		where $b$ can always be chosen to be real. Parametrizing $|\varphi(\alpha)\rangle$ as
+		
+		$$
+		|\varphi(\alpha)\rangle=\left(\begin{array}{c}
+			\cos \alpha / 2 \\
+			\sin \alpha / 2
+		\end{array}\right)
+		$$
+		find the values of $\alpha_{0}$ by seeking the extrema of $\langle\varphi(\alpha)|H| \varphi(\alpha)\rangle$. Rederive (2.35).
+	\end{exercise}
+	\begin{answer}
+	Começamos considerando a equação do valor médio explicitamente:
+	\bea
+		\braket{\psi|H|\psi} 
+			&=& 
+			\begin{bmatrix}
+				\cos(\alpha/2) & \sin(\alpha/2)
+			\end{bmatrix}
+			\begin{bmatrix}
+				a+c & b \\
+				b & a-c
+			\end{bmatrix}
+			\begin{bmatrix}
+				\cos(\alpha/2) \\
+				\sin(\alpha/2)
+			\end{bmatrix} \\
+			&=& 
+			\begin{bmatrix}
+				\cos(\alpha/2) & \sin(\alpha/2)
+			\end{bmatrix}
+			\begin{bmatrix}
+				(a+c)\cos(\alpha/2) + b\sin(\alpha/2) \\
+				b\cos(\alpha/2) + (a-c)\sin(\alpha/2)
+			\end{bmatrix} \\
+			&=& 
+			(a+c)\cos^2(\alpha/2) + b\sin(\alpha/2)\cos(\alpha/2) + b\cos(\alpha/2)\sin(\alpha/2) + (a-c)\sin^2(\alpha/2) \\
+			&=& 
+			a(\sin^2(\alpha/2)+ \cos^2(\alpha/2)) + c(\cos^2(\alpha/2) - \sin^2(\alpha/2)) + b\sin(\alpha) \\
+			&=& a + b\sin(\alpha) + c\cos(\alpha)
+	\eea
+	Vejamos os extremos dessa função:
+	\bea	
+		\partial_\alpha \braket{\psi|H|\psi} &=& b\cos(\alpha) - c\sin(\alpha) = 0 \\
+		b\cos(\alpha) &=& c\sin(\alpha) \\
+		\tan(\alpha) &=& b/c \\
+		\alpha_0 &=& \atan(b/c)
+	\eea
+	A Eq.(2.35) se refere aos autovetores e autovalores de $H$. Vejamos o caso do nosso $\psi$:
+	\bea	
+		H\ket{\psi} &=& 
+		\l( a\begin{bmatrix}
+			  1 & 0 \\
+			  0 & 1
+			\end{bmatrix}
+			+ \sqrt{b^2+c^2}
+			\begin{bmatrix}
+				\cos\alpha & \sin\alpha \\
+				\sin\alpha & -\cos\alpha
+			\end{bmatrix}
+		\r)
+		\begin{bmatrix}
+			\cos(\alpha/2) \\
+			\sin(\alpha/2)
+		\end{bmatrix} \\
+		&=& 
+		a\begin{bmatrix}
+			\cos(\alpha/2) \\
+			\sin(\alpha/2)
+		\end{bmatrix} 
+		+ 
+		\sqrt{b^2+c^2}
+		\begin{bmatrix}
+			\cos\alpha\cos(\alpha/2) + \sin\alpha\sin(\alpha/2) \\
+			\sin\alpha\cos(\alpha/2) - \cos\alpha\sin(\alpha/2)
+		\end{bmatrix} \\
+		&=& 
+		a + \sqrt{b^2+c^2} 
+		\begin{bmatrix}
+			\cos(\alpha/2) \\
+			\sin(\alpha/2)
+		\end{bmatrix} 
+	\eea
+	onde usamos a Eq.(2.34) e algumas identidades trigonométricas.	
+	\end{answer}
+	
+	\begin{exercise}[4.4.3]
+		Let a Hamiltonian $H$ depend on a parameter $\lambda: H=H(\lambda)$. Let $E(\lambda)$ be a nondegenerate eigenvalue and $|\varphi(\lambda)\rangle$ be the corresponding normalized eigenvector $\left(\|\varphi(\lambda)\|^{2}=1\right)$ :
+		
+		$$
+		H(\lambda)|\varphi(\lambda)\rangle=E(\lambda)|\varphi(\lambda)\rangle
+		$$
+		Demonstrate the Feynman-Hellmann theorem:
+		$$
+		\frac{\partial E}{\partial \lambda}=\left\langle\varphi(\lambda)\left|\frac{\partial H}{\partial \lambda}\right| \varphi(\lambda)\right\rangle .
+		$$
+	\end{exercise}
+	\begin{answer}
+		Sabemos que podemos escrever
+		\be
+			E(\lambda) = \braket{\psi|H|\psi}
+		\ee
+		Então considere:
+		\be
+			\partial_\lambda E = \braket{\partial_\lambda\psi|H|\psi} + \braket{\psi|\partial_\lambda|\psi} + \braket{\psi|H|\partial_\lambda\psi} 
+		\ee
+		Logo, é suficiente mostrar que 
+		\be
+			\braket{\partial_\lambda\psi|H|\psi} +  \braket{\psi|H|\partial_\lambda\psi} = 0
+		\ee
+		Considere:
+		\bea
+			\braket{\partial_\lambda\psi|H|\psi} +  \braket{\psi|H|\partial_\lambda\psi} 
+			&=& \braket{\partial_\lambda\psi|E|\psi} + \braket{\psi|E^\dagger|\partial_\lambda\partial_\lambda\psi} \\
+ 			&=& E \l(\braket{\partial_\lambda\psi|\psi} + \braket{\psi|\partial_\lambda\psi}\r) \\ 
+			&=& E( \partial_\lambda\braket{\psi|\psi}) \\
+			&=& E\partial_\lambda 1 \\
+			&=& 0
+		\eea
+		onde usamos o fato de $H$ ser hermitiano e ter autovalores reais e de $\ket{\psi}$ ser normalizado. Portanto, fica demonstrado o teorema.		
+	\end{answer}
+
+	\begin{exercise}[4.4.4]
+		We consider a two-level system with Hamiltonian $H$ represented by the matrix
+		$$
+		H=\hbar\left(\begin{array}{cc}
+			A & B \\
+			B & -A
+		\end{array}\right)
+		$$
+		in the basis
+		$$
+		|+\rangle=\left(\begin{array}{l}
+			1 \\
+			0
+		\end{array}\right), \quad|-\rangle=\left(\begin{array}{l}
+			0 \\
+			1
+		\end{array}\right)
+		$$
+		According to (2.35), the eigenvalues and eigenvectors of $H$ are
+		$$
+		\begin{array}{ll}
+			E_{+}=\hbar \sqrt{A^{2}+B^{2}}, & \left|\chi_{+}\right\rangle=\cos \frac{\theta}{2}|+\rangle+\sin \frac{\theta}{2}|-\rangle \\
+			E_{-}=-\hbar \sqrt{A^{2}+B^{2}}, & \left|\chi_{-}\right\rangle=-\sin \frac{\theta}{2}|+\rangle+\cos \frac{\theta}{2}|-\rangle
+		\end{array}
+		$$
+		with
+		$$
+		A=\sqrt{A^{2}+B^{2}} \cos \theta, \quad B=\sqrt{A^{2}+B^{2}} \sin \theta, \quad \tan \theta=\frac{B}{A}
+		$$
+		\begin{exercises}
+		\item The state vector $|\varphi(t)\rangle$ at time $t$ can be decomposed on the $\{|+\rangle,|-\rangle\}$ basis:
+		
+		$$
+		|\varphi(t)\rangle=c_{+}(t)|+\rangle+c_{-}(t)|-\rangle
+		$$
+		
+		Write down the system of coupled differential equations which the components $c_{+}(t)$ and $c_{-}(t)$ satisfy.
+		\begin{multianswer}
+				Começamos escrevendo:
+				\be
+					\ket{\varphi(t)} = \begin{pmatrix}
+						c_+(t) \\ c_-(t)
+						\end{pmatrix}
+				\ee
+				Agora montamos a equação de Schrödinger:
+				\bea
+					H\ket{\varphi(t)} &=& -i\hbar \partial_t\ket{\varphi(t)} \\
+					\hbar\begin{pmatrix}
+						A & B \\
+						B & -A
+					\end{pmatrix} 
+					\begin{pmatrix}
+						c_+(t) \\ c_-(t)
+					\end{pmatrix} 
+					&=& 
+					-i\hbar 
+					\begin{pmatrix}
+						\partial_t c_+(t) \\ \partial_t c_-(t)
+					\end{pmatrix} \\
+					\begin{pmatrix}
+						Ac_+ + Bc_- \\ Bc_+ - Ac_-
+					\end{pmatrix}
+					&=&
+					-i \begin{pmatrix}
+						\dot{c}_+(t) \\ \dot{c}_-(t)
+					\end{pmatrix}
+				\eea
+			Ou seja, temos as equações diferenciais:
+			\beaa
+				i\dot{c}_+ &=& Ac_+ + Bc_- \\
+				i\dot{c}_- &=& Bc_+ - Ac_-
+			\eeaa				
+		\end{multianswer}
+		
+		\item Let $|\varphi(t=0)\rangle$ be decomposed on the $\left\{\left|\chi_{+}\right\rangle,\left|\chi_{-}\right\rangle\right\}$basis:
+		$$
+		|\varphi(t=0)\rangle=|\varphi(0)\rangle=\lambda\left|\chi_{+}\right\rangle+\mu\left|\chi_{-}\right\rangle, \quad|\lambda|^{2}+|\mu|^{2}=1
+		$$
+		Show that $c_{+}(t)=\langle+\mid \varphi(t)\rangle$ is written as
+		$$
+		c_{+}(t)=\lambda \mathrm{e}^{-\mathrm{i} \Omega t / 2} \cos \frac{\theta}{2}-\mu \mathrm{e}^{\mathrm{i} \Omega t / 2} \sin \frac{\theta}{2}
+		$$
+		with $\Omega=2 \sqrt{A^{2}+B^{2}}$. Here $\hbar \Omega$ is the energy difference of the two levels. Show that $c_{+}(t)$ (as well as $\left.c_{-}(t)\right)$ satisfies the differential equation
+		$$
+		\ddot{c}_{+}(t)+\left(\frac{\Omega}{2}\right)^{2} c_{+}(t)=0 .
+		$$
+		\begin{multianswer}
+			Vamos começar pela segunda parte, mostrando a validez da equação diferencial. Considere as EDOs que obtemos e vamos deriva-las mais uma vez (faremos as contas para $c_+$, pois são análogas para $c_-$.):
+			\be
+				i\ddot{c}_+ = A\dot{c}_+ + B\dot{c}_-
+			\ee
+			Mas note, também, que:
+			\bea
+				A\dot{c}_+ &=& -iA^2c_+ - iABc_- \\
+				B\dot{c}_- &=& -iB^2c_+ + iABc_-
+			\eea
+			Logo, 
+			\be
+				A\dot{c}_+ + B\dot{c}_- = -i(A^2+B^2)c_+
+			\ee
+			Portanto,
+			\be
+				i\ddot{c}_+ = -i(A^2+B^2)c_+
+			\ee
+			que, simplificando, implica na expressão desejada
+			\be
+				\ddot{c}_+ +\l(\f{\Omega}{2}\r)^2c_+ = 0
+			\ee
+			Vamos considerar agora a outra parte. Ela nos dá condições iniciais:
+			\be
+				\ket{\varphi_0} = 
+				\begin{pmatrix}
+					\lambda\cos(\theta/2) - \mu\sin(\theta/2) \\
+					\lambda\sin(\theta/2) + \mu\cos(\theta/2) \\
+				\end{pmatrix}
+			\ee
+			Ou seja,
+			\bea
+				c_+(0) &=& \lambda\cos(\theta/2) - \mu\sin(\theta/2) \\
+				c_-(0) &=& \lambda\sin(\theta/2) + \mu\cos(\theta/2) 
+			\eea
+			Usando a equação diferencial que deduzimos, é fácil ver que (novamente, apenas para $c_+$):
+			\be
+				c_+(t) = Ae^{i\Omega t/2} + Be^{-i\Omega t/2}
+			\ee
+			
+			
+		\end{multianswer}
+		\end{exercises}
+	\end{exercise}
+	
+	
 
 \end{document}
