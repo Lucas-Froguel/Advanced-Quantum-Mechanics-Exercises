@@ -1,0 +1,245 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage[mathscr]{euscript}
+\usepackage{array}
+\usepackage[thinlines]{easytable}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage[margin=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{braket}
+\usepackage[backend=biber, style=numeric]{biblatex} %Imports biblatex package
+\addbibresource{references.bib} %Import the bibliography file
+
+\usepackage{lipsum} % Pode tirar esse :D
+
+
+\def\be{\begin{equation}}
+	\def\ee{\end{equation}}
+\def\bee{\begin{equation*}}
+	\def\eee{\end{equation*}}
+\def\bea{\begin{eqnarray*}}
+	\def\eea{\end{eqnarray*}}
+\def\beaa{\begin{eqnarray}}
+	\def\eeaa{\end{eqnarray}}
+
+\def\bl{\begin{lemma}}
+	\def\el{\end{lemma}}
+\def\bt{\begin{theorem}}
+	\def\et{\end{theorem}}
+\def\bc{\begin{corollary}}
+	\def\ec{\end{corollary}}
+
+\def\bp{\begin{proof}}
+	\def\ep{\end{proof}}
+
+\def\bd{\begin{definition}}
+	\def\ed{\end{definition}}
+\def\br{\begin{remark}}
+	\def\er{\end{remark}}
+
+\def\bex{\begin{exercise}}
+	\def\eex{\end{exercise}}
+\def\bexa{\begin{example}}
+	\def\eexa{\end{example}}
+\def\bm{\begin{method}}
+	\def\em{\end{method}}
+
+\def\benu{\begin{enumerate}}
+	\def\eenu{\end{enumerate}}
+\def\bpr{\begin{proposition}}
+	\def\epr{\end{proposition}}
+
+\def\f{\frac}
+\def\del{\partial}
+
+
+\def\R{\mathbb{R}}
+\def\K{\mathbb{K}}
+\def\C{\mathbb{C}}
+\def\I{\mathbb{I}}
+\def\Z{\mathbb{Z}}
+\def\Q{\mathbb{Q}}
+\def\N{\mathbb{N}}
+
+\def\cd{\cdot}
+
+\def\v#1{{\boldsymbol{#1}}}
+\def\ve#1{\hat{\boldsymbol#1}}
+
+\def\l{\left}
+\def\r{\right}
+\def\la{\l\langle}
+\def\ra{\r\rangle}
+\def\div{\nabla\cdot}
+\def\curl{\nabla\times}
+\def\grad{\nabla}
+\def\lap{\nabla^2}
+\def\e{\varepsilon}
+
+\def\s{\quad}
+\def\ss{\qquad}
+\def\infi{\infty}
+\def\p{\partial}
+\def\u{\cup}%union of two sets
+\def\i{\cap}%intersection of two sets
+\def\ds{\oplus}
+
+
+\newtheorem{exercise}{Exercise}
+\newtheorem{answer}{Answer}
+
+
+
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+
+\DeclareMathOperator{\atan}{atan}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\asinh}{asinh}
+\DeclareMathOperator{\atanh}{atanh}
+\DeclareMathOperator{\acoth}{acoth}
+\DeclareMathOperator{\acosh}{acosh}
+\DeclareMathOperator{\acsch}{acsch}
+\DeclareMathOperator{\asech}{asech}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\D}{D}
+\DeclareMathOperator{\Tr}{tr}
+\DeclareMathOperator{\graph}{graph}
+\DeclareMathOperator{\spann}{span}
+\DeclareMathOperator{\aut}{Aut}
+\DeclareMathOperator{\res}{Res}
+%\DeclareMathOperator{\det}{det}
+%\DeclareMathOperator{\dim}{dim}
+
+\title{Mecânica Quântica Avançada \\ Lista 1}
+\author{Lucas Froguel \\ IFT}
+\date{}
+
+\begin{document}
+	\maketitle
+	
+	
+	\begin{exercise}[4.1]
+		Show that a necessary and sufficient condition for $|\psi\rangle$ to be an eigenvector of a Hermitian
+		operator A is that the dispersion (4.8) $\Delta_\psi A = 0$.
+	\end{exercise}
+	\begin{answer}
+		Vamos iniciar mostrando que se $\ket{\psi}=0$, então $\Delta_\psi A = 0$. Ora, por definição:
+		\be
+			\Delta_\psi A = \braket{\psi|A^2|\psi} - \braket{\psi|A|\psi}^2
+		\ee
+		É fácil ver que
+		\be
+			\braket{\psi|A^2|\psi} = \bra{\psi|A^\dagger}\ket{A|\psi} = a^2
+		\ee
+		E também
+		\be
+			\braket{\psi|A|\psi}^2 = \l(a\r)^2 = a^2
+		\ee
+		Logo, é trivial que $\Delta_\psi A = 0$. 
+		
+		Agora vamos assumir que a dispersão é nula, ou seja, $\Delta A = 0$. Então ,por definição:		
+		\begin{align}
+			0 &= \sqrt{\langle A^2 \rangle - \langle A \rangle^2} \\
+			\Rightarrow \langle A^2 \rangle &= \langle A \rangle^2
+		\end{align}		
+				
+	\end{answer}
+
+	\begin{exercise}[4.4.2 - 1]
+		 Let $\ket{\psi}$ be a vector (not normalized) in the Hilbert space of states and H be a Hamiltonian. The
+		expectation value $\braket{H}_\psi$ is
+		\be
+			\braket{\psi}_\psi = \f{\braket{\psi|H|\psi}}{\braket{\psi|\psi}}
+		\ee
+		Show that if the minimum of this expectation value is obtained for $\ket{\psi}=\ket{\psi_m}$ and the maximum for $\ket{\psi}=\ket{\psi_M}$ , then
+		\be
+			H\ket{\psi_m} = E_m\ket{\psi_m}, \quad\quad H\ket{\psi_M} = E_M\ket{\psi_M}
+		\ee 	
+		where $E_m$ and $E_M$ are the smallest and largest eigenvalues.
+	\end{exercise}
+	\begin{answer}
+		É evidente que
+		\be
+			\braket{H}_{\psi_m} = \f{\braket{\psi_m|H|\psi_m}}{\braket{\psi_m|\psi_m}} = E_m
+		\ee
+		Portanto, é evidente que se $\braket{H}_{\psi_m}$ for mínimo, então $E_m$ também é. Vale um raciocínio análogo para $E_M=\braket{H}_{\psi_M}$. 		
+	\end{answer}
+	
+	\begin{exercise}[4.4.2 - 2]
+		We assume that the vector $|\varphi\rangle$ depends on a parameter $\alpha:|\varphi\rangle=|\varphi(\alpha)\rangle$. Show that if
+		\begin{equation}
+			\frac{\partial\braket{H}_{\varphi(\alpha)}}{\partial \alpha}\bigg|_{\alpha=\alpha_0}=0,
+		\end{equation}
+		then $E_{m} \leq\langle H\rangle_{\varphi\left(\alpha_{0}\right)}$ if $\alpha_{0}$ corresponds to a minimum of $\langle H\rangle_{\varphi(\alpha)}$, and $\langle H\rangle_{\varphi\left(\alpha_{0}\right)} \leq E_{M}$ if $\alpha_{0}$ corresponds to a maximum. This result forms the basis of an approximation method called the variational method (Section 14.1.4).
+	\end{exercise}
+	\begin{answer}
+		Vamos abrir a derivada:
+		\be
+			\frac{\partial\braket{H}{\varphi(\alpha)}}{\partial \alpha} = \f{1}{\braket{\psi|\psi}}\l( \bra{\psi|H} \partial_\alpha\ket{\psi} + (\partial_\alpha\bra{\psi})\ket{H|\psi}\r) - \f{\braket{\psi|H|\psi}}{\braket{\psi|\psi}^2}\l( (\partial_\alpha\bra{\psi})\ket{\psi} + \bra{\psi}\partial_\alpha\ket{\psi}\r) 
+		\ee
+		Então, em $\alpha_0$
+		\be
+			\braket{\psi|H|\partial_\alpha\psi} + \braket{\partial_\alpha\psi|H|\psi} = \f{\braket{\psi|H|\psi}}{\braket{\psi|\psi}}\big( \braket{\partial_\alpha\psi|\psi} + \braket{\psi|\partial_\alpha\psi}\big)
+		\ee
+		Isolando a quantidade de interesse:
+		\be
+			\braket{H}_{\varphi(\alpha_0)} = \f{\braket{\psi|H|\partial_\alpha\psi} + \braket{\partial_\alpha\psi|H|\psi}}{\braket{\partial_\alpha\psi|\psi} + \braket{\psi|\partial_\alpha\psi}}
+		\ee 
+		Podemos reescrever, usando que $H=H^\dagger$:
+		\be
+			\braket{H}_{\varphi(\alpha_0)} = \f{\braket{\partial_\alpha\psi|H|\psi}^\dagger + \braket{\partial_\alpha\psi|H|\psi}}{\braket{\partial_\alpha\psi|\psi}^\dagger + \braket{\partial_\alpha\psi|\psi}}
+		\ee
+		
+		Podemos expandir qualquer estado usando os autokets do hamiltoniano, que são ortonormais:
+		\be
+			\ket{\psi} = \sum c_j\ket{\psi_j}
+		\ee
+		De modo que
+		\be
+			\partial_\alpha\ket{\psi} = \sum \f{\partial c_j}{\partial\alpha} \ket{\psi_j}
+		\ee
+		Assim, vale que
+		\be
+			\braket{\partial_\alpha\psi|\psi} = \sum c_j\f{\partial c_j^*}{\partial\alpha}
+		\ee
+		E também
+		\be
+			\braket{\partial_\alpha\psi|H|\psi} = \sum E_jc_j\f{\partial c_j^*}{\partial\alpha}
+		\ee
+		Considere o denominador:
+		\bea
+			\braket{\partial_\alpha\psi|\psi}^\dagger + \braket{\partial_\alpha\psi|\psi} 
+				&=& \sum c_j \f{\partial c_j^*}{\partial\alpha} + c_j^*\f{\partial c_j}{\partial\alpha} \\
+				&=& \sum \f{\partial}{\partial\alpha} (c_j^*c_j) \\
+				&=& \sum \partial_\alpha |c_j|^2 \\
+				&=& \partial_\alpha \sum |c_j|^2
+		\eea
+		Considerando, enfim, o numerador e fazendo os mesmos cálculos:
+		\bea
+			\braket{\partial_\alpha\psi|H|\psi}^\dagger + \braket{\partial_\alpha\psi|H|\psi} 
+				&=& \sum E_jc_j\f{\partial c_j^*}{\partial\alpha} + E_j c_* \f{\partial c_j}{\partial\alpha} \\
+				&=& \sum E_j \partial_\alpha |c_j|^2 \\
+				&=& \partial_\alpha \sum E_j|c_j|^2 
+		\eea
+		É óbvio, então, que
+		\be
+			E_m \partial_\alpha\sum |c_j|^2 \leq \partial_\alpha\sum E_j|c_j|^2 \leq E_M \partial_\alpha\sum |c_j|^2
+		\ee 
+		Portanto, concluímos que
+		\be
+			E_m \leq \braket{H}_{\varphi(\alpha_0)} \leq E_M
+		\ee
+		
+		
+	\end{answer}
+
+
+\end{document}
