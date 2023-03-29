@@ -472,11 +472,48 @@
 				c_+(0) &=& \lambda\cos(\theta/2) - \mu\sin(\theta/2) \\
 				c_-(0) &=& \lambda\sin(\theta/2) + \mu\cos(\theta/2) 
 			\eea
-			Usando a equação diferencial que deduzimos, é fácil ver que (novamente, apenas para $c_+$):
+			Usando a equação diferencial que deduzimos, é fácil ver que:
+			\bea
+				c_+(t) &=& A_+e^{i\Omega t/2} + B_+e^{-i\Omega t/2} \\
+				c_-(t) &=& A_-e^{i\Omega t/2} + B_-e^{-i\Omega t/2} 
+			\eea
+			Isso obviamente nos diz que:
+			\bea
+				A_+ + B_+ &=& \lambda\cos(\theta/2) - \mu\sin(\theta/2) \\
+				A_- + B_- &=& \lambda\sin(\theta/2) + \mu\cos(\theta/2) 
+			\eea
+			*
+		\end{multianswer}
+		\item We assume that $c_{+}(0)=0$. Find $\lambda$ and $\mu$ up to a phase as well as $c_{+}(t)$. Show that the probability of finding the system in the state $|+\rangle$ at time $t$ is
+		
+		$$
+		\mathrm{p}_{+}(t)=\sin ^{2} \theta \sin ^{2}\left(\frac{\Omega t}{2}\right)=\frac{B^{2}}{A^{2}+B^{2}} \sin ^{2}\left(\frac{\Omega t}{2}\right) .
+		$$
+		\begin{multianswer}
+			Se $c_+(0)=0$, então precisa ser que
 			\be
-				c_+(t) = Ae^{i\Omega t/2} + Be^{-i\Omega t/2}
+				 \lambda\cos(\theta/2) - \mu\sin(\theta/2) = 0
 			\ee
-			
+			Logo, é verdade que
+			\be
+				\lambda = \mu \tan(\theta/2)
+			\ee
+			Mas, pela normalização:
+			\bea
+				|\lambda|^2 + |\mu|^2 &=& 1 \\
+				|\mu\tan(\theta/2)|^2 + |\mu|^2 &=& 1 \\
+				|\mu|^2|\tan(\theta/2)|^2 + |\mu|^2 &=& \\
+				|\mu|^2 &=& \f{1}{1 + |\tan(\theta/2)|^2}
+			\eea
+			Logo, a menos de uma fase $e^{ia}$, 
+			\bea
+				\mu =  &=& \f{1}{\sqrt{1 + |\tan(\theta/2)|^2}} \\
+				\lambda  &=& \f{\tan(\theta/2)}{\sqrt{1 + |\tan(\theta/2)|^2}}
+			\eea
+			Vamos supor, daqui em diante, $\theta\in[0, \pi]$ para tirarmos a tangente do módulo. Usando a solução geral de $c_+(t)$, sabemos que precisa valer
+			\be
+				A_+ + B_+ = 0
+			\ee
 			
 		\end{multianswer}
 		\end{exercises}
