@@ -84,11 +84,21 @@
 \setlist[exercises, 1]{label =\itshape \bfseries Part~\arabic*.\; }
 
 \newenvironment{answer}{\noindent\textbf{\textit{Answer.}} \normalfont }{\par\noindent\rule{\textwidth}{0.4pt}}
-\newenvironment{multianswer}{\\ \noindent\textbf{\textit{Answer.}} \normalfont }{ \par\noindent\rule{0.7\textwidth}{0.1pt}}
+%\newenvironment{multianswer}{\\ \noindent\textbf{\textit{Answer.}} \normalfont }{ \par\noindent\rule{0.7\textwidth}{0.1pt}}
+\NewEnviron{multianswer}[1][false]{%
+	\ifthenelse{\equal{#1}{true}}%
+	{\def\rulewidth{\textwidth}}%
+	{\def\rulewidth{0.7\textwidth}}%
+	\\ \noindent\textbf{\textit{Answer.}} \normalfont%
+	\BODY%
+	\par\noindent\rule{\rulewidth}{0.1pt}%
+}
+
 
 \newcommand\norm[1]{\left\lVert#1\right\rVert}
 
 \DeclareMathOperator{\atan}{atan}
+\DeclareMathOperator{\acos}{acos}
 \DeclareMathOperator{\sech}{sech}
 \DeclareMathOperator{\csch}{csch}
 \DeclareMathOperator{\asinh}{asinh}
@@ -489,7 +499,7 @@
 		$$
 		\mathrm{p}_{+}(t)=\sin ^{2} \theta \sin ^{2}\left(\frac{\Omega t}{2}\right)=\frac{B^{2}}{A^{2}+B^{2}} \sin ^{2}\left(\frac{\Omega t}{2}\right) .
 		$$
-		\begin{multianswer}
+		\begin{multianswer}[true]
 			Se $c_+(0)=0$, então precisa ser que
 			\be
 				 \lambda\cos(\theta/2) - \mu\sin(\theta/2) = 0
@@ -519,6 +529,159 @@
 		\end{exercises}
 	\end{exercise}
 	
+	\begin{exercise}[4.4.5]
+		Let $|\varphi(0)\rangle$ represent the state vector at time $t=0$ of an unstable particle, or more generally that of an unstable quantum state such as an atom in an excited state, and let $\mathrm{p}(t)$ be the probability (survival probability) that it has not decayed at time $t$. The particle is assumed to be isolated from external influences (but not from quantized fields), so that the Hamiltonian $H$ that governs the decay is time-independent. Let $|\Psi(t)\rangle$ be the state vector at time $t$ of the full quantum system
+		$$
+		|\Psi(t)\rangle=\exp \left(-\frac{i H t}{\hbar}\right)|\varphi(0)\rangle .
+		$$
+		The probability amplitude for finding the state of the quantum system at time $t$ in $|\varphi(0)\rangle$ is
+		$$
+		c(t)=\langle\varphi(0) \mid \Psi(t)\rangle=\left\langle\varphi(0)\left|\exp \left(-\frac{\mathrm{i} H t}{\hbar}\right)\right| \varphi(0)\right\rangle
+		$$
+		and the survival probability is
+		$$
+		\mathrm{p}(t)=|c(t)|^{2}=|\langle\Psi(t) \mid \varphi(0)\rangle|^{2}=\langle\Psi(t)|\mathcal{P}| \Psi(t)\rangle
+		$$
+		where $\mathcal{P}=|\varphi(0)\rangle\langle\varphi(0)|$ is the projector on the initial state.
+		\begin{exercises}
+			% Part 1
+			\item Let us first restrict ourselves to very short times. Show that for $t \rightarrow 0$
+			$$
+			\mathrm{p}(t) \simeq 1-\frac{(\Delta H)^{2}}{\hbar^{2}} t^{2}
+			$$
+			so that, for very short times, the decay law is certainly not exponential. The expectation values of $H$ and $H^{2}$ are computed in the state $|\varphi(0)\rangle$. Note that $\Delta H$ must be finite, otherwise $|\varphi(0)\rangle$ would not belong to the domain of $H^{2}$, which would be difficult to imagine physically (see Chapter 7 for the definition of the domain of an operator).
+			\begin{multianswer}
+				Começamos lembrando que
+				\be
+					(\Delta H)^2 = \braket{H^2} - \braket{H}^2
+				\ee
+				Para $t\to0$, podemos aproximar
+				\be
+					e^{-iHt/\hbar} \approx 1 -\f{iHt}{\hbar} - \f{H^2t^2}{2\hbar^2}
+				\ee
+				Logo, 
+				\bea
+					c(t) &=& \braket{\phi_0 | 1 - \f{iHt}{\hbar} - \f{H^2t^2}{2\hbar^2} | \phi_0} \\
+						&=& \braket{\phi_0|\phi_0} - \f{it}{\hbar}  \braket{H} - \f{t^2\braket{H^2}}{2\hbar^2}\\
+						&=& 1 - \f{it\braket{H}}{\hbar} - \f{t^2\braket{H^2}}{2\hbar^2}
+				\eea
+				Portanto,
+				\bea
+					p(t) &=& |c(t)|^2 \\
+						&=& 1  - \f{t^2\braket{H^2}}{\hbar^2}  + \f{t^2\braket{H}^2}{\hbar^2} + \f{t^4\braket{H^2}^2}{\hbar^4} \\
+						&=& 1 - \f{t^2}{\hbar^2}\l(\braket{H^2}  - \braket{H}^2 \r) + \mathcal{O}(t^4)  \\
+						&=& 1 - \f{t^2(\Delta H)^2}{\hbar^2}
+				\eea
+				como queríamos mostrar. 
+			\end{multianswer}
+		
+			% Part 2
+			\item A more general result is obtained as follows. Show first that
+			$$
+			\Delta \mathcal{P}^{2}=\langle\mathcal{P}\rangle-\langle\mathcal{P}\rangle^{2}
+			$$
+			and use (4.27) to deduce the inequality $\left(\Delta H=\left(\left\langle H^{2}\right\rangle-\langle H\rangle^{2}\right)^{1 / 2}\right)$
+			$$
+			\left|\frac{\mathrm{d} \mathrm{p}(t)}{\mathrm{d} t}\right| \leq \frac{2 \Delta H}{\hbar} \sqrt{\mathrm{p}(1-\mathrm{p})}
+			$$
+			Integrating this differential equation, derive
+			$$
+			\mathrm{p}(t) \geq \cos ^{2}\left(\frac{t \Delta H}{\hbar}\right) \quad 0 \leq t \leq \frac{\pi \hbar}{2 \Delta H}
+			$$		]
+			\begin{multianswer}
+				Sabemos que $\mathcal{P} = \ket{\psi_0}\bra{\psi_0}$. Assim, como $\mathcal{P}$ é um projetor, é trivial que seja idempotente:
+				\be
+					\mathcal{P}^2 = \l(\ket{\psi_0}\bra{\psi_0}\r)\l(\ket{\psi_0}\bra{\psi_0}\r) = \ket{\psi_0}\braket{\psi_0|\psi_0}\bra{\psi_0} = \ket{\psi_0}\bra{\psi_0} = \mathcal{P}
+				\ee
+				À partir disso, decorre diretamente a propriedade de:
+				\be
+					(\Delta\mathcal{P})^2 = \braket{\mathcal{P}} - \braket{\mathcal{P}}^2
+				\ee
+				A Eq.(4.27) diz que
+				\be
+					\Delta_{\varphi} H \Delta_{\varphi} A \geq \frac{1}{2}\left|\langle[A, H]\rangle_{\varphi}\right|=\frac{1}{2} \hbar\left|\frac{\mathrm{d}}{\mathrm{d} t}\langle A\rangle_{\varphi}(t)\right|
+				\ee
+				onde, no nosso caso, teremos $A=\mathcal{P}$. Usando $p(t)=\braket{\mathcal{P}}$ e aplicando para o nosso caso:
+				\be
+					\l|\f{dp}{dt}\r| \leq \f{2\Delta H}{\hbar}\Delta\mathcal{P} 
+				\ee
+				Então, basta escrever $\Delta\mathcal{P}$ na forma desejada. Ora, isso é fácil, pois
+				\bea
+					\Delta\mathcal{P} &=& \sqrt{\braket{\mathcal{P}} - \braket{\mathcal{P}}^2} \\
+							&=& \sqrt{p - p^2} \\
+							&=& \sqrt{p(1-p)}
+				\eea
+				Portanto, 
+				\be
+					\l|\f{dp}{dt}\r| \leq \f{2\Delta H}{\hbar}\sqrt{p(1-p)} 
+				\ee
+				Vamos, agora, integrar essa inequação:
+				\bea
+					\f{dp}{\sqrt{p(1-p)}} &\leq& \f{2\Delta H}{\hbar} dt  \\
+					\int \f{dp}{\sqrt{p(1-p)}} &\leq& \int \f{2\Delta H}{\hbar} dt = \f{2t\Delta H}{\hbar}
+				\eea
+				Vejamos o lado esquerdo com mais cuidado. Vamos usar a substituição $u=\sqrt{p}$, onde $2du = dp/\sqrt{p}$. Assim, 
+				\be
+					\int \f{dp}{\sqrt{p(1-p)}} = \int \f{2du}{\sqrt{1-u^2}} = 2\acos(u)
+				\ee
+				Agora, notamos que isso implica
+				\be
+					0 \leq \f{2t\Delta H}{\hbar} \leq \pi
+				\ee
+				Ou,
+				\be
+					0 \leq t \leq \frac{\pi \hbar}{2 \Delta H}
+				\ee
+				Voltando à inequação das integrais e usando que $u=\sqrt{p}$. 
+				\bea
+					\acos(u) &\leq& \f{t\Delta H}{\hbar} \\ 
+					\sqrt{p} &\geq& \cos\l(\f{t\Delta H}{\hbar}\r)  \\
+					p(t) &\geq& \cos^2\l(\f{t\Delta H}{\hbar}\r) 
+				\eea
+				o sinal da inegualdade muda, pois $\cos(x)$ decresce no intervalo $x\in[0, \pi]$. 	
+			\end{multianswer}
+		
+			% Part 3
+			\item Let $|n\rangle$ be a complete set of eigenstates of the Hamiltonian
+			$$
+			H|n\rangle=E_{n}|n\rangle
+			$$
+			Show that $c(t)$ is given by the Fourier transform of a spectral function $w(E)$
+			$$
+			w(E)=\sum_{n}|\langle n \mid \varphi(0)\rangle|^{2} \delta\left(E-E_{n}\right)
+			$$
+			Set $E_{0}=\langle H\rangle$ and give the expression of $(\Delta H)^{2}$ in terms of $w(E)$ and $E_{0}$.
+			\begin{multianswer}
+				Por definição,
+				\be
+					c(t)=\braket{\varphi(0) | \Psi(t)}
+				\ee
+				com
+				\be
+					|\Psi(t)\rangle=\exp \left(-\frac{i H t}{\hbar}\right)|\varphi(0)\rangle
+				\ee
+				
+			\end{multianswer}
+		
+			% Part 4
+			\item If $w(E)$ has a Lorentzian shape
+			$$
+			w(E)=\frac{\Gamma \hbar}{2 \pi} \frac{1}{\left(E-E_{0}\right)^{2}+\hbar^{2} \Gamma^{2} / 4}
+			$$
+			show that
+			$$
+			c(t)=\mathrm{e}^{-\mathrm{i} E_{0} t / \hbar} \mathrm{e}^{-\Gamma t / 2}
+			$$
+			and that the decay law is an exponential. The width of $w(E)$ is $\hbar \Gamma$, but $\Delta H$ is infinite, Thus $\Delta H$ is a rather poor measure of energy spread, and the width $\hbar \Gamma=\Delta E$ is the physically relevant quantity.
+			\begin{multianswer}[true]
+				
+			\end{multianswer}
+			
+		\end{exercises}
+	
+		
+		
+	\end{exercise}
 	
 
 \end{document}
