@@ -109,6 +109,7 @@
 \DeclareMathOperator{\asech}{asech}
 \DeclareMathOperator{\D}{D}
 \DeclareMathOperator{\Tr}{tr}
+\DeclareMathOperator{\Res}{Res}
 
 \title{Mecânica Quântica Avançada \\ Lista 1}
 \author{Lucas Froguel \\ IFT}
@@ -712,7 +713,7 @@
 					&=& \sum_n |\braket{\psi_0|n}|^2 \delta(E-E_n)
 				\eea
 				como queríamos mostrar. 
-				
+				*
 			\end{multianswer}
 		
 			% Part 4
@@ -729,8 +730,32 @@
 				Iremos realizar a transformada de Fourier dessa função:
 				\bea
 					c(t) &=& \mathcal{F}\l(\omega(E)\r) \\
-						&=&  \int_{-\infty}^{\infty} \frac{\Gamma \hbar}{2 \pi} \frac{e^{-2i\pi tE}}{\left(E-E_{0}\right)^{2}+\hbar^{2} \Gamma^{2} / 4} dE
+						&=&  \int_{-\infty}^{\infty} \frac{\Gamma \hbar}{2 \pi} \frac{e^{-2i\pi tE}}{\left(E-E_{0}\right)^{2}+\hbar^{2} \Gamma^{2} / 4} dE \\
+						&=& \f{\Gamma\hbar}{2\pi}e^{-2i\pi tE_0} \int_{-\infty}^{\infty} \frac{e^{-2i\pi t(E-E_0)}}{\left(E-E_{0}\right)^{2}+\hbar^{2} \Gamma^{2} / 4} dE 
 				\eea
+				Agora iremos considerar um contorno adequado e a versão complexa dessa integral. Se usarmos o contorno que cobre o UHP (upper half plane), podemos escrever:
+				\be
+					\int_{-\infty}^{\infty} \frac{e^{-2i\pi t(E-E_0)}}{\left(E-E_{0}\right)^{2}+\hbar^{2} \Gamma^{2} / 4} dE  = \oint \f{e^{-2i\pi tz}}{z^2 + k^2} dz
+				\ee
+				onde $k=\hbar\Gamma/2$ e $z=E-E_0$. Os polos dessa função ocorrem em $z_\pm=\pm ik$ e são de primeira ordem. Como apenas $z_+=ik$ está no UHP e a função é, no resto, analítica, podemos calcular a integral usando o teorema dos resíduos. Ora, o resíduo é
+				\bea
+					\Res(f)_{z_+} &=& \lim_{z\to z_+} \f{e^{-2i\pi tz}}{(z-ik)(z+ik)} (z-ik) \\ 
+							&=& \f{e^{-2i\pi t (ik)}}{2ik} \\
+							&=& \f{e^{2\pi tk}}{2ik}
+				\eea
+				Logo,
+				\bea
+					\oint \f{e^{-2i\pi tz}}{z^2 + k^2} dz &=& 2\pi i \sum_{z\in\text{UHP}} \Res(f)_z \\
+						&=& \l(\f{\pi}{k}\r) e^{2\pi tk} \\
+						&=& \l(\f{2\pi}{\hbar\Gamma}\r) e^{\pi\hbar\Gamma t}
+				\eea
+				Portanto,
+				\be
+					c(t) = e^{-2\pi i tE_0}e^{\pi \hbar\Gamma t}
+				\ee
+				
+				
+				
 				*
 				
 			\end{multianswer}
