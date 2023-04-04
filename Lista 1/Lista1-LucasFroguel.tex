@@ -84,7 +84,6 @@
 \setlist[exercises, 1]{label =\itshape \bfseries Part~\arabic*.\; }
 
 \newenvironment{answer}{\noindent\textbf{\textit{Answer.}} \normalfont }{\par\noindent\rule{\textwidth}{0.4pt}}
-%\newenvironment{multianswer}{\\ \noindent\textbf{\textit{Answer.}} \normalfont }{ \par\noindent\rule{0.7\textwidth}{0.1pt}}
 \NewEnviron{multianswer}[1][false]{%
 	\ifthenelse{\equal{#1}{true}}%
 	{\def\rulewidth{\textwidth}}%
@@ -98,6 +97,7 @@
 \newcommand\norm[1]{\left\lVert#1\right\rVert}
 
 \DeclareMathOperator{\atan}{atan}
+\DeclareMathOperator{\cotan}{cotan}
 \DeclareMathOperator{\acos}{acos}
 \DeclareMathOperator{\sech}{sech}
 \DeclareMathOperator{\csch}{csch}
@@ -118,7 +118,7 @@
 	\maketitle
 	\listoftheorems[title={List of Exercises}]
 
-	\begin{exercise}[4.1]
+	\begin{exercise}[4.4.1 - Dispersion and eigenvectors]
 		Show that a necessary and sufficient condition for $|\psi\rangle$ to be an eigenvector of a Hermitian
 		operator A is that the dispersion (4.8) $\Delta_\psi A = 0$.
 	\end{exercise}
@@ -137,103 +137,108 @@
 		\ee
 		Logo, é trivial que $\Delta_\psi A = 0$. 
 		
-		Agora vamos assumir que a dispersão é nula, ou seja, $\Delta A = 0$. Então ,por definição:		
+		Agora vamos assumir que a dispersão é nula, ou seja, $\Delta A = 0$. Então, por definição:		
 		\begin{align}
 			0 &= \sqrt{\langle A^2 \rangle - \langle A \rangle^2} \\
 			\Rightarrow \langle A^2 \rangle &= \langle A \rangle^2
-		\end{align}		
+		\end{align}	
+		Ora, considere
+		\bea
+			\braket{\psi|A^2|\psi} &=& \braket{\psi|A|\psi}^2 \\
+			\braket{\psi|A^2|\psi} &=& \braket{\psi|A|\psi}\braket{\psi|A|\psi} \\
+			A^2\ket{\psi} &=& \braket{\psi|A|\psi} A\ket{\psi} \\
+			A\ket{\psi} &=& \braket{\psi|A|\psi} \ket{\psi} 
+		\eea
+		Logo, vemos que $\ket{\psi}$ é autovetor de $A$.
 				
 	\end{answer}
 
-	\begin{exercise}[4.4.2 - 1]
-		 Let $\ket{\psi}$ be a vector (not normalized) in the Hilbert space of states and H be a Hamiltonian. The
-		expectation value $\braket{H}_\psi$ is
-		\be
-			\braket{\psi}_\psi = \f{\braket{\psi|H|\psi}}{\braket{\psi|\psi}}
-		\ee
-		Show that if the minimum of this expectation value is obtained for $\ket{\psi}=\ket{\psi_m}$ and the maximum for $\ket{\psi}=\ket{\psi_M}$ , then
-		\be
-			H\ket{\psi_m} = E_m\ket{\psi_m}, \quad\quad H\ket{\psi_M} = E_M\ket{\psi_M}
-		\ee 	
-		where $E_m$ and $E_M$ are the smallest and largest eigenvalues.
-	\end{exercise}
-	\begin{answer}
-		É evidente que
-		\be
-			\braket{H}_{\psi_m} = \f{\braket{\psi_m|H|\psi_m}}{\braket{\psi_m|\psi_m}} = E_m
-		\ee
-		Portanto, é evidente que se $\braket{H}_{\psi_m}$ for mínimo, então $E_m$ também é. Vale um raciocínio análogo para $E_M=\braket{H}_{\psi_M}$. 		
-	\end{answer}
+	\begin{exercise}[4.4.2 - The variational method]
+		\begin{exercises}
+			\item Let $\ket{\psi}$ be a vector (not normalized) in the Hilbert space of states and H be a Hamiltonian. The
+			expectation value $\braket{H}_\psi$ is
+			\be
+				\braket{\psi}_\psi = \f{\braket{\psi|H|\psi}}{\braket{\psi|\psi}}
+			\ee
+			Show that if the minimum of this expectation value is obtained for $\ket{\psi}=\ket{\psi_m}$ and the maximum for $\ket{\psi}=\ket{\psi_M}$ , then
+			\be
+				H\ket{\psi_m} = E_m\ket{\psi_m}, \quad\quad H\ket{\psi_M} = E_M\ket{\psi_M}
+			\ee 	
+			where $E_m$ and $E_M$ are the smallest and largest eigenvalues.
+			\begin{multianswer}
+				É evidente que
+				\be
+					\braket{H}_{\psi_m} = \f{\braket{\psi_m|H|\psi_m}}{\braket{\psi_m|\psi_m}} = E_m
+				\ee
+				Portanto, é evidente que se $\braket{H}_{\psi_m}$ for mínimo, então $E_m$ também é. Vale um raciocínio análogo para $E_M=\braket{H}_{\psi_M}$. 		
+			\end{multianswer}
 	
-	\begin{exercise}[4.4.2 - 2]
-		We assume that the vector $|\varphi\rangle$ depends on a parameter $\alpha:|\varphi\rangle=|\varphi(\alpha)\rangle$. Show that if
-		\begin{equation}
-			\frac{\partial\braket{H}_{\varphi(\alpha)}}{\partial \alpha}\bigg|_{\alpha=\alpha_0}=0,
-		\end{equation}
-		then $E_{m} \leq\langle H\rangle_{\varphi\left(\alpha_{0}\right)}$ if $\alpha_{0}$ corresponds to a minimum of $\langle H\rangle_{\varphi(\alpha)}$, and $\langle H\rangle_{\varphi\left(\alpha_{0}\right)} \leq E_{M}$ if $\alpha_{0}$ corresponds to a maximum. This result forms the basis of an approximation method called the variational method (Section 14.1.4).
-	\end{exercise}
-	\begin{answer}
-		Vamos abrir a derivada:
-		\be
-			\frac{\partial\braket{H}{\varphi(\alpha)}}{\partial \alpha} = \f{1}{\braket{\psi|\psi}}\l( \bra{\psi|H} \partial_\alpha\ket{\psi} + (\partial_\alpha\bra{\psi})\ket{H|\psi}\r) - \f{\braket{\psi|H|\psi}}{\braket{\psi|\psi}^2}\l( (\partial_\alpha\bra{\psi})\ket{\psi} + \bra{\psi}\partial_\alpha\ket{\psi}\r) 
-		\ee
-		Então, em $\alpha_0$
-		\be
-			\braket{\psi|H|\partial_\alpha\psi} + \braket{\partial_\alpha\psi|H|\psi} = \f{\braket{\psi|H|\psi}}{\braket{\psi|\psi}}\big( \braket{\partial_\alpha\psi|\psi} + \braket{\psi|\partial_\alpha\psi}\big)
-		\ee
-		Isolando a quantidade de interesse:
-		\be
-			\braket{H}_{\varphi(\alpha_0)} = \f{\braket{\psi|H|\partial_\alpha\psi} + \braket{\partial_\alpha\psi|H|\psi}}{\braket{\partial_\alpha\psi|\psi} + \braket{\psi|\partial_\alpha\psi}}
-		\ee 
-		Podemos reescrever, usando que $H=H^\dagger$:
-		\be
-			\braket{H}_{\varphi(\alpha_0)} = \f{\braket{\partial_\alpha\psi|H|\psi}^\dagger + \braket{\partial_\alpha\psi|H|\psi}}{\braket{\partial_\alpha\psi|\psi}^\dagger + \braket{\partial_\alpha\psi|\psi}}
-		\ee
-		
-		Podemos expandir qualquer estado usando os autokets do hamiltoniano, que são ortonormais:
-		\be
-			\ket{\psi} = \sum c_j\ket{\psi_j}
-		\ee
-		De modo que
-		\be
-			\partial_\alpha\ket{\psi} = \sum \f{\partial c_j}{\partial\alpha} \ket{\psi_j}
-		\ee
-		Assim, vale que
-		\be
-			\braket{\partial_\alpha\psi|\psi} = \sum c_j\f{\partial c_j^*}{\partial\alpha}
-		\ee
-		E também
-		\be
-			\braket{\partial_\alpha\psi|H|\psi} = \sum E_jc_j\f{\partial c_j^*}{\partial\alpha}
-		\ee
-		Considere o denominador:
-		\bea
-			\braket{\partial_\alpha\psi|\psi}^\dagger + \braket{\partial_\alpha\psi|\psi} 
-				&=& \sum c_j \f{\partial c_j^*}{\partial\alpha} + c_j^*\f{\partial c_j}{\partial\alpha} \\
-				&=& \sum \f{\partial}{\partial\alpha} (c_j^*c_j) \\
-				&=& \sum \partial_\alpha |c_j|^2 \\
-				&=& \partial_\alpha \sum |c_j|^2
-		\eea
-		Considerando, enfim, o numerador e fazendo os mesmos cálculos:
-		\bea
-			\braket{\partial_\alpha\psi|H|\psi}^\dagger + \braket{\partial_\alpha\psi|H|\psi} 
-				&=& \sum E_jc_j\f{\partial c_j^*}{\partial\alpha} + E_j c_* \f{\partial c_j}{\partial\alpha} \\
-				&=& \sum E_j \partial_\alpha |c_j|^2 \\
-				&=& \partial_\alpha \sum E_j|c_j|^2 
-		\eea
-		É óbvio, então, que
-		\be
-			E_m \partial_\alpha\sum |c_j|^2 \leq \partial_\alpha\sum E_j|c_j|^2 \leq E_M \partial_\alpha\sum |c_j|^2
-		\ee 
-		Portanto, concluímos que
-		\be
-			E_m \leq \braket{H}_{\varphi(\alpha_0)} \leq E_M
-		\ee
-		
-	\end{answer}
-
-	\begin{exercise}[4.4.2 - 3]
-		If $H$ acts in a two-dimensional space, its most general form is
+			\item We assume that the vector $|\varphi\rangle$ depends on a parameter $\alpha:|\varphi\rangle=|\varphi(\alpha)\rangle$. Show that if
+			\begin{equation}
+				\frac{\partial\braket{H}_{\varphi(\alpha)}}{\partial \alpha}\bigg|_{\alpha=\alpha_0}=0,
+			\end{equation}
+			then $E_{m} \leq\langle H\rangle_{\varphi\left(\alpha_{0}\right)}$ if $\alpha_{0}$ corresponds to a minimum of $\langle H\rangle_{\varphi(\alpha)}$, and $\langle H\rangle_{\varphi\left(\alpha_{0}\right)} \leq E_{M}$ if $\alpha_{0}$ corresponds to a maximum. This result forms the basis of an approximation method called the variational method (Section 14.1.4).
+		\begin{multianswer}
+			Vamos abrir a derivada:
+			\be
+				\frac{\partial\braket{H}_{\varphi(\alpha)}}{\partial \alpha} = \f{1}{\braket{\psi|\psi}}\l( \bra{\psi|H} \partial_\alpha\ket{\psi} + (\partial_\alpha\bra{\psi})\ket{H|\psi}\r) - \f{\braket{\psi|H|\psi}}{\braket{\psi|\psi}^2}\l( (\partial_\alpha\bra{\psi})\ket{\psi} + \bra{\psi}\partial_\alpha\ket{\psi}\r) 
+			\ee
+			Então, em $\alpha_0$
+			\be
+				\braket{\psi|H|\partial_\alpha\psi} + \braket{\partial_\alpha\psi|H|\psi} = \f{\braket{\psi|H|\psi}}{\braket{\psi|\psi}}\big( \braket{\partial_\alpha\psi|\psi} + \braket{\psi|\partial_\alpha\psi}\big)
+			\ee
+			Isolando a quantidade de interesse:
+			\be
+				\braket{H}_{\varphi(\alpha_0)} = \f{\braket{\psi|H|\partial_\alpha\psi} + \braket{\partial_\alpha\psi|H|\psi}}{\braket{\partial_\alpha\psi|\psi} + \braket{\psi|\partial_\alpha\psi}}
+			\ee 
+			Podemos reescrever, usando que $H=H^\dagger$:
+			\be
+				\braket{H}_{\varphi(\alpha_0)} = \f{\braket{\partial_\alpha\psi|H|\psi}^\dagger + \braket{\partial_\alpha\psi|H|\psi}}{\braket{\partial_\alpha\psi|\psi}^\dagger + \braket{\partial_\alpha\psi|\psi}}
+			\ee
+			
+			Podemos expandir qualquer estado usando os autokets do hamiltoniano, que são ortonormais:
+			\be
+				\ket{\psi} = \sum c_j\ket{\psi_j}
+			\ee
+			De modo que
+			\be
+				\partial_\alpha\ket{\psi} = \sum \f{\partial c_j}{\partial\alpha} \ket{\psi_j}
+			\ee
+			Assim, vale que
+			\be
+				\braket{\partial_\alpha\psi|\psi} = \sum c_j\f{\partial c_j^*}{\partial\alpha}
+			\ee
+			E também
+			\be
+				\braket{\partial_\alpha\psi|H|\psi} = \sum E_jc_j\f{\partial c_j^*}{\partial\alpha}
+			\ee
+			Considere o denominador:
+			\bea
+				\braket{\partial_\alpha\psi|\psi}^\dagger + \braket{\partial_\alpha\psi|\psi} 
+					&=& \sum c_j \f{\partial c_j^*}{\partial\alpha} + c_j^*\f{\partial c_j}{\partial\alpha} \\
+					&=& \sum \f{\partial}{\partial\alpha} (c_j^*c_j) \\
+					&=& \sum \partial_\alpha |c_j|^2 \\
+					&=& \partial_\alpha \sum |c_j|^2
+			\eea
+			Considerando, enfim, o numerador e fazendo os mesmos cálculos:
+			\bea
+				\braket{\partial_\alpha\psi|H|\psi}^\dagger + \braket{\partial_\alpha\psi|H|\psi} 
+					&=& \sum E_jc_j\f{\partial c_j^*}{\partial\alpha} + E_j c_* \f{\partial c_j}{\partial\alpha} \\
+					&=& \sum E_j \partial_\alpha |c_j|^2 \\
+					&=& \partial_\alpha \sum E_j|c_j|^2 
+			\eea
+			É óbvio, então, que
+			\be
+				E_m \partial_\alpha\sum |c_j|^2 \leq \partial_\alpha\sum E_j|c_j|^2 \leq E_M \partial_\alpha\sum |c_j|^2
+			\ee 
+			Portanto, concluímos que
+			\be
+				E_m \leq \braket{H}_{\varphi(\alpha_0)} \leq E_M
+			\ee	
+		\end{multianswer}
+	
+	% Part 3
+		\item If $H$ acts in a two-dimensional space, its most general form is
 		$$
 		H=\left(\begin{array}{cc}
 			a+c & b \\
@@ -249,83 +254,84 @@
 		\end{array}\right)
 		$$
 		find the values of $\alpha_{0}$ by seeking the extrema of $\langle\varphi(\alpha)|H| \varphi(\alpha)\rangle$. Rederive (2.35).
+		\begin{multianswer}[true]
+			Começamos considerando a equação do valor médio explicitamente:
+			\bea
+				\braket{\psi|H|\psi} 
+					&=& 
+					\begin{bmatrix}
+						\cos(\alpha/2) & \sin(\alpha/2)
+					\end{bmatrix}
+					\begin{bmatrix}
+						a+c & b \\
+						b & a-c
+					\end{bmatrix}
+					\begin{bmatrix}
+						\cos(\alpha/2) \\
+						\sin(\alpha/2)
+					\end{bmatrix} \\
+					&=& 
+					\begin{bmatrix}
+						\cos(\alpha/2) & \sin(\alpha/2)
+					\end{bmatrix}
+					\begin{bmatrix}
+						(a+c)\cos(\alpha/2) + b\sin(\alpha/2) \\
+						b\cos(\alpha/2) + (a-c)\sin(\alpha/2)
+					\end{bmatrix} \\
+					&=& 
+					(a+c)\cos^2(\alpha/2) + b\sin(\alpha/2)\cos(\alpha/2) + b\cos(\alpha/2)\sin(\alpha/2) + (a-c)\sin^2(\alpha/2) \\
+					&=& 
+					a(\sin^2(\alpha/2)+ \cos^2(\alpha/2)) + c(\cos^2(\alpha/2) - \sin^2(\alpha/2)) + b\sin(\alpha) \\
+					&=& a + b\sin(\alpha) + c\cos(\alpha)
+			\eea
+			Vejamos os extremos dessa função:
+			\bea	
+				\partial_\alpha \braket{\psi|H|\psi} &=& b\cos(\alpha) - c\sin(\alpha) = 0 \\
+				b\cos(\alpha) &=& c\sin(\alpha) \\
+				\tan(\alpha) &=& b/c \\
+				\alpha_0 &=& \atan(b/c)
+			\eea
+			A Eq.(2.35) se refere aos autovetores e autovalores de $H$. Vejamos o caso do nosso $\psi$:
+			\bea	
+				H\ket{\psi} &=& 
+				\l( a\begin{bmatrix}
+					  1 & 0 \\
+					  0 & 1
+					\end{bmatrix}
+					+ \sqrt{b^2+c^2}
+					\begin{bmatrix}
+						\cos\alpha & \sin\alpha \\
+						\sin\alpha & -\cos\alpha
+					\end{bmatrix}
+				\r)
+				\begin{bmatrix}
+					\cos(\alpha/2) \\
+					\sin(\alpha/2)
+				\end{bmatrix} \\
+				&=& 
+				a\begin{bmatrix}
+					\cos(\alpha/2) \\
+					\sin(\alpha/2)
+				\end{bmatrix} 
+				+ 
+				\sqrt{b^2+c^2}
+				\begin{bmatrix}
+					\cos\alpha\cos(\alpha/2) + \sin\alpha\sin(\alpha/2) \\
+					\sin\alpha\cos(\alpha/2) - \cos\alpha\sin(\alpha/2)
+				\end{bmatrix} \\
+				&=& 
+				a + \sqrt{b^2+c^2} 
+				\begin{bmatrix}
+					\cos(\alpha/2) \\
+					\sin(\alpha/2)
+				\end{bmatrix} 
+			\eea
+			onde usamos a Eq.(2.34) e algumas identidades trigonométricas.	
+		\end{multianswer}
+	\end{exercises}
 	\end{exercise}
-	\begin{answer}
-	Começamos considerando a equação do valor médio explicitamente:
-	\bea
-		\braket{\psi|H|\psi} 
-			&=& 
-			\begin{bmatrix}
-				\cos(\alpha/2) & \sin(\alpha/2)
-			\end{bmatrix}
-			\begin{bmatrix}
-				a+c & b \\
-				b & a-c
-			\end{bmatrix}
-			\begin{bmatrix}
-				\cos(\alpha/2) \\
-				\sin(\alpha/2)
-			\end{bmatrix} \\
-			&=& 
-			\begin{bmatrix}
-				\cos(\alpha/2) & \sin(\alpha/2)
-			\end{bmatrix}
-			\begin{bmatrix}
-				(a+c)\cos(\alpha/2) + b\sin(\alpha/2) \\
-				b\cos(\alpha/2) + (a-c)\sin(\alpha/2)
-			\end{bmatrix} \\
-			&=& 
-			(a+c)\cos^2(\alpha/2) + b\sin(\alpha/2)\cos(\alpha/2) + b\cos(\alpha/2)\sin(\alpha/2) + (a-c)\sin^2(\alpha/2) \\
-			&=& 
-			a(\sin^2(\alpha/2)+ \cos^2(\alpha/2)) + c(\cos^2(\alpha/2) - \sin^2(\alpha/2)) + b\sin(\alpha) \\
-			&=& a + b\sin(\alpha) + c\cos(\alpha)
-	\eea
-	Vejamos os extremos dessa função:
-	\bea	
-		\partial_\alpha \braket{\psi|H|\psi} &=& b\cos(\alpha) - c\sin(\alpha) = 0 \\
-		b\cos(\alpha) &=& c\sin(\alpha) \\
-		\tan(\alpha) &=& b/c \\
-		\alpha_0 &=& \atan(b/c)
-	\eea
-	A Eq.(2.35) se refere aos autovetores e autovalores de $H$. Vejamos o caso do nosso $\psi$:
-	\bea	
-		H\ket{\psi} &=& 
-		\l( a\begin{bmatrix}
-			  1 & 0 \\
-			  0 & 1
-			\end{bmatrix}
-			+ \sqrt{b^2+c^2}
-			\begin{bmatrix}
-				\cos\alpha & \sin\alpha \\
-				\sin\alpha & -\cos\alpha
-			\end{bmatrix}
-		\r)
-		\begin{bmatrix}
-			\cos(\alpha/2) \\
-			\sin(\alpha/2)
-		\end{bmatrix} \\
-		&=& 
-		a\begin{bmatrix}
-			\cos(\alpha/2) \\
-			\sin(\alpha/2)
-		\end{bmatrix} 
-		+ 
-		\sqrt{b^2+c^2}
-		\begin{bmatrix}
-			\cos\alpha\cos(\alpha/2) + \sin\alpha\sin(\alpha/2) \\
-			\sin\alpha\cos(\alpha/2) - \cos\alpha\sin(\alpha/2)
-		\end{bmatrix} \\
-		&=& 
-		a + \sqrt{b^2+c^2} 
-		\begin{bmatrix}
-			\cos(\alpha/2) \\
-			\sin(\alpha/2)
-		\end{bmatrix} 
-	\eea
-	onde usamos a Eq.(2.34) e algumas identidades trigonométricas.	
-	\end{answer}
-	
-	\begin{exercise}[4.4.3]
+
+	\begin{exercise}[4.4.3 - The Feynman-Hellmann theorem]
 		Let a Hamiltonian $H$ depend on a parameter $\lambda: H=H(\lambda)$. Let $E(\lambda)$ be a nondegenerate eigenvalue and $|\varphi(\lambda)\rangle$ be the corresponding normalized eigenvector $\left(\|\varphi(\lambda)\|^{2}=1\right)$ :
 		
 		$$
@@ -361,7 +367,7 @@
 		onde usamos o fato de $H$ ser hermitiano e ter autovalores reais e de $\ket{\psi}$ ser normalizado. Portanto, fica demonstrado o teorema.		
 	\end{answer}
 
-	\begin{exercise}[4.4.4]
+	\begin{exercise}[4.4.4 - Time evolution of a two-level system]
 		We consider a two-level system with Hamiltonian $H$ represented by the matrix
 		$$
 		H=\hbar\left(\begin{array}{cc}
@@ -391,6 +397,7 @@
 		A=\sqrt{A^{2}+B^{2}} \cos \theta, \quad B=\sqrt{A^{2}+B^{2}} \sin \theta, \quad \tan \theta=\frac{B}{A}
 		$$
 		\begin{exercises}
+		% Part 1
 		\item The state vector $|\varphi(t)\rangle$ at time $t$ can be decomposed on the $\{|+\rangle,|-\rangle\}$ basis:
 		
 		$$
@@ -469,31 +476,29 @@
 			\be
 				\ddot{c}_+ +\l(\f{\Omega}{2}\r)^2c_+ = 0
 			\ee
-			Vamos considerar agora a outra parte. Ela nos dá condições iniciais:
+			Vamos considerar agora a outra parte. Sabemos que
 			\be
-				\ket{\varphi_0} = 
-				\begin{pmatrix}
-					\lambda\cos(\theta/2) - \mu\sin(\theta/2) \\
-					\lambda\sin(\theta/2) + \mu\cos(\theta/2) \\
-				\end{pmatrix}
+				\ket{\psi_t} = \hat{U}\ket{\psi_0}
 			\ee
-			Ou seja,
+			onde $\hat{U}$ é o operador de evolução temporal. Assim, usando a base dos autoestados de $\hat{H}$:
 			\bea
-				c_+(0) &=& \lambda\cos(\theta/2) - \mu\sin(\theta/2) \\
-				c_-(0) &=& \lambda\sin(\theta/2) + \mu\cos(\theta/2) 
+				\ket{\psi_t} &=& \hat{U}\ket{\psi_0} \\
+							&=& e^{-i\hat{H}t/\hbar} \l(\lambda\left|\chi_{+}\right\rangle+\mu\left|\chi_{-}\right\rangle\r) \\
+							&=& \lambda e^{-iE_+t/\hbar}\ket{\chi_+} + \mu e^{iE_-t/\hbar}\ket{\chi_-}
 			\eea
-			Usando a equação diferencial que deduzimos, é fácil ver que:
-			\bea
-				c_+(t) &=& A_+e^{i\Omega t/2} + B_+e^{-i\Omega t/2} \\
-				c_-(t) &=& A_-e^{i\Omega t/2} + B_-e^{-i\Omega t/2} 
-			\eea
-			Isso obviamente nos diz que:
-			\bea
-				A_+ + B_+ &=& \lambda\cos(\theta/2) - \mu\sin(\theta/2) \\
-				A_- + B_- &=& \lambda\sin(\theta/2) + \mu\cos(\theta/2) 
-			\eea
-			*
+			Abrindo agora na base natural:
+			\be
+				\ket{\psi_t} = \lambda e^{-iE_+t/\hbar}\l(\cos \frac{\theta}{2}|+\rangle+\sin \frac{\theta}{2}|-\rangle\r) + \mu e^{iE_-t/\hbar}\l(-\sin \frac{\theta}{2}|+\rangle+\cos \frac{\theta}{2}|-\rangle\r)
+			\ee
+			Por fim, calculamos $c_+(t) = \braket{+|\psi_t}$ e usamos $\Omega = 2E_\pm$:
+			\be
+				c_+(t) = \lambda \mathrm{e}^{-\mathrm{i} \Omega t / 2} \cos \frac{\theta}{2}-\mu \mathrm{e}^{\mathrm{i} \Omega t / 2} \sin \frac{\theta}{2}
+			\ee
+			
+			
 		\end{multianswer}
+		
+		% Part 3
 		\item We assume that $c_{+}(0)=0$. Find $\lambda$ and $\mu$ up to a phase as well as $c_{+}(t)$. Show that the probability of finding the system in the state $|+\rangle$ at time $t$ is
 		
 		$$
@@ -520,16 +525,35 @@
 				\mu =  &=& \f{1}{\sqrt{1 + |\tan(\theta/2)|^2}} \\
 				\lambda  &=& \f{\tan(\theta/2)}{\sqrt{1 + |\tan(\theta/2)|^2}}
 			\eea
-			Vamos supor, daqui em diante, $\theta\in[0, \pi]$ para tirarmos a tangente do módulo. Usando a solução geral de $c_+(t)$, sabemos que precisa valer
+			Vamos supor, daqui em diante, $\theta\in[0, \pi]$ para tirarmos a tangente do módulo. Usando a solução geral de $c_+(t)$, basta usarmos os valores calculados de $\lambda$ e $\mu$:
+			\bea
+				c_+(t) &=& \l(\f{\tan(\theta/2)}{\sqrt{1 + \tan(\theta/2)^2}}\r) \mathrm{e}^{-\mathrm{i} \Omega t / 2} \cos \frac{\theta}{2}-\l( \f{1}{\sqrt{1 + \tan(\theta/2)^2}}\r) \mathrm{e}^{\mathrm{i} \Omega t / 2} \sin \frac{\theta}{2} \\
+					&=& \f{\sin(\theta/2)}{\sqrt{1+\tan^2(\theta/2)}}\l( e^{-i\Omega t/2} - e^{i\Omega t/2}\r) \\
+					&=& \f{-2i\sin(\theta/2)}{\sqrt{1+\tan^2(\theta/2)}} \sin\l(\f{\Omega t}{2}\r)
+			\eea 
+			Ora, tendo isso, a probabilidade é $p(t)=|c(t)|^2$. Portanto, considere:
+			\bea
+				p(t) &=& |c(t)|^2 \\
+					&=& |c^2(t)| \\
+					&=& \f{2\sin^2(\theta/2)}{1+\tan^2(\theta/2)} \sin^2(\Omega t/2)
+			\eea
+			Aqui notamos que:
 			\be
-				A_+ + B_+ = 0
+				1+\tan^2(\theta/2) = 1 + \f{\sin^2(\theta/2)}{\cos^2(\theta/2)} = \f{\sin^2(\theta/2) + \cos^2(\theta/2)}{\cos^2(\theta/2)} = \f{1}{\cos^2(\theta/2)}
 			\ee
-			
+			Então, é fácil ver que
+			\be
+				p(t) = \sin^2(\theta)\sin^2(\Omega t/2)
+			\ee
+			E ainda podemos escrever
+			\be
+				c_+(t) = -i\sin(\theta)\sin(\Omega t/2)
+			\ee
 		\end{multianswer}
 		\end{exercises}
 	\end{exercise}
 	
-	\begin{exercise}[4.4.5]
+	\begin{exercise}[4.4.5 - Unstable states]
 		Let $|\varphi(0)\rangle$ represent the state vector at time $t=0$ of an unstable particle, or more generally that of an unstable quantum state such as an atom in an excited state, and let $\mathrm{p}(t)$ be the probability (survival probability) that it has not decayed at time $t$. The particle is assumed to be isolated from external influences (but not from quantized fields), so that the Hamiltonian $H$ that governs the decay is time-independent. Let $|\Psi(t)\rangle$ be the state vector at time $t$ of the full quantum system
 		$$
 		|\Psi(t)\rangle=\exp \left(-\frac{i H t}{\hbar}\right)|\varphi(0)\rangle .
@@ -587,7 +611,7 @@
 			Integrating this differential equation, derive
 			$$
 			\mathrm{p}(t) \geq \cos ^{2}\left(\frac{t \Delta H}{\hbar}\right) \quad 0 \leq t \leq \frac{\pi \hbar}{2 \Delta H}
-			$$		]
+			$$		
 			\begin{multianswer}
 				Sabemos que $\mathcal{P} = \ket{\psi_0}\bra{\psi_0}$. Assim, como $\mathcal{P}$ é um projetor, é trivial que seja idempotente:
 				\be
@@ -658,8 +682,36 @@
 				\ee
 				com
 				\be
-					|\Psi(t)\rangle=\exp \left(-\frac{i H t}{\hbar}\right)|\varphi(0)\rangle
+					|\Psi(t)\rangle=\exp\left(-\frac{i H t}{\hbar}\right)|\varphi(0)\rangle
 				\ee
+				Vamos considerar $c(t)$ na base das autoenergias:
+				\bea
+					\ket{\Psi(t)} &=& \exp\left(-\frac{i H t}{\hbar}\right) \sum_{n} \braket{n|\psi_0}\ket{n} \\
+						&=& \sum_n \braket{n|\psi_0} e^{-iE_nt/\hbar} \ket{n}
+				\eea
+				Logo, sendo 
+				\be
+					\bra{\psi_0} = \sum_k \braket{\psi_0|k}\bra{k}
+				\ee
+				Vale que
+				\bea
+					c(t) &=& \braket{\psi_0|\Psi_t} \\
+						&=& \l(\sum_k \braket{\psi_0|k}\bra{k}\r)\l( \sum_n \braket{n|\psi_0} e^{-iE_nt/\hbar} \ket{n}\r) \\
+						&=& \sum_{n, k} \braket{\psi_0|k} \braket{n|\psi_0} e^{-iE_nt/\hbar} \braket{k|n} \\
+						&=& \sum_{n, k} \braket{\psi_0|k} \braket{n|\psi_0} e^{-iE_nt/\hbar} \delta(n-k) \\
+						&=& \sum_n |\braket{\psi_0|n}|^2e^{-iE_nt/\hbar}
+				\eea
+				Aqui nós observamos que a transformada de fourier da delta de dirac é:
+				\be
+					\int_{-\infty}^{\infty} \delta(E-E_n) e^{-2\pi i tE} dE = e^{-2\pi i tE_n}
+				\ee
+				da onde é óbvio a transformada inversa da exponencial que temos em mão. Portanto,
+				\bea
+				\omega(E) &=& \mathcal{F}^{-1} \l( \sum_n |\braket{\psi_0|n}|^ 2e^{-iE_nt/\hbar}\r) \\
+					&=&  \sum_n |\braket{\psi_0|n}|^2 \mathcal{F}^{-1}\l(e^{-iE_nt/\hbar}\r) \\
+					&=& \sum_n |\braket{\psi_0|n}|^2 \delta(E-E_n)
+				\eea
+				como queríamos mostrar. 
 				
 			\end{multianswer}
 		
@@ -674,13 +726,265 @@
 			$$
 			and that the decay law is an exponential. The width of $w(E)$ is $\hbar \Gamma$, but $\Delta H$ is infinite, Thus $\Delta H$ is a rather poor measure of energy spread, and the width $\hbar \Gamma=\Delta E$ is the physically relevant quantity.
 			\begin{multianswer}[true]
+				Iremos realizar a transformada de Fourier dessa função:
+				\bea
+					c(t) &=& \mathcal{F}\l(\omega(E)\r) \\
+						&=&  \int_{-\infty}^{\infty} \frac{\Gamma \hbar}{2 \pi} \frac{e^{-2i\pi tE}}{\left(E-E_{0}\right)^{2}+\hbar^{2} \Gamma^{2} / 4} dE
+				\eea
+				*
 				
+			\end{multianswer}
+		\end{exercises}
+	\end{exercise}
+
+	\begin{exercise}[4.4.6 - The solar neutrino puzzle] \label{ex4.4.6}
+		The nuclear reactions occurring in the interior of the Sun produce an abundance of electron neutrinos $\nu_{\mathrm{e}} ; 95 \%$ of these are produced in the reaction
+		$$
+		\mathrm{p}+\mathrm{p} \rightarrow{ }^{2} \mathrm{H}+\mathrm{e}^{+}+\nu_{\mathrm{e}}
+		$$
+		The Earth receives $6.5 \times 10^{14}$ neutrinos per second and per square metre from the Sun. For about thirty years several experiments sought to detect these neutrinos, but all of them concluded that the measured neutrino flux is only about half the flux calculated using the standard solar model. Now this model is considered to be quite reliable, in particular owing to recent results from helioseismology. In any case, the uncertainties in the solar model cannot explain this "solar neutrino deficit." The combined results of three experiments (see Footnote 4, Chapter 1) have now shown with no possible doubt that this neutrino deficit is due to the transformation of $\nu_{\mathrm{e}}$ neutrinos into other types of neutrino during the passage from the Sun to the Earth. These experiments show that the total neutrino flux predicted by the solar model is correct, but that the measured electron neutrino flux is too small. We shall construct a simplified theory which gives the essential physics. We assume that
+		\begin{itemize}
+			\item there exist only two types of neutrino, the electron neutrino $\nu_{\mathrm{e}}$ and the muon neutrino $v_{\mu}$ (in fact, there is also a third type, the $\tau$ neutrino $\nu_{\tau}$ );
+		
+			\item the entire phenomenon takes place in a vacuum during the propagation from the Sun to the Earth (the propagation inside the Sun actually plays an important role).
+		\end{itemize}
+		It has long been thought that neutrinos have zero mass. If, on the contrary, they are massive, we can place them in their rest frame and write down the Hamiltonian in the $\left\{\left|\nu_{\mathrm{e}}\right\rangle,\left|\nu_{\mu}\right\rangle\right\}$ basis:
+		$$
+		\left|v_{\mathrm{e}}\right\rangle=\left(\begin{array}{l}
+			1 \\
+			0
+		\end{array}\right), \quad\left|v_{\mu}\right\rangle=\left(\begin{array}{l}
+			0 \\
+			1
+		\end{array}\right), \quad H=c^{2}\left(\begin{array}{cc}
+			m_{\mathrm{e}} & m \\
+			m & m_{\mu}
+		\end{array}\right) .
+		$$
+		\begin{exercises}
+			\item Show that the states of definite mass are $\left|v_{1}\right\rangle$ and $\left|v_{2}\right\rangle$ :
+			$$
+			\begin{aligned}
+				& \left|v_{1}\right\rangle=\cos \frac{\theta}{2}\left|v_{\mathrm{e}}\right\rangle+\sin \frac{\theta}{2}\left|v_{\mu}\right\rangle, \\
+				& \left|v_{2}\right\rangle=-\sin \frac{\theta}{2}\left|v_{\mathrm{e}}\right\rangle+\cos \frac{\theta}{2}\left|v_{\mu}\right\rangle,
+			\end{aligned}
+			$$
+			with
+			$$
+			\tan \theta=\frac{2 m}{m_{\mathrm{e}}-m_{\mu}}
+			$$
+			and that the masses $m_{1}$ and $m_{2}$ are
+			$$
+			\begin{aligned}
+				& m_{1}=\frac{m_{\mathrm{e}}+m_{\mu}}{2}+\sqrt{m^{2}+\left(\frac{m_{\mathrm{e}}-m_{\mu}}{2}\right)^{2}}, \\
+				& m_{2}=\frac{m_{\mathrm{e}}+m_{\mu}}{2}-\sqrt{m^{2}+\left(\frac{m_{\mathrm{e}}-m_{\mu}}{2}\right)^{2}} .
+			\end{aligned}
+			$$
+			\begin{multianswer}
+				Esse problema é resolvido pela diagonalização da matriz. Como a matriz é $2\times2$, esse é um processo fácil. Vejamos os autovalores
+				\bea
+					(m_e-\lambda)(m_\mu - \lambda) - m^2 &=& 0 \\
+					m_em_\mu -\lambda(m_e+m_\mu) +\lambda^2 - m^2 &=& 0 				
+				\eea
+				Logo,
+				\bea
+					\lambda_\pm &=& \f{m_e+m_\mu}{2} \pm \f{1}{2}\sqrt{(m_e+m_\mu)^2 - 4(m_em_\mu - m^2)} \\
+						&=& \f{m_e+m_\mu}{2} \pm \sqrt{\f{m_e^2+m_\mu^2}{4} + \f{m_em_\mu}{2} - m_em_\mu + m^2} \\
+						&=& \f{m_e+m_\mu}{2} \pm \sqrt{m^2 + \l(\f{m_e - m_\mu}{2}\r)^2}
+				\eea
+				aonde identificamos $m_1 = \lambda_+$ e $m_2=\lambda_-$. Agora iremos achar os autovetores. Considere $\ket{v_1}$ primeiramente:
+				\bea
+					Hv_1 &=& m_1v_1 \\
+					\begin{pmatrix}
+						m_{\mathrm{e}} & m \\
+						m & m_{\mu} \\
+					\end{pmatrix}
+					\begin{pmatrix}
+						a \\
+						b \\
+					\end{pmatrix}
+					&=& 
+					\begin{pmatrix}
+						am_1 \\
+						bm_1 \\
+					\end{pmatrix} \\
+					m_ea + mb &=& am_1 
+				\eea
+				Então podemos escrever 
+				\bea
+					b &=& \f{a(m_1 - m_e)}{m} \\
+						&=& a\l( \f{m_\mu - m_e}{2m} + \sqrt{1 + \l(\f{m_\mu - m_e}{2m}\r)^2}\r)
+				\eea
+				Seja, pois, $\tan\theta = 2m/(m_e - m_\mu)$. Temos aqui:
+				\bea
+					b &=& a\l(-\cot\theta + \sqrt{1 + \cot^2\theta}\r) \\
+						&=& a\l(-\cot\theta + \csc\theta \r) \\
+						&=& a\l( - \f{\cos\theta}{\sin\theta} + \f{1}{\sin\theta}\r) \\
+						&=& a\l( \f{1 - \cos\theta}{\sin\theta} \r) \\
+						&=& a\l(\f{\sin\theta/2}{\cos\theta/2} \r)
+				\eea
+				Então fazemos a escolha $a=\cos\theta/2$, o que resulta em $b=\sin\theta/2$. Portanto,
+				\be
+					\ket{v_1} = \cos\f{\theta}{2} \ket{v_e} + \sin\f{\theta}{2}\ket{v_\mu}
+				\ee
+				Fazendo contas análogas para $\ket{v_2}$, chegamos na expressão
+				\bea
+					b &=& -a \l( \f{1+\cos\theta}{\sin\theta} \r) \\
+						&=& -a \l( \f{\cos\theta/2}{\sin\theta/2}\r)
+				\eea
+				Aqui fazemos a escolha $a=-\sin\theta/2$, que resulta em $b=\cos\theta/2$. Portanto, concluímos que
+				\be
+					\left|v_{2}\right\rangle=-\sin \frac{\theta}{2}\left|v_{\mathrm{e}}\right\rangle+\cos \frac{\theta}{2}\left|v_{\mu}\right\rangle
+				\ee
+			\end{multianswer}
+			\item Neutrinos propagate with a speed close to that of light; their energy is very high compared with $\langle m\rangle c^{2}$, where $\langle m\rangle$ is the typical mass in $H$. Show that if an electron neutrino is produced inside the Sun at time $t=0$ with state vector
+			$$
+			|\varphi(t=0)\rangle=\left|v_{\mathrm{e}}\right\rangle=\cos \frac{\theta}{2}\left|v_{1}\right\rangle-\sin \frac{\theta}{2}\left|v_{2}\right\rangle
+			$$
+			the state vector at time $t$ has component on $\left|v_{\mathrm{e}}\right\rangle$ given by
+			$$
+			\left\langle\nu_{\mathrm{e}} \mid \varphi(t)\right\rangle=\mathrm{e}^{-\mathrm{i} E_{1} t / \hbar}\left(\cos ^{2} \frac{\theta}{2}+\sin ^{2} \frac{\theta}{2} \mathrm{e}^{-\mathrm{i} \Delta E t / \hbar}\right),
+			$$
+			where $\Delta E=E_{2}-E_{1}$. Show that the probability of finding a neutrino $\nu_{\mathrm{e}}$ at time $t$ is
+			$$
+			\mathrm{p}_{\mathrm{e}}(t)=1-\sin ^{2} \theta \sin ^{2}\left(\frac{\Delta E t}{2 \hbar}\right)
+			$$
+			This transformation phenomenon is called neutrino oscillation.
+			\begin{multianswer}
+				Sabemos que
+				\bea
+					\ket{\psi_t} &=& e^{-iHt/\hbar}\ket{\psi_0}  \\
+						&=& e^{-iHt/\hbar}\l( \cos(\theta/2)\ket{v_1} - \sin(\theta/2)\ket{v_2}\r) \\
+						&=& e^{-iE_1t/\hbar} \cos(\theta/2)\ket{v_1} - e^{-iE_2t/\hbar}\sin(\theta/2)\ket{v_2} 
+				\eea
+				Logo, projetando em $\ket{v_e}$, temos:
+				\bea
+					\braket{v_e | \psi_t} &=& e^{-iE_1t/\hbar} \cos(\theta/2)\braket{v_e | v_1} - e^{-iE_2t/\hbar}\sin(\theta/2)\braket{v_e | v_2} \\
+						&=& e^{-iE_1t/\hbar} \cos^2(\theta/2) + e^{-iE_2t/\hbar}\sin^2(\theta/2)
+				\eea
+				onde usamos as expressões calculadas no item anterior para expressar $\ket{v_1}, \ket{v_2}$ em termos de $\ket{v_e}, \ket{v_\mu}$. Podemos escrever a expressão acima como:
+				\be
+					\braket{v_e | \psi_t} = e^{-iE_1t/\hbar}\l( \cos^2(\theta/2) + \sin^2(\theta/2) e^{-i\Delta E t/\hbar}\r)
+				\ee
+				Ora, a probabilidade é apenas o módulo quadrado dessa expressão:
+				\bea
+					p_e(t) &=& |\braket{v_e | \psi_t}|^2 \\
+						&=& \l| \cos^4(\theta/2) + 2\sin^2(\theta/2)\cos^2(\theta/2)e^{-i\Delta E t/\hbar} + \sin^4(\theta/2) e^{-2i\Delta Et/\hbar} \r| \\
+						&=& \l| \f{e^{-i\Delta Et/\hbar}}{2i} \l(\cos\l(\f{\Delta Et}{\hbar}\r)\l(\cos^4(\theta/2) + \sin^4(\theta/2) \r) + i\sin\l(\f{\Delta Et}{\hbar}\r) \l(\cos^4(\theta/2) - \sin^4(\theta/2) \r) \r) + \sin^2\theta e^{-i\Delta Et/\hbar} \r| \\
+						&=& \l| \cos\l(\f{\Delta Et}{\hbar}\r) \f{\cos^2(\theta)+1}{4i} +\f{1}{4}\sin\l(\f{\Delta Et}{\hbar}\r)\cos(\theta) + \sin^2\theta \r|
+				\eea
+				*
+			\end{multianswer}
+			\item If $p \gg\langle m\rangle c$ is the neutrino momentum, show that $\Delta E$, as measured in the Sun rest frame, is
+			
+			$$
+			\Delta E=\frac{\left(m_{2}^{2}-m_{1}^{2}\right) c^{3}}{2 p}=\frac{\Delta m^{2} c^{3}}{2 p}
+			$$
+			
+			with $\Delta m^{2}=m_{2}^{2}-m_{1}^{2}$. Then $t$ must also be measured in the Sun rest frame, and not in the neutrino rest frame!
+			\begin{multianswer}
+				*
 			\end{multianswer}
 			
 		\end{exercises}
+		
+		
+	\end{exercise}
+
+
+	\begin{exercise}[5.5.1 - An orthonormal basis of eigenvectors]
+		Show by explicit calculation that the vectors $\left|\chi_{s}\right\rangle$ (5.12) form an orthonormal basis: $\left\langle\chi_{s^{\prime}} \mid \chi_{s}\right\rangle=\delta_{s^{\prime} s}$
+	\end{exercise}
+	\begin{answer}
+		Foi mostrado que
+		\be
+			\ket{\chi_s} = \f{1}{\sqrt{N}}\sum_{n=0}^{N-1} e^{in\delta_s}\ket{\phi_n}
+		\ee
+		com
+		\be
+			\delta_s = \f{2\pi s}{N}
+		\ee
+		Então, considere:
+		\bea
+			\braket{ \chi_{s'} | \chi_s} &=& \f{1}{N} \sum_{n=0}^{N-1} \sum_{p=0}^{N-1} e^{in\delta s}e^{-ip\delta_{s'}} \braket{\phi_p | \phi_n} \\
+				&=& \f{1}{N} \sum_{n=0}^{N-1} e^{in(\delta_s - \delta_{s'})} \\
+				&=& \f{1}{N} \sum_{n=0}^{N-1} e^{2\pi in (s-s') / N}
+		\eea
+		Agora, notamos que caso $s=s'$, então a exponencial vira $e^0=1$ e o somatório resulta em $N$, de modo que $\braket{\chi_s | \chi_s} = 1$. Vamos, então, considerar o caso estrito $s\not=s'$. Nesse caso, escreveremos $s-s' = k$, onde $k$ é um número inteiro. Então, teremos
+		\be
+			\braket{ \chi_{s'} | \chi_s} = \f{1}{N} \sum_{n=0}^{N-1} e^{2\pi i np/N}
+		\ee
+		Geometricamente, esse somatório significa dar $N$ passos de tamanho $2\pi p/N$ no círculo unitário, que resulta em $p$ voltas, a partir do ponto $(1, 0)$. Então, em termos físicos, podemos interpretar essa equação como calculando a posição média de uma partícula dando a volta em uma circunferência de raio 1 (em passos de tamanho $2\pi p/N$). Evidentemente, se dermos uma quantidade inteira de voltas completas, a média da posição será 0. Como nosso somatório equivale a exatamente $p$ voltas, temos diretamente que:
+		\be
+			\braket{\chi_{s'} | \chi_s} = 0
+		\ee
+		se $s'\not=0s$. Portanto, no geral,
+		\be
+			\braket{\chi_{s'} | \chi_s} = \delta_{s's}
+		\ee
+	\end{answer}
 	
+	\begin{exercise}[5.5.2 - The electric dipole moment of formaldehyde]
+		\begin{exercises}
+			\item We wish to model the behavior of the two $\pi$ electrons of the double bond in the formaldehyde molecule $\mathrm{H}_{2}-\mathrm{C}=\mathrm{O}$. Using the fact that oxygen is more electronegative than carbon, show that the Hamiltonian of an electron takes the form
+			$$
+			\left(\begin{array}{cc}
+				E_{\mathrm{C}} & -A \\
+				-A & E_{\mathrm{O}}
+			\end{array}\right)
+			$$
+			with $E_{\mathrm{O}}<E_{\mathrm{C}}$, where $E_{\mathrm{C}}\left(E_{\mathrm{O}}\right)$ is the energy of an electron localized at a carbon (oxygen) atom.
+			\begin{multianswer}
+				Um elétron pode estar ligado tanto ao carbono com energia $E_c$ ou ao oxigênio com energia $E_o$. Os autoestados da hamiltoniana pura, então, são
+				\bea
+					H\ket{\phi_e} &=& E_c\ket{\phi_c} \\
+					H\ket{\phi_o} &=& E_o\ket{\phi_o} 
+				\eea
+				Para ter a hamiltoniana completa precisamos introduzir uma perturbação na anti-diagonal simétrica. Logo,
+				\be
+					H = 
+					\begin{pmatrix}
+						E_c & -A \\
+						-A & E_o \\
+					\end{pmatrix}
+				\ee
+			\end{multianswer}
 		
-		
+			% Part 2
+			\item We define
+			$$
+			B=\frac{1}{2}\left(E_{\mathrm{C}}-E_{\mathrm{O}}\right)>0
+			$$
+			and the angle $\theta$ by
+			$$
+			B=\sqrt{A^{2}+B^{2}} \cos \theta, \quad A=\sqrt{A^{2}+B^{2}} \sin \theta .
+			$$
+			Calculate as a function of $\theta$ the probability of finding a $\pi$ electron localized at a carbon or oxygen atom.
+			\begin{multianswer}
+				As probabilidades são dadas por $p_c = |\braket{\phi_c | \phi_c}|^2$ e $p_o = |\braket{\phi_o | \phi_o}|^2$. Vamos diagonalizar a matriz e calcular os autovetores, num processo análogo ao do Ex.(\ref{ex4.4.6}). Usando os resultados de lá como base:
+				\be
+					E_{\pm} = \f{E_c + E_o}{2} \pm \sqrt{A^2 + \l(\f{E_c - E_o}{2}\r)^2}
+				\ee
+				Sendo $\phi_\pm = (a_\pm, b_\pm)$, os autovetores são dados pelas equações (novamente, invocando resultados do outro exercício):
+				\bea
+					b_\pm &=& a_\pm\l( \f{E_c - E_o}{2A} \pm \sqrt{1 + \l(\f{E_c - E_o}{2A}\r)^2}\r) \\
+						&=& a_\pm \l( \f{B}{A} \pm \sqrt{1 + \l(\f{B}{A}\r)^2}\r) \\
+						&=& a_\pm \l( \f{B}{A} \pm \f{B}{A\cos\theta}\r) \\
+						&=& a_\pm \f{B}{A}( 1 \pm \sec\theta) \\
+						&=& a_\pm \f{B}{A} \l( \f{\cos\theta \pm 1}{\cos\theta} \r)
+				\eea
+				Então, escolhemos $a_\pm = A\cos\theta$ e temos $b_\pm = B(\cos\theta\pm 1)$. Isso gera os autoestados:
+				\be
+					\ket{\phi_\pm} = A\cos\theta\ket{\phi_e} + B(\cos\theta\pm 1)\ket{\phi_o}
+				\ee
+				
+				
+			\end{multianswer}
+			
+			
+			
+			
+		\end{exercises}		
 	\end{exercise}
 	
 

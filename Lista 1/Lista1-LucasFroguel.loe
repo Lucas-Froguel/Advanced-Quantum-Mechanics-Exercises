@@ -1,7 +1,8 @@
-\contentsline {exercise}{\ifthmt@listswap Exercise~1\else \numberline {1}Exercise\fi \thmtformatoptarg {4.1}}{1}{exercise.1}%
-\contentsline {exercise}{\ifthmt@listswap Exercise~2\else \numberline {2}Exercise\fi \thmtformatoptarg {4.4.2 - 1}}{1}{exercise.2}%
-\contentsline {exercise}{\ifthmt@listswap Exercise~3\else \numberline {3}Exercise\fi \thmtformatoptarg {4.4.2 - 2}}{2}{exercise.3}%
-\contentsline {exercise}{\ifthmt@listswap Exercise~4\else \numberline {4}Exercise\fi \thmtformatoptarg {4.4.2 - 3}}{3}{exercise.4}%
-\contentsline {exercise}{\ifthmt@listswap Exercise~5\else \numberline {5}Exercise\fi \thmtformatoptarg {4.4.3}}{4}{exercise.5}%
-\contentsline {exercise}{\ifthmt@listswap Exercise~6\else \numberline {6}Exercise\fi \thmtformatoptarg {4.4.4}}{4}{exercise.6}%
-\contentsline {exercise}{\ifthmt@listswap Exercise~7\else \numberline {7}Exercise\fi \thmtformatoptarg {4.4.5}}{7}{exercise.7}%
+\contentsline {exercise}{\ifthmt@listswap Exercise~1\else \numberline {1}Exercise\fi \thmtformatoptarg {4.4.1 - Dispersion and eigenvectors}}{1}{exercise.1}%
+\contentsline {exercise}{\ifthmt@listswap Exercise~2\else \numberline {2}Exercise\fi \thmtformatoptarg {4.4.2 - The variational method}}{2}{exercise.2}%
+\contentsline {exercise}{\ifthmt@listswap Exercise~3\else \numberline {3}Exercise\fi \thmtformatoptarg {4.4.3 - The Feynman-Hellmann theorem}}{4}{exercise.3}%
+\contentsline {exercise}{\ifthmt@listswap Exercise~4\else \numberline {4}Exercise\fi \thmtformatoptarg {4.4.4 - Time evolution of a two-level system}}{5}{exercise.4}%
+\contentsline {exercise}{\ifthmt@listswap Exercise~5\else \numberline {5}Exercise\fi \thmtformatoptarg {4.4.5 - Unstable states}}{8}{exercise.5}%
+\contentsline {exercise}{\ifthmt@listswap Exercise~6\else \numberline {6}Exercise\fi \thmtformatoptarg {4.4.6 - The solar neutrino puzzle}}{12}{exercise.6}%
+\contentsline {exercise}{\ifthmt@listswap Exercise~7\else \numberline {7}Exercise\fi \thmtformatoptarg {5.5.1 - An orthonormal basis of eigenvectors}}{15}{exercise.7}%
+\contentsline {exercise}{\ifthmt@listswap Exercise~8\else \numberline {8}Exercise\fi \thmtformatoptarg {5.5.2 - The electric dipole moment of formaldehyde}}{16}{exercise.8}%
