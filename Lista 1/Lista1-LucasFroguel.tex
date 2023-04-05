@@ -712,8 +712,27 @@
 					&=&  \sum_n |\braket{\psi_0|n}|^2 \mathcal{F}^{-1}\l(e^{-iE_nt/\hbar}\r) \\
 					&=& \sum_n |\braket{\psi_0|n}|^2 \delta(E-E_n)
 				\eea
-				como queríamos mostrar. 
-				*
+				como queríamos mostrar. Agora, seja $E_0=\braket{H}$. Sabemos que
+				\be
+					(\Delta H)^2 = \braket{H^2} - \braket{H}^2 
+				\ee
+				Ademais, por uma conta análoga à que fizemos para calcular $c(t)$:
+				\bea
+					\braket{H} &=& \braket{\psi_0 | H | \psi_0} \\
+						&=& \sum_n E_n |\braket{\psi_0|n}|^2 \\
+						&=& \int E\omega(E) dE
+				\eea
+				E
+				\bea
+					\braket{H^2} &=& \braket{\psi_0 | H^2 | \psi_0} \\
+					&=& \sum_n E_n^2 |\braket{\psi_0|n}|^2 \\
+					&=& \int E^2\omega(E) dE
+				\eea
+				Ambas as integrais são facilmente checadas substituindo $\omega(E)$ e notando o efeito da $\delta(E-E_n)$ de matar a integral. Portanto, podemos escrever
+				\be
+					(\Delta H)^2 = \int E(E - E_0)\omega(E) dE
+				\ee
+				
 			\end{multianswer}
 		
 			% Part 4
@@ -895,20 +914,32 @@
 				\bea
 					p_e(t) &=& |\braket{v_e | \psi_t}|^2 \\
 						&=& \l| \cos^4(\theta/2) + 2\sin^2(\theta/2)\cos^2(\theta/2)e^{-i\Delta E t/\hbar} + \sin^4(\theta/2) e^{-2i\Delta Et/\hbar} \r| \\
-						&=& \l| \f{e^{-i\Delta Et/\hbar}}{2i} \l(\cos\l(\f{\Delta Et}{\hbar}\r)\l(\cos^4(\theta/2) + \sin^4(\theta/2) \r) + i\sin\l(\f{\Delta Et}{\hbar}\r) \l(\cos^4(\theta/2) - \sin^4(\theta/2) \r) \r) + \sin^2\theta e^{-i\Delta Et/\hbar} \r| \\
-						&=& \l| \cos\l(\f{\Delta Et}{\hbar}\r) \f{\cos^2(\theta)+1}{4i} +\f{1}{4}\sin\l(\f{\Delta Et}{\hbar}\r)\cos(\theta) + \sin^2\theta \r|
+						&=& \cos^4(\theta/2) + 2\sin^2(\theta/2)\cos^2(\theta/2)\cos\l(\Delta Et/\hbar\r) + \sin^4(\theta/2) \\
+						&=& \f{\cos^2\theta + 1}{2} +  \f{\sin^2\theta}{2} \cos\l(\Delta Et/\hbar\r) \\
+						&=& \f{1 - \sin^2\theta + 1}{2} +  \f{\sin^2\theta}{2} \cos\l(\Delta Et/\hbar\r)  \\
+						&=& 1 - \f{\sin^2\theta}{2} \l( 1 - \cos\l(\Delta Et/\hbar\r) \r) \\
+						&=& 1 - \sin^2\theta\sin^2\l(\f{\Delta E t}{\hbar}\r)
 				\eea
-				*
 			\end{multianswer}
+		
+			% Part 3
 			\item If $p \gg\langle m\rangle c$ is the neutrino momentum, show that $\Delta E$, as measured in the Sun rest frame, is
-			
 			$$
 			\Delta E=\frac{\left(m_{2}^{2}-m_{1}^{2}\right) c^{3}}{2 p}=\frac{\Delta m^{2} c^{3}}{2 p}
 			$$
-			
 			with $\Delta m^{2}=m_{2}^{2}-m_{1}^{2}$. Then $t$ must also be measured in the Sun rest frame, and not in the neutrino rest frame!
 			\begin{multianswer}
-				*
+				Quando $p \ll mc$, podemos escrever a relação de dispersão como:
+				\bea
+					E &=& \sqrt{m^2c^4 +  p^2c^2}  \\
+						&=& pc \sqrt{1 + \f{m^2c^2}{p^2}} \\
+						&\approx& pc\l(1 + \f{m^2c^2}{2p^2}\r)
+				\eea
+				Logo,
+				\be
+					\Delta E = E_2 - E_1 = \f{(m_2^2 - m_1^2)c^3}{2p}
+				\ee
+				
 			\end{multianswer}
 			
 		\end{exercises}
@@ -1002,7 +1033,34 @@
 				\be
 					\ket{\phi_\pm} = A\cos\theta\ket{\phi_e} + B(\cos\theta\pm 1)\ket{\phi_o}
 				\ee
-				* como calcular a probabilidade sem um estado inicial?
+				Vamos supor que o estado inicial é o ground state, ou seja, o autoestado de menor energia. Ou seja, $\ket{\phi_-}$. Portanto,
+				\bea
+					p_c = |\braket{\phi_c | \phi_-}|^2 = A^2\cos^2\theta \\
+					p_o = |\braket{\phi_o | \phi_-}|^2 = B^2(\cos\theta-1)^2 \\
+				\eea
+				Sabemos que
+				\be
+					A^2 = B^2\l(\f{1-\cos^2\theta}{\cos^2\theta}\r)
+				\ee
+				Logo,
+				\be
+					p_c = B^2(1-\cos^2\theta)
+				\ee
+				Portanto, fazendo $p_c + p_o = 1$
+				\be
+					B^2(1-\cos^2\theta) + B^2(\cos\theta-1)^2 = 1
+				\ee
+				Resolvendo para $B$:
+				\bea
+					B^2\l(1 - \cos^2\theta + \cos^2\theta - 2\cos\theta + 1\r) &=& 1 \\
+					2B^2 \l( 1 - \cos\theta\r) &=& 1 \\
+					B^2 &=& \f{1}{2(1-\cos\theta)}
+				\eea
+				Portanto, as probabilidades são
+				\beaa
+					p_c &=& \f{1-\cos^2\theta}{2(1-\cos\theta)} = \f{1+\cos\theta}{2}\\
+					p_o &=& \f{1 - \cos\theta}{2}
+				\eeaa			
 			\end{multianswer}
 			\item We assume that the electric dipole moment $d$ of formaldehyde is exclusively due to the charge distribution on the $\mathrm{C}=\mathrm{O}$ axis. Express this dipole moment as a function of the distance $l$ between the carbon and oxygen atoms, the proton charge $q_{\mathrm{p}}$, and $\theta$. The experimental values are $l=0.121 \mathrm{~nm}$ and $d=q_{\mathrm{p}} \times 0.040 \mathrm{~nm}$.
 			\begin{multianswer}[true]
@@ -1011,8 +1069,112 @@
 		\end{exercises}		
 	\end{exercise}
 
-	\begin{exercise}
-		
+	\begin{exercise}[5.5.3 - Butadiene]
+		The butadiene molecule $\mathrm{C}_{4} \mathrm{H}_{6}$ has a linear structure (Fig. 5.16). Its $\left(\mathrm{C}_{4} \mathrm{H}_{6}\right)^{4+}$ skeleton formed of $\sigma$ electrons involves four carbon atoms numbered $n=1$ to $n=4$. The state 	of a $\pi$ electron localized near the $n$th carbon atom is designated $\left|\varphi_{n}\right\rangle$. It is convenient to generalize to a linear chain of $N$ carbon atoms, numbering them $n=1, \ldots, N$. The Hamiltonian of a $\pi$ electron acts on the state $\left|\varphi_{n}\right\rangle$ as follows:
+		$$
+		\begin{aligned}
+			H\left|\varphi_{n}\right\rangle & =E_{0}\left|\varphi_{n}\right\rangle-A\left(\left|\varphi_{n-1}\right\rangle+\left|\varphi_{n+1}\right\rangle\right) \text { if } n \neq 1, N, \\
+			H\left|\varphi_{1}\right\rangle & =E_{0}\left|\varphi_{1}\right\rangle-A\left|\varphi_{2}\right\rangle, \\
+			H\left|\varphi_{N}\right\rangle & =E_{0}\left|\varphi_{N}\right\rangle-A\left|\varphi_{N-1}\right\rangle,
+		\end{aligned}
+		$$
+		where $A$ is a positive constant. We note that the states $\left|\varphi_{1}\right\rangle$ and $\left|\varphi_{N}\right\rangle$ play a special role, because in contrast to benzene there is no cyclic symmetry in this molecule.
+		\begin{exercises}
+			\item Write down the explicit matrix for $H$ in the $\left|\varphi_{n}\right\rangle$ basis for $N=4$.
+			\begin{multianswer}
+				Seguindo a expressão do enunciado, podemos facilmente calcular cada elemento de matriz de $H$ individualmente e montar a matriz. O resultado é
+				\be
+					H = 
+					\begin{pmatrix}
+						E_0 & -A & 0 & 0 \\
+						-A & E_0 & -A & 0 \\
+						0 & -A  & E_0 & -A \\
+						0 & 0 & -A & E_0 \\
+					\end{pmatrix}
+				\ee
+			\end{multianswer}
+			\item The most general state for a $\pi$ electron is
+			$$
+			|\chi\rangle=\sum_{n=1}^{N} c_{n}\left|\varphi_{n}\right\rangle
+			$$
+			To adapt the method used in the case of cyclic symmetry to the present case, we introduce two fictitious states $\left|\varphi_{0}\right\rangle$ and $\left|\varphi_{N+1}\right\rangle$ and two components $c_{0}=c_{N+1}=0$, which allows us to rewrite $|\chi\rangle$ as
+			$$
+			|\chi\rangle=\sum_{n=0}^{N+1} c_{n}\left|\varphi_{n}\right\rangle
+			$$
+			Show that the action of $H$ on the state $|\chi\rangle$ is written as
+			$$
+			H|\chi\rangle=E_{0}|\chi\rangle-A \sum_{n=1}^{N}\left(c_{n-1}+c_{n+1}\right)\left|\varphi_{n}\right\rangle .
+			$$
+			\begin{multianswer}
+				Considere:
+				\bea
+					H\ket{\chi} &=& H\sum_{n=0}^{N+1} c_n\ket{\varphi_n} \\
+						&=& \sum_{n=0}^{N+1} c_n H\ket{\varphi_n} \\
+						&=& \sum_{n=0}^{N+1} c_n (E_0\ket{\varphi}_n - A(\ket{\varphi_{n-1}} + \ket{\varphi_{n+1}}) \\
+						&=& E_0\ket{\chi} - A\sum_{n=0}^{N+1} c_n\ket{\varphi_{n-1}} -A\sum_{n=0}^{N+1} c_n\ket{\varphi_{n+1}} \\
+						&=& E_0\ket{\chi} -A\sum_{k=1}^{N+2} c_{k-1}\ket{\varphi_k} - A\sum_{k=-1}^{N} c_{k+1}\ket{\varphi_k}
+				\eea
+				Mas, obviamente $c_{N+1} = c_0 = 0$, então podemos matar o último termo do primeiro somatório e o primeiro termo do último somatório e renomar $k$ para $n$. Com isso, obtemos:
+				\be
+					H|\chi\rangle=E_{0}|\chi\rangle-A \sum_{n=1}^{N}\left(c_{n-1}+c_{n+1}\right)\left|\varphi_{n}\right\rangle
+				\ee
+			\end{multianswer}
+			
+			% Part 3
+			\item Inspired by the method used in the case of cyclic symmetry, we seek $c_{n}$ in the form
+			$$
+			c_{n}=\frac{c}{2 \mathrm{i}}\left(\mathrm{e}^{\mathrm{i} n \delta}-\mathrm{e}^{-\mathrm{i} n \delta}\right)
+			$$
+			which ensures that $c_{0}=0$. Show that we must choose
+			$$
+			\delta=\frac{\pi s}{N+1}, \quad s=1, \ldots, N,
+			$$
+			if we also wish to have $c_{N+1}=0$. 
+			\begin{multianswer}
+				Vamos considerar o caso $n=N+1$, para avaliar o constraint sobre $\delta$. Ora,
+				\be
+					c_{N+1} = \f{c}{2i}\l( e^{i(N+1)\delta} - e^{-i(N+1)\delta}\r)
+				\ee
+				Então, para que $c_{N+1}=0$, requerimos que:
+				\be
+					e^{i(N+1)\delta} = e^{-i(N+1)\delta}
+				\ee
+				Isso equivale a:
+				\be
+					\cos(i(N+1)\delta) + i\sin(i(N+1)\delta) = \cos(i(N+1)\delta) - i\sin(i(N+1)\delta)
+				\ee
+				De fato, é verdade que $\sin(x) = -\sin(x)$ se, e somente se, $x=s\pi$ com $s\in\mathbb{Z}$. Portanto, é óbvio que
+				\be
+					\delta = \f{\pi s}{N+1}
+				\ee
+			\end{multianswer}
+			
+			% Part 4
+			\item Show that the eigenvalues of $H$ are labeled by an integer $s$ :
+			$$
+			E_{s}=E_{0}-2 A \cos \frac{\pi s}{N+1}
+			$$
+			and give the expression for the corresponding eigenvectors $\left|\chi_{s}\right\rangle$. Show that the normalization constant $c$ is $\sqrt{2 /(N+1)}$. [Hint: cf. (5.15).]
+			\begin{multianswer}
+				É fácil ver que
+				\be
+					c_n = c\sin\l(\f{n\pi s}{N+1}\r)
+				\ee
+				Ademais, mostramos que
+				\be
+					E = E_0 - A\sum_{n=1}^{N} c_{n-1} + c_{n+1}
+				\ee
+				Logo, consideramos o termo
+				\be
+					c^2\sum_{n=1}^N \sin\l(\f{(n-1)\pi s}{N+1}\r) + \sin\l(\f{(n+1)\pi s}{N+1}\r) = c^2\l( 2\cos\l(\f{\pi s}{N+1}\r) \sum_{n=1}^N \sin\l(\f{ n\pi s}{N+1}\r) \r)
+				\ee
+				Para fazermos uma álgebra, denotaremos $k=\pi s/(N+1)$. 
+				
+				
+				
+			\end{multianswer}
+			
+		\end{exercises}		
 	\end{exercise}
 	
 
