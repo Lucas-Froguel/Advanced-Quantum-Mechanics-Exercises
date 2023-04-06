@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2023.4.3)  5 APR 2023 23:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2023.3.22)  6 APR 2023 17:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1089,7 +1089,7 @@ Package: lipsum 2021-09-20 v2.7 150 paragraphs of Lorem Ipsum dummy text
 \l__lipsum_b_int=\count450
 
 (/usr/share/texmf-dist/tex/latex/lipsum/lipsum.ltd.tex))
-Package hyperref Info: Option `colorlinks' set `true' on input line 32.
+Package hyperref Info: Option `colorlinks' set `true' on input line 34.
 \c@exercise=\count451
 \c@partinner=\count452
 \c@exercisesi=\count453
@@ -1104,24 +1104,24 @@ Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 (./Lista1-LucasFroguel.aux)
 \openout1 = `Lista1-LucasFroguel.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 120.
+LaTeX Font Info:    ... okay on input line 120.
 
 (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -1149,7 +1149,7 @@ e
 Package pgfplots Warning: running in backwards compatibility mode (unsuitable t
 ick labels; missing features). Consider writing \pgfplotsset{compat=1.18} into 
 your preamble.
- on input line 118.
+ on input line 120.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1185,7 +1185,7 @@ your preamble.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 118.
+Package hyperref Info: Link coloring ON on input line 120.
 (/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 
@@ -1197,9 +1197,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count463
 )
-LaTeX Info: Redefining \ref on input line 118.
-LaTeX Info: Redefining \pageref on input line 118.
-LaTeX Info: Redefining \nameref on input line 118.
+LaTeX Info: Redefining \ref on input line 120.
+LaTeX Info: Redefining \pageref on input line 120.
+LaTeX Info: Redefining \nameref on input line 120.
 
 (./Lista1-LucasFroguel.out) (./Lista1-LucasFroguel.out)
 \@outlinefile=\write5
@@ -1220,27 +1220,47 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'Lista1-LucasFroguel.bbl' found.
 
 (./Lista1-LucasFroguel.bbl)
-Package biblatex Info: Reference section=0 on input line 118.
-Package biblatex Info: Reference segment=0 on input line 118.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 120
+Package biblatex Info: Reference section=0 on input line 120.
+Package biblatex Info: Reference segment=0 on input line 120.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 122
 .
  (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 120
+LaTeX Font Info:    Trying to load font information for U+msb on input line 122
 .
 
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (./Lista1-LucasFroguel.loe)
 Package hyperref Info: bookmark level for unknown exercise defaults to 0 on inp
-ut line 122.
+ut line 124.
 
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6]
 [7] [8] [9] [10] [11] [12] [13] [14] [15] [16] [17] [18] [19] [20] [21]
-[22] [23]
+[22]
+<Images/graph_of_potential.pdf, id=257, 462.52798pt x 346.89601pt>
+File: Images/graph_of_potential.pdf Graphic file (type pdf)
+<use Images/graph_of_potential.pdf>
+Package pdftex.def Info: Images/graph_of_potential.pdf  used on input line 1289
+.
+(pdftex.def)             Requested size: 350.33727pt x 262.76503pt.
+ [23]
+Overfull \hbox (0.61763pt too wide) in paragraph at lines 1302--1303
+[]\T1/cmr/m/it/12 We shall treat the ion $\OT1/cmr/m/n/12 H[]$\T1/cmr/m/it/12 a
+s a two-level sys-tem with ba-sis sta-tes $[]$ and $[] \OT1/cmr/m/n/12 =
+ []
+
+[24 <./Images/graph_of_potential.pdf>]
+<Images/graph_of_wavefunc.pdf, id=295, 462.52798pt x 346.89601pt>
+File: Images/graph_of_wavefunc.pdf Graphic file (type pdf)
+<use Images/graph_of_wavefunc.pdf>
+Package pdftex.def Info: Images/graph_of_wavefunc.pdf  used on input line 1360.
+
+(pdftex.def)             Requested size: 350.33727pt x 262.76503pt.
+ [25] [26 <./Images/graph_of_wavefunc.pdf>] [27] [28]
 \tf@loe=\write6
 \openout6 = `Lista1-LucasFroguel.loe'.
 
@@ -1252,13 +1272,17 @@ Package logreq Info: Writing requests to 'Lista1-LucasFroguel.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 40281 strings out of 478238
- 910269 string characters out of 5850457
- 1787321 words of memory out of 5000000
- 57752 multiletter control sequences out of 15000+600000
+ 40327 strings out of 478238
+ 911232 string characters out of 5850456
+ 1787444 words of memory out of 5000000
+ 57772 multiletter control sequences out of 15000+600000
  485751 words of font info for 70 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  100i,14n,104p,1069b,1614s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+pdfTeX warning (dest): name{exercise.12} has been referenced but does not exist
+, replaced by a fixed one
+
 
 pdfTeX warning (dest): name{exercise.8} has been referenced but does not exist,
  replaced by a fixed one
@@ -1285,10 +1309,10 @@ e/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fo
 nts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf-dist/fonts/type1/publi
 c/cm-super/sfrm2074.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti
 1200.pfb>
-Output written on Lista1-LucasFroguel.pdf (23 pages, 344711 bytes).
+Output written on Lista1-LucasFroguel.pdf (28 pages, 375294 bytes).
 PDF statistics:
- 378 PDF objects out of 1000 (max. 8388607)
- 310 compressed objects within 4 object streams
- 149 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 464 PDF objects out of 1000 (max. 8388607)
+ 361 compressed objects within 4 object streams
+ 172 named destinations out of 1000 (max. 500000)
+ 23 words of extra memory for PDF output out of 10000 (max. 10000000)
 

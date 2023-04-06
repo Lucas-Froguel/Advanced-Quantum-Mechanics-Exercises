@@ -23,6 +23,8 @@
 %
 \usepackage{lipsum} % Pode tirar esse :D
 
+\graphicspath{.Images/}
+
 \hypersetup{
 	colorlinks=true,
 	linkcolor=blue,
@@ -1273,10 +1275,187 @@
 		\begin{exercises}
 			\item Assuming that the electron is located on the $x$ axis, express its potential energy $V(x)$ as a function of its position $x$ and $e^{2}=q_{\mathrm{e}}^{2} / 4 \pi \varepsilon_{0}$, where $q_{\mathrm{e}}$ is the electron charge, and sketch it qualitatively.
 			\begin{multianswer}
+				Vamos usar que $q_p=-q_e$. A energia potencial total é a soma da energia potencial causada pelo campo de cada próton individualmente, logo:
+				\be
+					V(x) = -e^2\l( \f{1}{\l|x - \f{r}{2}\r|} + \f{1}{\l|x + \f{r}{2}\r|}\r) 
+				\ee
+				Temos um rascunho do gráfico na Fig.(\ref{fig:graphofpotential}). 
+				\begin{figure}
+					\centering
+					\includegraphics[width=0.7\linewidth]{Images/graph_of_potential}
+					\caption[]{Rascunho do potencial $V(x)$}
+					\label{fig:graphofpotential}
+				\end{figure}
+			\end{multianswer}
+
+			% Part 2
+			\item If the two protons are very far apart, $r \gg l$, the electron is either localized near the proton on the right (the state $\left|\varphi_{1}\right\rangle$ ), or near the proton on the left (the state $\left|\varphi_{2}\right\rangle$ ). We assume that these states both correspond to the ground state of the hydrogen atom of energy
+			$$
+			E_{0}=-\frac{1}{2} \frac{m_{\mathrm{e}} e^{4}}{\hbar^{2}}=-\frac{e^{2}}{2 a_{0}}
+			$$
+			where $m_{\mathrm{e}}$ is the electron mass and $a_{0}$ is the Bohr radius: $a_{0}=\hbar^{2} / m_{\mathrm{e}} e^{2}$. What is the relevant length scale $l$ in the relation $r \gg l$ ?
+			\begin{multianswer}
+				Somos capazes de distingui-los como átomos separados se $r\geq a_0$, que é o raio de bohr, o raio atômico do hidrogênio. Assim, a distância relevante é $l=a_0$. 				
+			\end{multianswer}
+
+			% Part 3
+			\item We shall treat the ion $\mathrm{H}_{2}^{+}$as a two-level system with basis states $\left\{\left|\varphi_{1}\right\rangle,\left|\varphi_{2}\right\rangle\right\}$ and $\left\langle\varphi_{i} \mid \varphi_{j}\right\rangle=\delta_{i j}$. Justify the following form of the Hamiltonian with the choice $A>0$ :
+			$$
+			H=\left(\begin{array}{cc}
+				E_{0} & -A \\
+				-A & E_{0}
+			\end{array}\right)
+			$$
+			What are the eigenstates $\left|\chi_{+}\right\rangle$and $\left|\chi_{-}\right\rangle$of $H$ and the corresponding energies $E_{+}$and $E_{-}$, $E_{+}<E_{-}$? Qualitatively sketch the wave functions $\chi_{ \pm}(x)=\left\langle x \mid \chi_{ \pm}\right\rangle$of the electron on the $x$ axis.
+			\begin{multianswer}
+				As energia de ambos os estados são $E_0$, portanto é esperado que as diagonais sejam compostas por $E_0$. Ademais, é necessário introduzir uma perturbação simétrica, convenientemente parametrizada por $-A$ com $A>0$. Assim, a forma da hamiltoniana é natural. Os autovalores são:
+				\be
+					E_\mp = E_0 \pm A
+				\ee
+				Os autovetores são dados por:
+				\bea
+					E_0 a_+ -Ab_+ &=& (E_0 - A)a_+ \\
+					Ab_+ &=& Aa_+ \\
+					b_+ &=& a_+
+				\eea
+				Logo, uma escolha normalizada é
+				\be
+					\ket{\chi_+} = 
+					\f{1}{\sqrt{2}}
+					\begin{pmatrix}
+						1 \\
+						1 \\
+					\end{pmatrix} 
+					=
+					\f{\ket{\phi_1} + \ket{\phi_2}}{\sqrt{2}}
+				\ee
+				Analogamente,
+				\be
+				\ket{\chi_-} = 
+				\f{1}{\sqrt{2}}
+				\begin{pmatrix}
+					1 \\
+					-1 \\
+				\end{pmatrix}
+				=
+				\f{\ket{\phi_1} - \ket{\phi_2}}{\sqrt{2}}
+				\ee
+				Evidentemente, projetar na base das posições resulta em
+				\bea
+					\chi_+(x) &=& \f{\phi_1(x) + \phi_2(x)}{\sqrt{2}} \\
+					\chi_+(x) &=& \f{\phi_1(x) - \phi_2(x)}{\sqrt{2}} 
+				\eea
+				Sendo $\phi_1(x), \phi_2(x)$ soluções das equação de Schrödinger para o caso $n=1$ centrados em diferentes pontos, teremos
+				\bea
+					\chi_+(x) &=& \f{e^{-|x-r/2|/a_0} + e^{-|x+r/2|/a_0}}{\sqrt{2\pi} a_0^{3/2}} \\
+					\chi_+(x) &=& \f{e^{-|x-r/2|/a_0} - e^{-|x+r/2|/a_0}}{\sqrt{2\pi} a_0^{3/2}}
+				\eea
+				com o gráfico da Fig.(\ref{fig:graphofwavefunc}).
+				\begin{figure}
+					\centering
+					\includegraphics[width=0.7\linewidth]{Images/graph_of_wavefunc}
+					\caption{Gráfico não-normalizado das funções de onda $\chi_+(x)$ e $\chi_-(x)$.}
+					\label{fig:graphofwavefunc}
+				\end{figure}
+			\end{multianswer}
+		
+			% Part 4
+			\item The parameter $A$ is a function of the distance $r$ between the protons, $A(r)$. Justify the fact that $A$ is an increasing function of $r$ and $\lim _{r \rightarrow \infty} A(r)=0$. The electron energy is then a function of $r, E_{ \pm}(r)$
+			\begin{multianswer}
+				Quanto mais distantes os prótons estiverem, menor será sua interação. Quando estiverem em $r\geq a_0$, o elétron já estará bem localizado em apenas um deles com energia $\approx E_0$. Assim, é natural que $A(r)$ decreça conforme $r$ cresce. No limite que $r\to\infty$, não há definitivamente nenhuma interação entre os prótons e temos apenas um átomo de hidrogênio. Assim, obviamente, $E\pm=E_\pm(r)=E_0-A(r)$. 
+			\end{multianswer}
+			
+			% Part 5
+			\item Show that the total energy of the ion $E_{ \pm}^{\prime}(r)$ must contain an additional term $+e^{2} / r$. What is the physical origin of this term?
+			\begin{multianswer}
+				No limite em que $r\to0$, precisamos ter que a energia explode para infinito, pois estamos juntando os dois prótons. Assim, precisamos de um termo $\sim r^{-n}$. É natural adicionar
+				\be
+					\f{e^2}{r}
+				\ee
+				pois esse é o termo repulsivo entre os dois prótons. 
+			\end{multianswer}
+			
+			% Part 6
+			\item We parametrize $A(r)$ as
+			$$
+			A(r)=c e^{2} \exp \left(-\frac{r}{b}\right)
+			$$
+			where $b$ is a length and $c$ an inverse length. Give the expression for the two energy levels $E_{+}^{\prime}$ and $E_{-}^{\prime}$ of the ion. Let
+			$$
+			\Delta E(r)=E_{+}^{\prime}(r)-E_{0}
+			$$
+			be the energy difference between the ground state of the ion and that of the hydrogen atom. Show that $\Delta E(r)$ can pass through a minimum at a value $r=r_{0}$ and derive the expression
+			$$
+			\Delta E\left(r_{0}\right)=\frac{e^{2}}{r_{0}}\left(1-\frac{b}{r_{0}}\right)
+			$$
+			What condition must hold for $b$ and $r_{0}$ in order for the ion $\mathrm{H}_{2}^{+}$to be a bound state?
+			\begin{multianswer}
+				Ora, a expressão de $\Delta E(r)$ é
+				\be
+					\Delta E(r) = -ce^2 e^{-r/b} + \f{e^2}{r}
+				\ee
+				Essa função explode para $r\to0$ e para $r\to\infty$, então, como é contínua no intervalo $(0, \infty)$, pelo teorema do valor intermediário, precisa existir $r_0\in(0, \infty)$ que minimiza ela. Derivando e igualando a zero para encontrar o mínimo:
+				\bea
+					-ce^2 e^{-r_0/b} \l(\f{-1}{b}\r) - \f{e^2}{2r_0^2} &=& 0 \\
+					e^{-r_0/b} &=& \f{b}{2c r_0^2}
+				\eea
+				Ora, substituindo isso na expressão original, obtemos
+				\be
+				\Delta E(r_0) = \frac{e^{2}}{r_{0}}\left(1-\frac{b}{r_{0}}\right)
+				\ee
+				que é a expressão desejada. Para que esse seja um estado ligado, precisamos que $\Delta E(r_0) < 0$. Portanto, temos a condição $b/r_0 > 1$. 
+			\end{multianswer}
+			
+			% Part 7
+			\item The experimental values are $r_{0} \simeq 2 a_{0}$ and $\Delta E\left(r_{0}\right) \simeq E_{0} / 5=-e^{2} / 10 a_{0}$. Compute $b$ and $c$ as functions of $a_{0}$.
+			\begin{multianswer}[true]
+				Usanos os valores dados:
+				\bea
+					\f{e^2}{2a_0}\l( 1 - \f{b}{2a_0}\r) &=& \f{-e^2}{10a_0} \\
+					1-\f{b}{2a_0} &=& -\f{1}{5} \\
+					\f{b}{2a_0} &=& \f{6}{5} \\
+					b &=& \f{12a_0}{5}
+				\eea
+				Por outro lado,
+				\bea
+					-ce^2e^{-r_0/b} + \f{e^2}{r_0} &=& -\f{e^2}{10a_0} \\
+					-ce^{-5/6} + \f{1}{2a_0} &=& -\f{1}{10a_0} \\
+					c &=& \f{3e^{5/6}}{5a_0}
+				\eea
+			\end{multianswer}
+		\end{exercises}
+	\end{exercise}
+	
+	\begin{exercise}[5.5.6 - The rotating-wave approximation in NMR]
+		\begin{exercises}
+			\item Instead of the rotating field of (5.22), we shall use a field $\vec{B}_{1}(t)$ parallel to $O x$ :
+			$$
+			\vec{B}_{1}(t)=2 B_{1} \hat{x} \cos (\omega t-\phi) .
+			$$
+			We define the state vector $|\tilde{\varphi}(t)\rangle$ in the rotating frame with angular velocity $\omega$ as
+			$$
+			|\tilde{\varphi}(t)\rangle=\exp \left[-\frac{i \omega \sigma_{z} t}{2}\right]|\varphi(t)\rangle \quad|\tilde{\varphi}(t=0)\rangle=|\varphi(t=0)\rangle .
+			$$
+			Why can one call $|\tilde{\varphi}(t)\rangle$ the state vector in the rotating frame? Show that the time evolution of $|\tilde{\varphi}(t)\rangle$ is governed by a Hamiltonian $\tilde{H}(t)$
+			$$
+			\mathrm{i} \hbar \frac{\mathrm{d}|\tilde{\varphi}\rangle}{\mathrm{d} t}=\tilde{H}(t)|\tilde{\varphi}(t)\rangle
+			$$
+			where
+			$$
+			\tilde{H}(t)=\exp \left[-\frac{\mathrm{i} \omega \sigma_{z} t}{2}\right] H(t) \exp \left[\frac{\mathrm{i} \omega \sigma_{z} t}{2}\right]
+			$$
+			More generally, for any operator $A(t)$, we have in the rotating frame
+			$$
+			\tilde{A}(t)=\exp \left[-\frac{\mathrm{i} \omega \sigma_{z} t}{2}\right] A(t) \exp \left[\frac{\mathrm{i} \omega \sigma_{z} t}{2}\right]
+			$$
+			\begin{multianswer}
 				
 			\end{multianswer}
 			
+			
+			
 		\end{exercises}
+		
 	\end{exercise}
 	
 
