@@ -1169,12 +1169,114 @@
 					c^2\sum_{n=1}^N \sin\l(\f{(n-1)\pi s}{N+1}\r) + \sin\l(\f{(n+1)\pi s}{N+1}\r) = c^2 \l( 2\cos\l(\f{\pi s}{N+1}\r) \sum_{n=1}^N \sin\l(\f{ n\pi s}{N+1}\r) \r)
 				\ee
 				Para fazermos uma álgebra, denotaremos $k=\pi s/(N+1)$. 
-				
-				
-				
 			\end{multianswer}
 			
 		\end{exercises}		
+	\end{exercise}
+
+
+	\begin{exercise}[5.5.4 - Eigenvectors of the Hamiltonian]
+		Show that in the case where the electric field is independent of time and when $d \mathcal{E} / A \ll 1$, the normalized eigenvector of $H$ corresponding to the eigenvalue $E_{0}-A$ is given to order $d \mathcal{E} / A$ by
+		$$
+		\left|\chi_{+}^{\prime}\right\rangle=\frac{1}{\sqrt{2}}\left(\begin{array}{l}
+			1-d \mathcal{E} /(2 A) \\
+			1+d \mathcal{E} /(2 A)
+		\end{array}\right) .
+		$$
+		What is the other eigenvector?
+	\end{exercise}
+	\begin{answer}
+		Começamos escrevendo a hamiltoniana do sistema:
+		\be
+			H = 
+			\begin{pmatrix}
+				E_0 + d\mathcal{E} & -A \\
+				-A & E_0 - d\mathcal{E} \\
+			\end{pmatrix}
+		\ee
+		Vamos calcular os autovalores para, então, ver os autovetores. 
+		\bea
+			(E_0 +d\mathcal{E} - \lambda)(E_0-d\mathcal{E} - \lambda) - A^2 &=& 0 \\
+			E_0^2 -2\lambda E_0 -d^2\mathcal{E}^2 + \lambda^2 - A^2 &=& 0 \\
+			\lambda^2 - 2E_0 \lambda + (E_0^2 -d^2\mathcal{E}^2 - A^2) &=& 0 \\
+		\eea
+		Portanto, seguindo a convenção do livro (que é trocada) os autovalores são:
+		\bea
+			\lambda_\mp &=& \f{1}{2}\l(2E_0 \pm \sqrt{4E_0^2 -4(E_0^2 -d^2\mathcal{E}^2 - A^2)}\r) \\
+				&=& E_0 \pm \sqrt{d^2\mathcal{E}^2 + A^2} \\
+				&=& E_0 \pm A\l(1 + \f{d^2\mathcal{E}^2}{A^2}\r)^{1/2} \\
+				&\approx& E_0 \pm A\l(1 + \f{d^2\mathcal{E}^2}{2A^2}\r) \\
+				&=& E_0 \pm A \pm\f{d^2\mathcal{E}^2}{2A}
+		\eea
+		O autovetor com a autoenergia $\sim E_0-A$ é $\ket{\chi_+}$. Considere:
+		\bea
+			\begin{pmatrix}
+				E_0 + d\mathcal{E} & -A \\
+				-A & E_0 - d\mathcal{E} \\
+			\end{pmatrix} 
+			\begin{pmatrix}
+				a_+ \\
+				b_+ \\
+			\end{pmatrix}
+			&=& 
+			E_+
+			\begin{pmatrix}
+				a_+ \\
+				b_+ \\
+			\end{pmatrix} \\
+			 \begin{pmatrix}
+			 	(E_0+d\mathcal{E})a_+ - Ab_+  \\
+			 	-A a_+ + (E_0 - d\mathcal{E})b_+ \\
+			 \end{pmatrix}
+		 	&=& 
+		 	\begin{pmatrix}
+		 		a_+\l(E_0 - A - \f{d^2\mathcal{E}^2}{2A}\r) \\
+		 		b_+\l(E_0 - A - \f{d^2\mathcal{E}^2}{2A}\r) \\
+		 	\end{pmatrix}
+		\eea
+		Logo, temos a equação:
+		\bea
+			(E_0+d\mathcal{E})a_+ - Ab_+ &=& a_+\l(E_0 - A - \f{d^2\mathcal{E}^2}{2A}\r) \\
+			Ab_+ &=& a_+\l( A + d\mathcal{E} + \f{d^2\mathcal{E}^2}{2A^2}\r) \\
+			b_+ &\approx&  a_+\l(1 + \f{d\mathcal{E}}{A}\r)
+		\eea
+		Notamos que 
+		\bea
+			a_+ &=& \f{1}{\sqrt{2}}\l(1 - \f{d \mathcal{E}}{2 A}\r) \\
+			b_+ &=& \f{1}{\sqrt{2}}\l(1 + \f{d \mathcal{E}}{2 A}\r)
+		\eea
+		são escolhas válidas, pois, em primeira ordem
+		\bea
+			a_+\l(1 + \f{d\mathcal{E}}{A}\r) &=&   \f{1}{\sqrt{2}}\l(1 - \f{d \mathcal{E}}{2 A}\r) \l(1 + \f{d\mathcal{E}}{A}\r) \\
+				&=& \f{1}{\sqrt{2}} \l( 1 + \f{d\mathcal{E}}{A} - \f{d\mathcal{E}}{2A} - \f{d^2\mathcal{E}^2}{2A^2}\r) \\
+				&\approx& \f{1}{\sqrt{2}} \l( 1 + \f{d\mathcal{E}}{2A} \r) \\
+				&=& b_+
+		\eea
+		que é a equação que determina esse autovetor. Para o outro autovetor, começamos pela equação que determina ele:
+		\bea
+			(E_0+d\mathcal{E})a_- - Ab_- &=& a_-\l(E_0 + A + \f{d^2\mathcal{E}^2}{2A}\r) \\
+				Ab_- &=& a_-\l( d\mathcal{E} -A - \f{d^2\mathcal{E}^2}{2A^2}\r) \\
+				b_-	&\approx& -a_-\l(1 - \f{d\mathcal{E}}{A}\r)
+		\eea
+		Nesse caso, por uma análise idêntica à do outro autvetor, podemos escrever:
+		\be
+			\ket{\chi_-} = \f{1}{\sqrt{2}}
+			\begin{pmatrix}
+				1 + d\mathcal{E} / (2A) \\
+				-(1 - d\mathcal{E} / (2A)) \\
+			\end{pmatrix}
+		\ee
+	\end{answer}
+
+	\begin{exercise}[5.5.5 - The hydrogen molecular ion $\mathrm{H}_{2}^{+}$]
+		The hydrogen molecular ion $\mathrm{H}_{2}^{+}$is formed of two protons and an electron. The two protons are located on an axis which we choose to be the $x$ axis, at points $-r / 2$ and $r / 2$. They are assumed to be fixed, in agreement with the Born-Oppenheimer approximation.
+		\begin{exercises}
+			\item Assuming that the electron is located on the $x$ axis, express its potential energy $V(x)$ as a function of its position $x$ and $e^{2}=q_{\mathrm{e}}^{2} / 4 \pi \varepsilon_{0}$, where $q_{\mathrm{e}}$ is the electron charge, and sketch it qualitatively.
+			\begin{multianswer}
+				
+			\end{multianswer}
+			
+		\end{exercises}
 	\end{exercise}
 	
 
