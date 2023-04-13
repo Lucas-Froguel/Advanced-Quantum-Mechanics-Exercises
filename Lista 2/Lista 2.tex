@@ -129,10 +129,137 @@
 		\be
 			\begin{aligned}
 				\ket{n} &= \sum a_{n'}\ket{n'} \\
-				\ket{m} &= \sum a_{m'}\ket{m'}
+				\ket{m} &= \sum b_{m'}\ket{m'}
 			\end{aligned}	
-		\ee			
-			
+		\ee	
+		Thus, we can write
+		\bea
+			\ket{\varphi}\otimes\ket{\chi} &=& \sum_{n, m} c_nd_m\ket{n}\otimes\ket{m} \\ 
+				&=& \sum_{n, m} c_nd_m \l(\sum_{n'} a_{n'}\ket{n'}\r) \otimes \l(\sum_{m'}b_{m'}\ket{m'} \r) \\
+				&=& \sum_{n', m'} a_{n'}b_{m'} \l(\sum_n c_n \r) \l(\sum_m d_m\r) \ket{n'}\otimes\ket{m'} \\
+				&=& \sum_{n', m'} e_{n'} f_{m'} \ket{n'}\otimes\ket{m'}
+		\eea
+		This shows that the tensor product does not depend on the choice of basis.		
 	\end{answer}
+
+	\begin{exercise}[2 - Representação matricial de produtos tensoriais]
+		Calculate the tensor products of two-level systems.
+	\end{exercise}
+	\begin{answer}
+		We can calculate the tensor products of $\ket{+}$ and $\ket{-}$ as follows:
+		
+		\begin{align*}
+			\ket{+} \otimes \ket{-} &= \begin{pmatrix} 1 \\ 0 \end{pmatrix} \otimes \begin{pmatrix} 0 \\ 1 \end{pmatrix} \\
+			&= \begin{pmatrix} 1\begin{pmatrix} 0 \\ 1 \end{pmatrix} \\ 0\begin{pmatrix} 0 \\ 1 \end{pmatrix} \end{pmatrix} \\
+			&= \begin{pmatrix} 0 \\ 1 \\ 0 \\ 0 \end{pmatrix} 
+		\end{align*}
+		
+		\begin{align*}
+			\ket{-} \otimes \ket{+} &= \begin{pmatrix} 0 \\ 1 \end{pmatrix} \otimes \begin{pmatrix} 1 \\ 0 \end{pmatrix} \\
+			&= \begin{pmatrix} 0\begin{pmatrix} 1 \\ 0 \end{pmatrix} \\ 1\begin{pmatrix} 1 \\ 0 \end{pmatrix} \end{pmatrix} \\
+			&= \begin{pmatrix} 0 \\ 0 \\ 1 \\ 0 \end{pmatrix}
+		\end{align*}
+		
+		\begin{align*}
+			\ket{-} \otimes \ket{-} &= \begin{pmatrix} 0 \\ 1 \end{pmatrix} \otimes \begin{pmatrix} 0 \\ 1 \end{pmatrix} \\
+			&= \begin{pmatrix} 0\begin{pmatrix} 0 \\ 1 \end{pmatrix} \\ 1\begin{pmatrix} 0 \\ 1 \end{pmatrix} \end{pmatrix} \\
+			&= \begin{pmatrix} 0 \\ 0 \\ 0 \\ 1 \end{pmatrix} 
+		\end{align*}
+		
+		Now for the three dimension qubits, we will write the answers directly:
+		\bea
+			\ket{+++} &=& \begin{bmatrix} 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ \end{bmatrix}, \qquad
+			\ket{++-} = \begin{bmatrix} 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ \end{bmatrix} \\
+			\ket{+-+} &=& \begin{bmatrix} 0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ \end{bmatrix}, \qquad
+			\ket{+--} = \begin{bmatrix} 0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ 0 \\ \end{bmatrix} \\
+			\ket{-++} &=& \begin{bmatrix} 0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0 \\ 0 \\ \end{bmatrix}, \qquad
+			\ket{-+-} = \begin{bmatrix} 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0 \\ 0 \\ \end{bmatrix} \\
+			\ket{--+} &=& 	\begin{bmatrix} 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1 \\ 0 \\ \end{bmatrix}, \qquad
+			\ket{---} = \begin{bmatrix} 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0 \\ 1 \\ \end{bmatrix}
+		\eea
+	\end{answer}
+	
+	\begin{exercise}[6.5.2]
+		Write down explicitly the 4$\times$4 matrix $A\otimes B$, the tensor product of the 2$\times$2 matrices $A$ and $B$:
+		\be
+			A = 
+			\begin{pmatrix}
+				a & b \\
+				c & d
+			\end{pmatrix}, \qquad
+			B = 
+			\begin{pmatrix}
+				\alpha & \beta \\ 
+				\gamma & \delta 
+			\end{pmatrix}
+		\ee
+	\end{exercise}
+	\begin{answer}
+		It is very easy do perform this calculation:
+		\be
+			A \otimes B = 
+			\begin{pmatrix}
+				a\alpha & a\beta & b\alpha & b\beta \\
+				a\gamma & a\delta & b\gamma & b\delta \\
+				c\alpha & c\beta & d\alpha & d\beta \\
+				c\gamma & c\delta & d\gamma & d\delta \\
+			\end{pmatrix}.
+		\ee
+		We just multiply each element of the first matrix by the whole second matrix. 
+	\end{answer}
+	
+	\begin{exercise}[6.5.3 - Properties of state operators]
+		\begin{exercises}
+			\item Show that $\rho_{ii}\geq 0$, $\rho_{jj}\geq 0$, and $\det{A} \geq 0$, from which $|\rho_{ij}|^2 \leq \rho_{ii} \rho_{jj}$ . Also deduce that if $\rho_{ii} = 0$, then $\rho_{ij} = \rho_{ji}^* = 0$.
+			\begin{multianswer}
+				We can always write
+				\be
+					\rho = \sum a_n \ket{\phi_n}\bra{\phi_n}
+				\ee
+				for some states $\ket{\phi_n}$ and $a_n\geq 0$. Thus, the diagonal matrix elements are
+				\bea
+					\rho_{ii} &=& \bra{\phi_i} \l(\sum a_n \ket{\phi_n}\bra{\phi_n}\r) \ket{\phi_i} \\
+						&=& a_i 
+				\eea
+				Hence, $\rho_{ii}\geq0$. We also note that
+				\be
+					\det{A} = \rho_{ii}\rho_{jj} - |\rho_{ij}|^2
+				\ee
+				where we used the fact that $A$ is hermitian. This implies that
+				\be
+					\det{A} \geq 0 \iff |\rho_{ij}|^2 \leq \rho_{ii}\rho_{jj}
+				\ee
+				Using this inequality, if $\rho_ii=0$, then
+				\be
+					0 \leq \rho_{ij}\rho_{ji} \leq 0
+				\ee
+				Obviously, $\rho_{ij}=0$ or $\rho_{ji}=0$, but is does not matter, because they are the complex conjugate of each other, so if one is zero, the other is zero as well.				
+			\end{multianswer}
+			
+			% Part 2
+			\item Show that if there exists a maximal test giving 100$\%$ probability for the quantum state described
+			by a state operator $\rho$, then this state is a pure state. Also show that if $\rho$ describes a pure state,
+			and if it can be written as
+			\be
+				\rho = \lambda\rho' + (1 - \lambda)\rho'', 0 \leq \lambda 
+				\leq 1
+			\ee
+			then $\rho=\rho'=\rho''$ . Hint: first demonstrate that if $\rho'$ and $\rho''$ are generic state operators, then $\rho$ is
+			a state operator. The state operators form a convex subset of Hermitian operators.
+			\begin{multianswer}[true]
+				
+			\end{multianswer}
+			
+		\end{exercises}
+	\end{exercise}
+	
+
+
+
+
+
+
+
+
 
 \end{document}
