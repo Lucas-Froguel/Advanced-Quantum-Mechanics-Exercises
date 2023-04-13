@@ -1449,14 +1449,119 @@
 			\tilde{A}(t)=\exp \left[-\frac{\mathrm{i} \omega \sigma_{z} t}{2}\right] A(t) \exp \left[\frac{\mathrm{i} \omega \sigma_{z} t}{2}\right]
 			$$
 			\begin{multianswer}
+				A nomenclatura de que $\ket{\tilde{\varphi}}$ é o vetor de estado no referencial girante é justa, pois ele carrega toda a informação do vetor de estado original e ainda "gira", pois é a interpretação correta da exponencial complexa variando no tempo. Vejamos a evolução temporal. Vejamos, agora, a evolução temporal. Considere o lado direito:
+				\bea
+					i\hbar\f{d\ket{\tilde{\varphi}}}{dt} &=& \exp \left[-\frac{\mathrm{i} \omega \sigma_{z} t}{2}\right] H(t) \exp \left[\frac{\mathrm{i} \omega \sigma_{z} t}{2}\right] \exp\l( -\f{i\omega\sigma_z t}{2}\r) \ket{\varphi(t)} \\
+					&=& e^{-i\omega\sigma_zt/2} H(t)\ket{\varphi(t)} \\
+					&=& e^{-i\omega\sigma_zt/2} i\hbar \f{d\ket{\varphi}}{dt} \\
+					\f{d\ket{\tilde{\varphi}}}{dt} &=& e^{-i\omega\sigma_zt/2} \f{d\ket{\varphi}}{dt}
+				\eea	
+			\end{multianswer}			
+			
+			% Part 2
+			\item Show that the preceding definition gives for the operators $\sigma_{ \pm}=\left(\sigma_{x} \pm \mathrm{i} \sigma_{y}\right) / 2$
+			$$
+			\tilde{\sigma}_{ \pm}(t)=\exp \left[-\frac{\mathrm{i} \omega \sigma_{z} t}{2}\right] \sigma_{ \pm} \exp \left[-\frac{\mathrm{i} \omega \sigma_{z} t}{2}\right]=\mathrm{e}^{\mp \mathrm{i} \omega t} \sigma_{ \pm} .
+			$$
+			Hint: establish the following differential equation from the definition of $\tilde{\sigma}_{ \pm}(t)$
+			$$
+			\frac{\mathrm{d} \tilde{\sigma}_{ \pm}(t)}{\mathrm{d} t}=\mp \mathrm{i} \omega \tilde{\sigma}_{ \pm}(t)
+			$$
+			Writing $\sigma_{x}=\sigma_{+}+\sigma_{-}$, obtain the Hamiltonian in the rotating frame
+			$$
+			\tilde{H}(t)=\frac{\hbar}{2} \delta \sigma_{z}-\frac{\hbar}{2} \omega_{1}\left(\sigma_{x} \cos \phi+\sigma_{y} \sin \phi\right)+\hbar \omega_{1}\left(\sigma_{+} \mathrm{e}^{-2 \mathrm{i} \omega t} \mathrm{e}^{\mathrm{i} \phi}+\sigma_{-} \mathrm{e}^{2 \mathrm{i} \omega t} \mathrm{e}^{-\mathrm{i} \phi}\right)
+			$$
+			where $\delta$ is the detuning, $\delta=\omega-\omega_{0}$. Use the rotating wave approximation to eliminate the terms between square brackets in the preceding equation. The Hamiltonian $\tilde{H}(t)$ is now timeindependent!
+			\begin{multianswer}
+				Começamos notando que a equação diferencial vem de
+				\be
+					\frac{\mathrm{d} \tilde{\sigma}_{ \pm}(t)}{\mathrm{d} t}=-\frac{\mathrm{i} \omega}{2} \mathrm{e}^{-\mathrm{i} \omega \sigma_z t / 2}\left[\sigma_z, \sigma_{ \pm}\right] \mathrm{e}^{\mathrm{i} \omega \sigma_z t / 2}=\mp \mathrm{i} \omega \tilde{\sigma}_{ \pm}(t)
+				\ee
+				pois $[\sigma_z, \sigma_\pm] = 2\sigma_\pm$. A solução da equação diferencial é trivialmente:
+				\be
+					\tilde{\sigma}_\pm = \sigma_\pm e^{\mp i\omega t}
+				\ee
+				Feito isso, podemos escrever a hamiltoniana.Primeiro, notamos que:
+				\be
+					H_1=-\frac{\hbar}{2} \omega_1\left(\sigma_{+}+\sigma_{-}\right)\left(\mathrm{e}^{\mathrm{i} \omega t} \mathrm{e}^{-\mathrm{i} \phi}+\mathrm{e}^{-\mathrm{i} \omega t} \mathrm{e}^{\mathrm{i} \phi}\right)
+				\ee
+				Logo, no referencial girante
+				\be
+					\tilde{H}(t) = -\frac{\hbar}{2} \omega_1 \sigma_{-}\left(\mathrm{e}^{2 i \omega t} \mathrm{e}^{-\mathrm{i} \phi}+\mathrm{e}^{\mathrm{i} \phi}\right)
+				\ee
+				E, desprezando os termos $e^{\pm 2i\omega t}$. 
+				\be
+					\begin{aligned}
+						\tilde{H}_1 & =-\frac{\hbar \omega_1}{2}\left(\sigma_{+} \mathrm{e}^{-\mathrm{i} \phi}+\sigma_{-} \mathrm{e}^{\mathrm{i} \phi}\right) \\
+						& =-\frac{\hbar}{2} \omega_1\left(\sigma_x \cos \phi+\sigma_y \sin \phi\right)
+					\end{aligned}
+				\ee
 				
 			\end{multianswer}
 			
+			
+		
+		\end{exercises}
+		
+	\end{exercise}
+	
+	
+	\begin{exercise}[2 - Avoided crossing, or level repulsion, or anticrossing]
+		\begin{exercises}
+			\item Show that one can always choose $V_{21} = V_{12} = v$, where $v$ us a real number.
+			\begin{multianswer}
+				O único requisito sobre $V$ é que seja hermitiano. Isso implica em $V_{12} = V_{21}^*$ e $V_{21} = V_{12}^*$. Ou seja,
+				\bea
+					a + ib &=& c - id \\
+					c + id &=& a - ib
+				\eea
+				Somando e subtraindo essas equações, encontramos as condições $a=c$ e $b=d$. Portanto, uma escolha possível é $b=d=0$. Assim, $a=c\equiv v$. Portanto, $V_{12}=V_{21}=v$ podem sempre ser escolhidos reais. 
+			\end{multianswer}
+			
+			% Part 2
+			\item  Let $E_\pm$ denote the eigenvalues of $H$. Make a qualitative plot of $E_\pm$ as a function of $v$, by fixing the values of $E_1 , E_2 , V_{11} \text{and} V_{22}$. You should convince yourself that the curves $E_\pm(v)$ never cross for generic values of $E_1 , E_2 , V_{11}, V_{22}$.
+			\begin{multianswer}
+				Vamos calcular os autovalores. 
+				\bea
+					0 &=& (E_1 + V_{11} - E)(E_2 + V_{22} - E) - v^2 \\
+					0 &=& E_1E_2 + E_1V_{22} - E_1E + V_{11}E_2 + V_{11}V_{22} - V_{11}E - E_2E - V_{22}E + E^2 - v^2 \\
+					0 &=& E^2 - E(E_1 + V_{11} +E_2 + V_{22}) + E_1E_2 + E_1V_{22} + V_{11}E_2 + V_{11}V_{22} - v^2 \\
+					E_\pm &=& \f{1}{2}\l( E_1 + V_{11} +E_2 + V_{22} \pm \sqrt{ (E_1 + V_{11} +E_2 + V_{22})^2 - 4(E_1E_2 + E_1V_{22} + V_{11}E_2 + V_{11}V_{22} - v^2)} \r)
+				\eea
+				O gráfico está na Fig.(\ref{fig:fige}).
+				\begin{figure}
+					\centering
+					\includegraphics[width=0.7\linewidth]{Images/figE}
+					\caption{Sketch das autoenergias.}
+					\label{fig:fige}
+				\end{figure}
+			\end{multianswer}
+			
+			% Part 3
+			\item Show that to have the levels crossing, one must have
+			\be
+				v=0 \quad \text{and} \quad E_1 - E_2 + V_{11} - V_{22} = 0
+			\ee
+			\begin{multianswer}
+				Vamos dizer que $E_1+V_{11} = E_2+V_{22}=k$. Assim,
+				\bea
+					E_\pm &=& \f{1}{2}\l( 2k \pm \sqrt{4k^2 - 4(k^2-v^2)}\r) \\
+						&=& \f{1}{2}\l( 2k \pm 2v\r)
+				\eea
+				As funções $E_+$ e $E_-$ se cruzam se $v=0$. Portanto, de fato, as condições do enunciado implicam que as funções se cruzam. 	
+			\end{multianswer}
+			
+			% Part 4
+			\item Prove the following assertion: the eigenvalues of a two-level system depending on $n$ continuous real parameters do not cross in general, except on a manifold (essentially a space) of $n-2$ dimensions.
+			\begin{multianswer}[true]
+				
+			\end{multianswer}
 			
 			
 		\end{exercises}
 		
 	\end{exercise}
+	
 	
 
 \end{document}

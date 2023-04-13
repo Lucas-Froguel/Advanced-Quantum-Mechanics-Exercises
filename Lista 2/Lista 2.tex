@@ -1,0 +1,138 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage[mathscr]{euscript}
+\usepackage{array}
+\usepackage[thinlines]{easytable}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage[margin=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{braket}
+\usepackage{thmtools} 
+\usepackage{hyperref}
+\usepackage{environ}
+\usepackage{enumitem}
+\usepackage[backend=biber, style=numeric]{biblatex} %Imports biblatex package
+\addbibresource{references.bib} %Import the bibliography file
+%
+\usepackage{lipsum} % Pode tirar esse :D
+
+\graphicspath{.Images/}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+	pdftitle={Quântica Avançada - L1 - Lucas Froguel}
+}
+
+
+\def\be{\begin{equation}}
+	\def\ee{\end{equation}}
+\def\bee{\begin{equation*}}
+	\def\eee{\end{equation*}}
+\def\bea{\begin{eqnarray*}}
+	\def\eea{\end{eqnarray*}}
+\def\beaa{\begin{eqnarray}}
+	\def\eeaa{\end{eqnarray}}
+
+\def\f{\frac}
+\def\del{\partial}
+
+\def\R{\mathbb{R}}
+\def\K{\mathbb{K}}
+\def\C{\mathbb{C}}
+\def\I{\mathbb{I}}
+\def\Z{\mathbb{Z}}
+\def\Q{\mathbb{Q}}
+\def\N{\mathbb{N}}
+
+\def\cd{\cdot}
+
+\def\v#1{{\boldsymbol{#1}}}
+\def\ve#1{\hat{\boldsymbol#1}}
+
+\def\l{\left}
+\def\r{\right}
+\def\la{\l\langle}
+\def\ra{\r\rangle}
+\def\div{\nabla\cdot}
+\def\curl{\nabla\times}
+\def\grad{\nabla}
+\def\lap{\nabla^2}
+
+\def\s{\quad}
+\def\ss{\qquad}
+\def\infi{\infty}
+\def\p{\partial}
+\def\u{\cup}%union of two sets
+\def\i{\cap}%intersection of two sets
+\def\ds{\oplus}
+
+
+
+\newtheorem{exercise}{Exercise}
+\newtheorem{partinner}{Part}[exercise]
+
+\newlist{exercises}{enumerate}{1}
+\setlist[exercises]{wide = 0pt, listparindent=\parindent,labelsep = 0pt,leftmargin =\labelwidth}
+\setlist[exercises, 1]{label =\itshape \bfseries Part~\arabic*.\; }
+
+\newenvironment{answer}{\noindent\textbf{\textit{Answer.}} \normalfont }{\par\noindent\rule{\textwidth}{0.4pt}}
+\NewEnviron{multianswer}[1][false]{%
+	\ifthenelse{\equal{#1}{true}}%
+	{\def\rulewidth{\textwidth}}%
+	{\def\rulewidth{0.7\textwidth}}%
+	\\ \noindent\textbf{\textit{Answer.}} \normalfont%
+	\BODY%
+	\par\noindent\rule{\rulewidth}{0.1pt}%
+}
+
+
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+
+\DeclareMathOperator{\atan}{atan}
+\DeclareMathOperator{\cotan}{cotan}
+\DeclareMathOperator{\acos}{acos}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\asinh}{asinh}
+\DeclareMathOperator{\atanh}{atanh}
+\DeclareMathOperator{\acoth}{acoth}
+\DeclareMathOperator{\acosh}{acosh}
+\DeclareMathOperator{\acsch}{acsch}
+\DeclareMathOperator{\asech}{asech}
+\DeclareMathOperator{\D}{D}
+\DeclareMathOperator{\Tr}{tr}
+\DeclareMathOperator{\Res}{Res}
+
+\title{Mecânica Quântica Avançada \\ Lista 2}
+\author{Lucas Froguel \\ IFT}
+\date{}
+
+\begin{document}
+	\maketitle
+	\listoftheorems[title={List of Exercises}]
+	
+	\begin{exercise}[6.5.1 - Independence of the tensor product from the choice of basis]
+		Verify that the definition (6.3) of the tensor product of two vectors is independent of the choice of basis in $\mathcal{H}_1$ and $\mathcal{H}_2$.
+	\end{exercise}
+	\begin{answer}
+		Let $\ket{n'}$ and $\ket{m'}$ be two other basis of the Hilbert spaces one and two, respectively. Then, it is true that
+		\be
+			\begin{aligned}
+				\ket{n} &= \sum a_{n'}\ket{n'} \\
+				\ket{m} &= \sum a_{m'}\ket{m'}
+			\end{aligned}	
+		\ee			
+			
+	\end{answer}
+
+\end{document}
