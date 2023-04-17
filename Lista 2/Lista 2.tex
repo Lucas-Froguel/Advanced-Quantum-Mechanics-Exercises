@@ -31,7 +31,7 @@
 	linkcolor=blue,
 	filecolor=magenta,      
 	urlcolor=cyan,
-	pdftitle={Quântica Avançada - L1 - Lucas Froguel}
+	pdftitle={Quântica Avançada - L2 - Lucas Froguel}
 }
 
 
@@ -230,7 +230,7 @@
 				\be
 					\det{A} \geq 0 \iff |\rho_{ij}|^2 \leq \rho_{ii}\rho_{jj}
 				\ee
-				Using this inequality, if $\rho_ii=0$, then
+				Using this inequality, if $\rho_{ii}=0$, then
 				\be
 					0 \leq \rho_{ij}\rho_{ji} \leq 0
 				\ee
@@ -311,7 +311,47 @@
 		\be
 			p(-\hbar/2, \hat{b}) = \f{1}{4} + \f{\cos^2\theta}{2}
 		\ee
-		* 
+		*  chatGPT:
+		Para encontrar a probabilidade de encontrar o valor $-\hbar/2$ ao se medir o spin ao longo do eixo b, precisamos projetar a matriz densidade $\rho$ nesse novo eixo. Podemos fazer isso usando as matrizes de Pauli:
+		
+		\begin{align}
+			\sigma_b &= \sin\theta\cos\phi , \sigma_x + \sin\theta\sin\phi , \sigma_y + \cos\theta , \sigma_z \\
+			\sigma_b &= \begin{pmatrix}
+				\cos\theta & \sin\theta e^{-i\phi} \\
+				\sin\theta e^{i\phi} & -\cos\theta
+			\end{pmatrix},
+		\end{align}
+		
+		onde $\sigma_x$, $\sigma_y$ e $\sigma_z$ são as matrizes de Pauli, $\phi$ é o ângulo entre o plano definido por a e b e o plano $xy$ e $\sigma_b$ é o operador de spin projetado no eixo b.
+		
+		Podemos calcular a projeção da matriz densidade $\rho$ no eixo b aplicando o operador de projeção $\sigma_b$:
+		
+		\begin{align*}
+			\rho_b &= \sigma_b \rho \sigma_b^\dagger \\
+			&= \begin{pmatrix}
+				\cos\theta & \sin\theta e^{i\phi} \\
+				\sin\theta e^{-i\phi} & -\cos\theta
+			\end{pmatrix}
+			\left(\frac{1}{4}\mathbb{I} + \frac{1}{2}\ket{+, \hat{a}}\bra{+, \hat{a}}\right)
+			\begin{pmatrix}
+				\cos\theta & \sin\theta e^{-i\phi} \\
+				\sin\theta e^{i\phi} & -\cos\theta
+			\end{pmatrix} \\
+			&= \frac{1}{4}\begin{pmatrix}
+				1+\cos\theta & \sin\theta e^{i\phi}+\sin\theta e^{-i\phi} \\
+				\sin\theta e^{-i\phi}+\sin\theta e^{i\phi} & 1-\cos\theta
+			\end{pmatrix}
+			\frac{1}{2}\begin{pmatrix}
+				\cos^2\frac{\theta}{2} & \cos\frac{\theta}{2}\sin\frac{\theta}{2}e^{-i\frac{\phi}{2}} \\
+				\cos\frac{\theta}{2}\sin\frac{\theta}{2}e^{i\frac{\phi}{2}} & \sin^2\frac{\theta}{2}
+			\end{pmatrix} \\
+			&= \begin{pmatrix}
+				\frac{1}{2}(1+\cos\theta) & \frac{1}{2}\sin\theta e^{-i\phi/2}\cos\frac{\theta}{2} \\
+				\frac{1}{2}\sin\theta e^{i\phi/2}\cos\frac{\theta}{2} & \frac{1}{2}(1-\cos\theta)
+			\end{pmatrix}.
+		\end{align*}
+		
+		A probabilidade de medir o valor $-\hbar/2$ ao se medir o spin ao longo do eixo b é o elemento diagonal inferior da matriz densidade projetada $\rho_b$:
 	\end{answer}
 
 	\begin{exercise}[6]
@@ -339,7 +379,87 @@
 			\ket{+}_a &=& \cos(\theta_a/2)\ket{+} + \sin(\theta_a/2)\ket{-} \\
 			\ket{+}_b &=& \cos(\theta_b/2)\ket{+} + \sin(\theta_b/2)\ket{-} 
 		\eea
-		
+		O projetor que projeta no estado desejado é $P_\phi = \ket{\phi}\bra{\phi}$. Ou seja,
+		\bea
+			\ket{\phi} &=& \l(\cos(\theta_a/2)\ket{+} + \sin(\theta_a/2)\ket{-} \r)\l( \cos(\theta_b/2)\ket{+} + \sin(\theta_b/2)\ket{-} \r) \\
+				&=& \cos\f{\theta_a}{2}\cos\f{\theta_b}{2}\ket{+}\ket{+} + \cos\f{\theta_a}{2}\sin\f{\theta_b}{2}\ket{+}\ket{-} + \sin\f{\theta_a}{2}\cos\f{\theta_b}{2}\ket{-}\ket{+} + \sin\f{\theta_a}{2}\sin\f{\theta_b}{2}\ket{-}\ket{-}
+		\eea
+		Portanto, o operador é
+		\begin{align*}
+			P_\phi &= \ket{\phi}\bra{\phi} \\
+			&= \left(\cos\frac{\theta_a}{2}\cos\frac{\theta_b}{2}\ket{+}\ket{+} + \cos\frac{\theta_a}{2}\sin\frac{\theta_b}{2}\ket{+}\ket{-} + \sin\frac{\theta_a}{2}\cos\frac{\theta_b}{2}\ket{-}\ket{+} + \sin\frac{\theta_a}{2}\sin\frac{\theta_b}{2}\ket{-}\ket{-}\right) \\
+			&\times \left(\cos\frac{\theta_a}{2}\cos\frac{\theta_b}{2}\bra{+}\bra{+} + \cos\frac{\theta_a}{2}\sin\frac{\theta_b}{2}\bra{+}\bra{-} + \sin\frac{\theta_a}{2}\cos\frac{\theta_b}{2}\bra{-}\bra{+} + \sin\frac{\theta_a}{2}\sin\frac{\theta_b}{2}\bra{-}\bra{-}\right) \\
+			&= 	 \cos^2\frac{\theta_a}{2}\cos^2\frac{\theta_b}{2}\ket{+}\ket{+}\bra{+}\bra{+} + \sin^2\frac{\theta_a}{2}\sin^2\frac{\theta_b}{2}\ket{-}\ket{-}\bra{-}\bra{-} + \\
+			&\quad
+			\cos^2\frac{\theta_a}{2}\sin^2\frac{\theta_b}{2}\ket{+}\ket{-}\bra{+}\bra{-} 
+			+ \sin^2\frac{\theta_a}{2}\cos^2\frac{\theta_b}{2}\ket{-}\ket{+}\bra{-}\bra{+} + \\
+			&\quad \cos\f{\theta_a}{2}\sin\f{\theta_b}{2}\sin\f{\theta_a}{2}\cos\f{\theta_b}{2} \ket{+}\ket{-}\bra{-}\bra{+} + \cos\f{\theta_a}{2}\sin\f{\theta_b}{2}\sin\f{\theta_a}{2}\cos\f{\theta_b}{2} \ket{-}\ket{+}\bra{+}\bra{-} + \cdots
+		\end{align*}
+		Os termos omitidos são aqueles que não aparecem em $\rho$, de modo que serão zero ao se tomar o traço de $P_\phi\rho$. Vamos, então, calcular a probabilidade
+		\bea
+			p_{++} &=& \tr\l( P_\phi\rho\r) \\
+				&=& \f{1}{8}\l( \cos^2\frac{\theta_a}{2}\cos^2\frac{\theta_b}{2} + \sin^2\frac{\theta_a}{2}\sin^2\frac{\theta_b}{2} + 
+				\cos^2\frac{\theta_a}{2}\sin^2\frac{\theta_b}{2} + \sin^2\frac{\theta_a}{2}\cos^2\frac{\theta_b}{2} \r) + \\
+				&\quad& \f{1}{4}\l( \cos^2\f{\theta_a}{2}\sin^2\f{\theta_b}{2} - \sin\f{\theta_a}{2}\cos\f{\theta_a}{2}\sin\f{\theta_b}{2}\cos\f{\theta_b}{2} - \sin\f{\theta_a}{2}\cos\f{\theta_a}{2}\sin\f{\theta_b}{2}\cos\f{\theta_b}{2} + \sin^2\frac{\theta_a}{2}\cos^2\frac{\theta_b}{2} \r) \\
+				&=& \f{1}{8} + \f{1}{4}\l( \cos\f{\theta_a}{2}\sin\f{\theta_b}{2} - \sin\f{\theta_a}{2}\cos\f{\theta_b}{2} \r)^2 \\
+				&=& \f{1}{8} + \f{1}{4}\sin^2\l(\f{\theta_b - \theta_a}{2}\r)
+		\eea
+		Ora, é fácil ver que $\theta=|\theta_b-\theta_a|$. Como o seno ao quadrado é uma função par, $\sin^2\theta = \sin^2(-\theta)$. Portanto, podemos escrever
+		\be
+			p_{++} = \f{1}{8} + \f{1}{4}\sin^2\l(\f{\theta}{2}\r)
+		\ee
+	\end{answer}
+	
+	\begin{exercise}[7]
+		Considere um sistema bipartite descrito por um operador de estado
+		$\rho^{AB}$ que evolui unitariamente:
+		\be\label{ML}
+			i\hbar\f{d\rho^{AB}}{dt} = \l[ H_{AB}, \rho_{AB} \r]
+		\ee
+		com $H_{AB} = H_A + H_B + V_{AB}$ onde $H_A$ depende somente das coordenadas do subsistema $A$, $H_B$ depende somente das coordenadas do subsistema $B$ e $V_{AB}$ depende das coordenadas de ambos subsistemas. Mostre que o operador de densidade reduzido do sistema $A$, i.e.
+		$\rho^{A} = \tr_B(\rho^{AB})$, obedece à seguinte equação de evolução temporal:
+		\be
+			i\hbar\f{d\rho^A}{dt} = \l[ H_A, \rho^A\r] + \tr_B\l[V_{AB}, \rho^{AB}\r]
+		\ee
+		Você acabou de mostrar que enquanto o sistema bipartite evolui unitariamente, o subsistema A não evolui unitariamente em geral. No curso de Física Estatística você, muito provavelmente, vai provar esse resultado novamente.
+	\end{exercise}
+	\begin{answer}
+		Vamos aplicar o traço em $B$ na Eq.(\ref{ML}) e deduzir a expressão que queremos. Obviamente, o lado esquerdo trivialmente dá a expressão que queremos, então focaremos no lado direito. Considere
+		\bea
+			\tr_B \l[ H_{AB}, \rho_{AB} \r] &=& \tr_B(H_{AB}\rho^{AB}) - \tr_B(\rho^{AB}H_{AB}) \\
+				&=& \tr_B\l( H_A\rho^{AB} + H_B\rho^{AB} + V_{AB}\rho^{AB}  \r) - \tr_B\l( \rho^{AB}H_A + \rho^{AB}H_B \rho^{AB}V_{AB}   \r) \\
+				&=& \l( H_A\tr_B(\rho^{AB}) - \tr_B(\rho^{AB})H_A \r) +  \tr_B\l( V_{AB}\rho^{AB} - \rho^{AB}V_{AB} \r) + \l( \tr_B(H_B\rho^{AB}) - \tr_B(\rho^{AB}H_B)  \r) \\
+				&=& [H_A, \rho_A] + \tr_B[V_{AB}, \rho^{AB}]
+		\eea
+		* Como o último termo se anula? 
+		Portanto, juntando as duas pontas:
+		\be
+			i\hbar\f{d\rho^A}{dt} = \l[ H_A, \rho^A\r] + \tr_B\l[V_{AB}, \rho^{AB}\r]
+		\ee
+	\end{answer}
+	
+	\begin{exercise}[8]
+		Mostre que sob evolução unitária (ou hamiltoniana, i.e. quando o
+		operador densidade evolui de acordo com a Eq. (6.37) do Le Bellac) a entropia de	emaranhamento é conservada no tempo.
+	\end{exercise}
+	\begin{answer}
+		A evolução unitária é dada por
+		\be
+			i\hbar\f{d\rho}{dt} = \l[ H, \rho \r]
+		\ee
+		E a entropia de emaranhamento é
+		\be
+			S = -\tr(\rho\ln\rho)
+		\ee
+		Logo,
+		\bea
+			\f{dS}{dt} &=& -\f{d}{dt}\tr(\rho\ln\rho) \\
+				&=& - \tr\l( \dot{\rho} + \dot{\rho}\ln\rho \r) \\
+				&=& -\tr(\dot{\rho}(1+\ln\rho)) \\
+				&=& -\f{1}{i\hbar} \tr\big( (H\rho-\rho H)(1+\ln\rho) \big) \\
+				&=& -\f{1}{i\hbar} \tr\big( H\rho + H\rho\ln\rho - \rho H - \rho H\ln\rho \big) \\
+				&=& - \f{1}{i\hbar}\tr\big( [H, \rho] + [H\rho, \rho] \big)
+		\eea
 	\end{answer}
 
 
