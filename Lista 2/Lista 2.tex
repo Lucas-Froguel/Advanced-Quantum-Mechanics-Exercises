@@ -12,7 +12,7 @@
 \usepackage{xcolor}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[portuguese]{babel}
+%\usepackage[portuguese]{babel}
 \usepackage{braket}
 \usepackage{thmtools} 
 \usepackage{hyperref}
@@ -20,7 +20,8 @@
 \usepackage{enumitem}
 \usepackage[backend=biber, style=numeric]{biblatex} %Imports biblatex package
 \addbibresource{references.bib} %Import the bibliography file
-%
+\usetikzlibrary{angles,quotes}
+
 \usepackage{lipsum} % Pode tirar esse :D
 
 \graphicspath{.Images/}
@@ -110,7 +111,7 @@
 \DeclareMathOperator{\acsch}{acsch}
 \DeclareMathOperator{\asech}{asech}
 \DeclareMathOperator{\D}{D}
-\DeclareMathOperator{\Tr}{tr}
+\DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\Res}{Res}
 
 \title{Mecânica Quântica Avançada \\ Lista 2}
@@ -247,19 +248,99 @@
 			then $\rho=\rho'=\rho''$ . Hint: first demonstrate that if $\rho'$ and $\rho''$ are generic state operators, then $\rho$ is
 			a state operator. The state operators form a convex subset of Hermitian operators.
 			\begin{multianswer}[true]
-				
+				Let us suppose the state in which there is a probability of 1 is $\ket{\psi}$ and let $P_\psi=\ket{\psi}\bra{\psi}$. Then having a probability of one means:
+				\be
+					\tr\l( P_\psi\rho\r) = 1
+				\ee
+				In general, we could write
+				\be
+					\rho = \sum_i c_i \ket{\psi_i}\bra{\psi_i}
+				\ee
+				where we define $\psi_0\equiv\psi$. Then, if we use this definition into the expression above, we can easily see that both equations together imply
+				\be
+					c_0 = 1
+				\ee
+				However, as $\sum_i |c_i|^2 = 1$, we must have $c_i=0\ \forall\ i>0$. Hence, $\rho=\ket{\psi}\bra{\psi}$ is a pure state. We will suppose that $\rho\not=\rho'\not=\rho''$. If that is the case, then the state $\rho$ can be described as a statistical mixture of $\rho'$ (with $p=\lambda$) and $\rho''$ (with $p=1-\lambda$). As we know $\rho$ is a pure state, it is false the assertion that $\rho\not=\rho'\not=\rho''$. Thus, we prove the result asked.  
 			\end{multianswer}
-			
 		\end{exercises}
 	\end{exercise}
 	
+	\begin{exercise}[4]
+		Ao ter provado o item 2 do exercício 6.5.3 do Le Bellac, você provou
+		que um operador de estado $\rho$ correspondente a um estado puro não pode ser
+		escrito como combinação linear de dois outros operadores de estado genéricos $\rho_1$ e $\rho_2$. Esse resultado tem a ver com a seguinte observação: "A preparação de um estado	puro é única enquanto que a preparação de um estado misto é sempre ambígua". Você poderia explicar o que uma coisa tem a ver com a outra, isto é, o que o resultado que você provou tem a ver com a preparação de um estado físico e
+		possíveis resultados de medida?
+	\end{exercise}
+	\begin{answer}
+		Dado um operador de estado puro, existe uma e apenas uma maneira de prepará-lo, que é coloca-lo no estado $\ket{\psi}\bra{\psi}$. No entanto, para um estado misto, para qualquer $\lambda\in\mathbb{R}$, sempre existirão operadores $\rho_1, \rho_2$ tais que $\rho$ seja uma combinação linear deles ponderada por $\lambda$, de modo que é impossível saber exatamente qual foi usada na preparação do estado. 
+	\end{answer}
 
+	\begin{exercise}[5]
+		 Considere a seguinte matriz densidade de um spin 1/2:
+		\be
+			\rho = \f{1}{4}\mathbb{I} + \f{1}{2} \ket{+, \hat{a}}\bra{+, \hat{a}}
+		\ee
+		onde $\ket{+, \hat{a}}$ é o autoestado da projeção do operador de spin ao longo de um eixo
+		a com autovalor $+\hbar/2$. Calcule a probabilidade como função de $\theta$ de encontrar o
+		valor $-\hbar/2$ ao se medir o spin ao longo de um eixo b, em que $\theta$ é o ângulo entre a e b, i.e. $\hat{a}\cdot\hat{b} = \cos\theta$.
+	\end{exercise}
+	\begin{answer}
+		Queremos calcular:
+		\bea
+			p(-\hbar/2, \hat{b}) &=& \tr \l( \rho \ket{-, \hat{b}}\bra{-, \hat{b}}\r) \\
+				&=& \f{|\braket{-, \hat{b} | -, \hat{b}}|^2}{4} + \f{|\braket{+, \hat{a} | -, \hat{b}}|^2}{2} 
+ 		\eea
+		\begin{figure}[h!]
+			\begin{tikzpicture}[>=stealth]
+				% Axes
+				%\draw[->] (0,0,0) -- (2,0,0) node[below right] {$x$};
+				%\draw[->] (0,0,0) -- (0,2,0) node[above] {$y$};
+				% Line a
+				\draw[-] (0,0,0) -- (0,1.5,0) node[above] {$a$};
+				% Line b
+				\draw[-] (0,0,0) -- ({1.5*cos(30)},{1.5*sin(30)},0) node[above] {$b$};		
+				% Vectors
+				\draw[->] (0,0,0) -- (0,1,0) node[above left] {$\ket{+, \hat{a}}$};
+				\draw[->] (0,0,0) -- ({-cos(30)},{-sin(30)},0) node[below left] {$\ket{-, 		\hat{b}}$};
+			\end{tikzpicture}
+			\centering 
+			\caption{The vectors $\hat{a}$ and $\hat{b}$.}
+			\label{fig1}
+		\end{figure}
+		Precisamos, então, considerar o termo $\braket{+, \hat{a} | -, \hat{b}}$. Pela Fig(\ref{fig1}), vemos que o produto interno dos vetores pode ser escrito como $\cos(\pi-\theta) = -\cos\theta$. Portanto,
+		\be
+			p(-\hbar/2, \hat{b}) = \f{1}{4} + \f{\cos^2\theta}{2}
+		\ee
+		* 
+	\end{answer}
 
-
-
-
-
-
+	\begin{exercise}[6]
+		Considere a seguinte matriz densidade de dois spins 1/2:
+		\be
+			\rho = \f{\mathbb{I}}{8} + \f{1}{2} \ket{\Psi_-}\bra{\Psi_-}
+		\ee
+		onde $\ket{\Psi_-}$ é o estado singleto (i.e. o estado de spin total igual a zero). Suponhamos que medimos um dos spins ao longo de um eixo $a$ e o outro ao longo de um eixo $b$, em que  $\hat{a}\cdot\hat{b} = \cos\theta$. Qual é a probabilidade (como função de $\theta$) de encontramos	$+\hbar/2$ para ambos spins nestas medidas?
+	\end{exercise}
+	\begin{answer}
+		O estado de singleto é 
+		\be
+			\ket{\Psi_-} = \f{\ket{+-} - \ket{-+}}{\sqrt{2}}
+		\ee
+		Portanto,
+		\be
+			\rho = \f{1}{8}\mathbb{I} + \f{1}{4}\l( \ket{+-}\bra{+-} - \ket{+-}\bra{-+} - \ket{-+}\bra{+-} + \ket{-+}\bra{-+} \r)
+		\ee
+		O estado que queremos medir é
+		\be
+			\ket{\phi} = \ket{+}_a\ket{+}_b
+		\ee
+		onde o índice significa o eixo em relação ao qual estamos considerando. Sejam $\theta_a$ e $\theta_b$ os ângulos que os eixos $a$ e $b$ fazem com o eixo $z$. Então,
+		\bea
+			\ket{+}_a &=& \cos(\theta_a/2)\ket{+} + \sin(\theta_a/2)\ket{-} \\
+			\ket{+}_b &=& \cos(\theta_b/2)\ket{+} + \sin(\theta_b/2)\ket{-} 
+		\eea
+		
+	\end{answer}
 
 
 \end{document}
