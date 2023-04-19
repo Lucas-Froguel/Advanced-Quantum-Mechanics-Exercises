@@ -122,7 +122,7 @@
 	\maketitle
 	\listoftheorems[title={List of Exercises}]
 	
-	\begin{exercise}[6.5.1 - Independence of the tensor product from the choice of basis]
+	\begin{exercise}[6.5.1 - Independence of the tensor product from the choice of basis] \label{LM}
 		Verify that the definition (6.3) of the tensor product of two vectors is independent of the choice of basis in $\mathcal{H}_1$ and $\mathcal{H}_2$.
 	\end{exercise}
 	\begin{answer}
@@ -287,8 +287,8 @@
 	\begin{answer}
 		Queremos calcular:
 		\bea
-			p(-\hbar/2, \hat{b}) &=& \tr \l( \rho \ket{-, \hat{b}}\bra{-, \hat{b}}\r) \\
-				&=& \f{|\braket{-, \hat{b} | -, \hat{b}}|^2}{4} + \f{|\braket{+, \hat{a} | -, \hat{b}}|^2}{2} 
+			p(\hbar/2, \hat{b}) &=& \tr \l( \rho \ket{+, \hat{b}}\bra{+, \hat{b}}\r) \\
+				&=& \f{|\braket{+, \hat{b} | +, \hat{b}}|^2}{4} + \f{|\braket{+, \hat{a} | +, \hat{b}}|^2}{2} 
  		\eea
 		\begin{figure}[h!]
 			\begin{tikzpicture}[>=stealth]
@@ -301,57 +301,20 @@
 				\draw[-] (0,0,0) -- ({1.5*cos(30)},{1.5*sin(30)},0) node[above] {$b$};		
 				% Vectors
 				\draw[->] (0,0,0) -- (0,1,0) node[above left] {$\ket{+, \hat{a}}$};
-				\draw[->] (0,0,0) -- ({-cos(30)},{-sin(30)},0) node[below left] {$\ket{-, 		\hat{b}}$};
+				\draw[->] (0,0,0) -- ({cos(30)},{sin(30)},0) node[below right] {$\ket{+, 		\hat{b}}$};
 			\end{tikzpicture}
 			\centering 
 			\caption{The vectors $\hat{a}$ and $\hat{b}$.}
 			\label{fig1}
 		\end{figure}
-		Precisamos, então, considerar o termo $\braket{+, \hat{a} | -, \hat{b}}$. Pela Fig(\ref{fig1}), vemos que o produto interno dos vetores pode ser escrito como $\cos(\pi-\theta) = -\cos\theta$. Portanto,
+		Precisamos, então, considerar o termo $\braket{+, \hat{a} | -, \hat{b}}$. Pela Fig(\ref{fig1}), vemos que o produto interno dos vetores pode ser escrito como $\cos\theta$, pois têm norma unitária. Portanto,
 		\be
-			p(-\hbar/2, \hat{b}) = \f{1}{4} + \f{\cos^2\theta}{2}
+			p(+\hbar/2, \hat{b}) = \f{1}{4} + \f{\cos^2\theta}{2}
 		\ee
-		*  chatGPT:
-		Para encontrar a probabilidade de encontrar o valor $-\hbar/2$ ao se medir o spin ao longo do eixo b, precisamos projetar a matriz densidade $\rho$ nesse novo eixo. Podemos fazer isso usando as matrizes de Pauli:
-		
-		\begin{align}
-			\sigma_b &= \sin\theta\cos\phi , \sigma_x + \sin\theta\sin\phi , \sigma_y + \cos\theta , \sigma_z \\
-			\sigma_b &= \begin{pmatrix}
-				\cos\theta & \sin\theta e^{-i\phi} \\
-				\sin\theta e^{i\phi} & -\cos\theta
-			\end{pmatrix},
-		\end{align}
-		
-		onde $\sigma_x$, $\sigma_y$ e $\sigma_z$ são as matrizes de Pauli, $\phi$ é o ângulo entre o plano definido por a e b e o plano $xy$ e $\sigma_b$ é o operador de spin projetado no eixo b.
-		
-		Podemos calcular a projeção da matriz densidade $\rho$ no eixo b aplicando o operador de projeção $\sigma_b$:
-		
-		\begin{align*}
-			\rho_b &= \sigma_b \rho \sigma_b^\dagger \\
-			&= \begin{pmatrix}
-				\cos\theta & \sin\theta e^{i\phi} \\
-				\sin\theta e^{-i\phi} & -\cos\theta
-			\end{pmatrix}
-			\left(\frac{1}{4}\mathbb{I} + \frac{1}{2}\ket{+, \hat{a}}\bra{+, \hat{a}}\right)
-			\begin{pmatrix}
-				\cos\theta & \sin\theta e^{-i\phi} \\
-				\sin\theta e^{i\phi} & -\cos\theta
-			\end{pmatrix} \\
-			&= \frac{1}{4}\begin{pmatrix}
-				1+\cos\theta & \sin\theta e^{i\phi}+\sin\theta e^{-i\phi} \\
-				\sin\theta e^{-i\phi}+\sin\theta e^{i\phi} & 1-\cos\theta
-			\end{pmatrix}
-			\frac{1}{2}\begin{pmatrix}
-				\cos^2\frac{\theta}{2} & \cos\frac{\theta}{2}\sin\frac{\theta}{2}e^{-i\frac{\phi}{2}} \\
-				\cos\frac{\theta}{2}\sin\frac{\theta}{2}e^{i\frac{\phi}{2}} & \sin^2\frac{\theta}{2}
-			\end{pmatrix} \\
-			&= \begin{pmatrix}
-				\frac{1}{2}(1+\cos\theta) & \frac{1}{2}\sin\theta e^{-i\phi/2}\cos\frac{\theta}{2} \\
-				\frac{1}{2}\sin\theta e^{i\phi/2}\cos\frac{\theta}{2} & \frac{1}{2}(1-\cos\theta)
-			\end{pmatrix}.
-		\end{align*}
-		
-		A probabilidade de medir o valor $-\hbar/2$ ao se medir o spin ao longo do eixo b é o elemento diagonal inferior da matriz densidade projetada $\rho_b$:
+		Como precisa ser que $p(+\hbar/2, \hat{b}) + p(-\hbar/, \hat{b}) = 1$, então vale que
+		\be
+			p(-\hbar/2, \hat{b}) = \f{1}{4} + \f{\sin^2\theta}{2}
+		\ee
 	\end{answer}
 
 	\begin{exercise}[6]
@@ -462,5 +425,138 @@
 		\eea
 	\end{answer}
 
+	\begin{exercise}[9]
+		Considere os estados de Bell.
+		\bea
+			\ket{\Phi_+} &=& \f{1}{\sqrt{2}} (\ket{++} + \ket{--}) \\
+			\ket{\Phi_-} &=& \f{1}{\sqrt{2}} (\ket{++} - \ket{--}) \\
+			\ket{\Psi_+} &=& \f{1}{\sqrt{2}} (\ket{+-} + \ket{-+}) \\
+			\ket{\Psi_-} &=& \f{1}{\sqrt{2}} (\ket{+-} - \ket{-+}) \\
+		\eea
+		\begin{exercises}
+			\item Escreva os estados de Bell e as correspondentes matrizes densidade na forma
+			matricial na representação definida pela Eq. (1).
+			\begin{multianswer}
+				Pelo Ex.(\ref{LM}), já sabemos as formas matriciais de cada um dos elementos da base. Basta realizar as somas/subtrações correspondentes.
+				\bea
+					\ket{\Phi_+} = \f{1}{\sqrt{2}}
+					\begin{pmatrix} 1 \\ 0 \\ 0 \\ 1 \end{pmatrix}, 
+					&\quad& 
+					\ket{\Phi_-} = \f{1}{\sqrt{2}}
+					\begin{pmatrix} 1 \\ 0 \\ 0 \\ -1 \end{pmatrix} \\
+					\ket{\Psi_+} = \f{1}{\sqrt{2}}
+					\begin{pmatrix} 0 \\ 1 \\ 1 \\ 0 \end{pmatrix}, 
+					&\quad& 
+					\ket{\Psi_-} = \f{1}{\sqrt{2}}
+					\begin{pmatrix} 0 \\ 1 \\ -1 \\ 0 \end{pmatrix}
+				\eea
+				Já as matrizes de densidade são apenas os produtos $\rho=\ket{\psi}\bra{\psi}$. 
+				\bea
+					\rho(\Phi_+) &=& \ket{\Phi_+}\bra{\Phi_+} 
+						= \f{1}{2} 
+						\begin{pmatrix} 1 \\ 0 \\ 0 \\ 1 \end{pmatrix}
+						\begin{pmatrix} 1 & 0 & 0 & 1 \end{pmatrix} 
+						= \f{1}{2}
+						\begin{pmatrix}
+							1 & 0 & 0 & 1 \\
+							0 & 0 & 0 & 0 \\
+							0 & 0 & 0 & 0 \\
+							1 & 0 & 0 & 1 \\
+						\end{pmatrix} \\
+					\rho(\Phi_-) &=& \ket{\Phi_-}\bra{\Phi_-} 
+					= \f{1}{2} 
+					\begin{pmatrix} 1 \\ 0 \\ 0 \\ -1 \end{pmatrix}
+					\begin{pmatrix} 1 & 0 & 0 & -1 \end{pmatrix} 
+					= \f{1}{2}
+					\begin{pmatrix}
+						1 & 0 & 0 & -1 \\
+						0 & 0 & 0 & 0 \\
+						0 & 0 & 0 & 0 \\
+						-1 & 0 & 0 & 1 \\
+					\end{pmatrix} \\
+					\rho(\Psi_+) &=& \ket{\Psi_+}\bra{\Psi_+} 
+					= \f{1}{2} 
+					\begin{pmatrix} 0 \\ 1 \\ 1 \\ 0 \end{pmatrix}
+					\begin{pmatrix} 0 & 1 & 1 & 0 \end{pmatrix} 
+					= \f{1}{2}
+					\begin{pmatrix}
+						0 & 0 & 0 & 0 \\
+						0 & 1 & 1 & 0 \\
+						0 & 1 & 1 & 0 \\
+						0 & 0 & 0 & 0 \\
+					\end{pmatrix} \\
+					\rho(\Psi_-) &=& \ket{\Psi_-}\bra{\Psi_-} 
+					= \f{1}{2} 
+					\begin{pmatrix} 0 \\ 1 \\ -1 \\ 0 \end{pmatrix}
+					\begin{pmatrix} 0 & 1 & -1 & 0 \end{pmatrix} 
+					= \f{1}{2}
+					\begin{pmatrix}
+						0 & 0 & 0 & 0 \\
+						0 & 1 & -1 & 0 \\
+						0 & -1 & 1 & 0 \\
+						0 & 0 & 0 & 0 \\
+					\end{pmatrix}
+				\eea
+				É fácil ver que todas possuem traço 1, como deveriam.
+			\end{multianswer}
+			
+			% Part 2
+			\item Mostre que estes estados são maximamente emaranhados (ou desordenados),
+			isto é, as entropias de emaranhamento correspondentes aos spins individuais assumem o valor máximo $\ln 2$.
+			\begin{multianswer}[true]
+				* como calcular a entropia sem usar a decomposição de Schmidt? tem como?
+			\end{multianswer}
+			
+		\end{exercises}
+	\end{exercise}
+	
+	\begin{exercise}[10]
+		Considere o seguinte vetor de estado de dois spins 1/2 :
+		\be
+			\ket{\Psi(1, 2)} = \cos\theta\ket{+-} - \sin\theta\ket{-+}	
+		\ee
+		onde $0\leq\theta\leq\pi/2$. Obtenha a matriz densidade reduzida de um dos spins e calcule a correspondente entropia de emaranhamento. Para que valor de $\theta$ essa entropia é máxima?
+	\end{exercise}
+	\begin{answer}
+		A matriz de densidade é:
+		\bea
+			\rho &=& \ket{\Psi(1, 2)}\bra{\Psi(1, 2)} \\ 
+				&=& \cos^2\theta\ket{+-}\bra{+-} - \sin\theta\cos\theta\ket{+-}\bra{-+} - \sin\theta\cos\theta\ket{-+}\bra{+-} + \sin^2\theta\ket{-+}\bra{-+}
+		\eea
+		Isso gera uma matriz $4\times 4$. Vamos considerar a seguinte ordenação dos vetores de base $\{ \ket{++}, \ket{+-},\\ \ket{-+}, \ket{--}\}$. 
+		\be
+			\rho = 
+			\begin{pmatrix}
+				0 & 0 & 0 & 0 \\
+				0 & \cos^2\theta & -\sin\theta\cos\theta & 0 \\
+				0 & -\sin\theta\cos\theta & \sin^2\theta & 0 \\
+				0 & 0 & 0 & 0 \\
+			\end{pmatrix}
+		\ee
+		Obviamente, o emaranhamento é máximo para $\theta=\pi/4$, pois essa escolha não favorece nenhum estado e gera uma matriz de Bell ($\rho(\Psi_-)$, em particular). 
+		* como calcular a entropia geral?
+	\end{answer}
+	
+	\begin{exercise}[6.5.4 - ]
+		Positronium is an electron–positron bound state very similar to the electron–proton bound state of the hydrogen atom.
+		\begin{exercises}
+			\item Calculate the energy of the ground state of positronium as a function of that of the hydrogen atom. We recall that the positron mass is equal to the electron mass.
+			\begin{multianswer}
+				We recall that the groundstate energy of the hydrogen atom is
+				\be
+					E_0 = \f{m_ee^4}{8h^2\varepsilon_0^2}
+				\ee
+			\end{multianswer}
+			
+			
+		\end{exercises}
+	\end{exercise}
+	
+	\begin{exercise}[12]
+		
+	\end{exercise}
+	\begin{answer}
+		
+	\end{answer}
 
 \end{document}
