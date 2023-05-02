@@ -394,7 +394,6 @@
 				&=& \l( H_A\tr_B(\rho^{AB}) - \tr_B(\rho^{AB})H_A \r) +  \tr_B\l( V_{AB}\rho^{AB} - \rho^{AB}V_{AB} \r) + \l( \tr_B(H_B\rho^{AB}) - \tr_B(\rho^{AB}H_B)  \r) \\
 				&=& [H_A, \rho_A] + \tr_B[V_{AB}, \rho^{AB}]
 		\eea
-		* Como o último termo se anula? 
 		Portanto, juntando as duas pontas:
 		\be
 			i\hbar\f{d\rho^A}{dt} = \l[ H_A, \rho^A\r] + \tr_B\l[V_{AB}, \rho^{AB}\r]
@@ -406,24 +405,23 @@
 		operador densidade evolui de acordo com a Eq. (6.37) do Le Bellac) a entropia de	emaranhamento é conservada no tempo.
 	\end{exercise}
 	\begin{answer}
-		A evolução unitária é dada por
+		Podemos escrever a evolução unitária como
 		\be
-			i\hbar\f{d\rho}{dt} = \l[ H, \rho \r]
+			\rho(t)=U(t)\rho(0)U^*(t)
 		\ee
-		E a entropia de emaranhamento é
-		\be
-			S = -\tr(\rho\ln\rho)
-		\ee
-		Logo,
+		Primeiramente, notamos que
 		\bea
-			\f{dS}{dt} &=& -\f{d}{dt}\tr(\rho\ln\rho) \\
-				&=& - \tr\l( \dot{\rho} + \dot{\rho}\ln\rho \r) \\
-				&=& -\tr(\dot{\rho}(1+\ln\rho)) \\
-				&=& -\f{1}{i\hbar} \tr\big( (H\rho-\rho H)(1+\ln\rho) \big) \\
-				&=& -\f{1}{i\hbar} \tr\big( H\rho + H\rho\ln\rho - \rho H - \rho H\ln\rho \big) \\
-				&=& - \f{1}{i\hbar}\tr\big( [H, \rho] + [H\rho, \rho] \big)
+			\ln(\rho(t)) &=& \ln(U(t)\rho(0)U^*(t)) \\
+				&=& \ln U(t) + \ln\rho_0 + \ln U^*(t) \\
+				&=& \ln U(t) + \ln\rho_0 + -\ln U(t) \\
+				&=& \ln\rho_0
 		\eea
-		* terminar 
+		Em seguida,
+		\bea
+			S &=& -k_b \tr\Big( U(t)\rho_0U^*(t) \ln\rho_0 \Big) \\
+				&=& -k_b\tr\big( \rho(0)\ln\rho(0)\big)
+		\eea
+		que depende apenas do estado inicial. 
 	\end{answer}
 
 	\begin{exercise}[9]
@@ -505,7 +503,60 @@
 			\item Mostre que estes estados são maximamente emaranhados (ou desordenados),
 			isto é, as entropias de emaranhamento correspondentes aos spins individuais assumem o valor máximo $\ln 2$.
 			\begin{multianswer}[true]
-				* como calcular a entropia sem usar a decomposição de Schmidt? tem como?
+				Vamos calcular a entropia do traço parcial. Primeiramente, para o B
+				\bea
+					\rho_B(\Phi_+) &=& \f{1}{2}
+					\begin{pmatrix}
+						1 & 0 \\
+						0 & 1
+					\end{pmatrix} \\
+					\rho_B(\Phi_-) &=& \f{1}{2}
+					\begin{pmatrix}
+						1 & 0 \\
+						0 & 1
+					\end{pmatrix} \\
+					\rho_B(\Psi_+) &=& \f{1}{2}
+					\begin{pmatrix}
+						1 & 0 \\
+						0 & 1
+					\end{pmatrix} \\
+					\rho_B(\Psi_-) &=& \f{1}{2}
+					\begin{pmatrix}
+						1 & 0 \\
+						0 & 1
+					\end{pmatrix} 
+				\eea
+				E para o A
+				\bea
+					\rho_A(\Phi_+) &=& \f{1}{2}
+					\begin{pmatrix}
+						1 & 0 \\
+						0 & 1
+					\end{pmatrix} \\
+					\rho_A(\Phi_-) &=& \f{1}{2}
+					\begin{pmatrix}
+						1 & 0 \\
+						0 & 1
+					\end{pmatrix} \\
+					\rho_A(\Psi_+) &=& \f{1}{2}
+					\begin{pmatrix}
+						1 & 0 \\
+						0 & 1
+					\end{pmatrix} \\
+					\rho_A(\Psi_-) &=& \f{1}{2}
+					\begin{pmatrix}
+						-1 & 0 \\
+						0 & -1
+					\end{pmatrix} 
+				\eea
+				Então todos são proporcionais a $\pm I/2$. Ora, a entropia é
+				\be
+					S_j = -k_b \tr \begin{pmatrix}
+						(1/2)\ln(1/2) & 0 \\
+						0 & (1/2)\ln(1/2) \\
+					\end{pmatrix} = k_b\ln 2
+				\ee
+				
 			\end{multianswer}
 			
 		\end{exercises}
@@ -534,29 +585,353 @@
 				0 & 0 & 0 & 0 \\
 			\end{pmatrix}
 		\ee
-		Obviamente, o emaranhamento é máximo para $\theta=\pi/4$, pois essa escolha não favorece nenhum estado e gera uma matriz de Bell ($\rho(\Psi_-)$, em particular). 
-		* como calcular a entropia geral?
+		Obviamente, o emaranhamento é máximo para $\theta=\pi/4$, pois essa escolha não favorece nenhum estado e gera uma matriz de Bell ($\rho(\Psi_-)$, em particular). Tomando o traço parcial:
+		\be
+			\rho_B = 
+			\begin{pmatrix}
+				\cos^2\theta & 0 \\
+				0 & \sin^2\theta
+			\end{pmatrix}
+		\ee
+		Thus,
+		\be
+			S_B = -k_b\tr\begin{pmatrix}
+				\sin^2\theta\ln\sin^2\theta & 0 \\
+				0 & \cos^2\theta\ln\cos^2\theta \\
+			\end{pmatrix} = - 2k_b (\sin^2\theta\ln\sin\theta +\cos^2\theta\ln\cos\theta)
+		\ee
+		
 	\end{answer}
 	
-	\begin{exercise}[6.5.4 - ]
+	\begin{exercise}[6.5.4 - Fine structure and the Zeeman effect in positronium]
 		Positronium is an electron–positron bound state very similar to the electron–proton bound state of the hydrogen atom.
 		\begin{exercises}
 			\item Calculate the energy of the ground state of positronium as a function of that of the hydrogen atom. We recall that the positron mass is equal to the electron mass.
 			\begin{multianswer}
 				We recall that the groundstate energy of the hydrogen atom is
 				\be
-					E_0 = \f{m_ee^4}{8h^2\varepsilon_0^2}
+					E_0^H = -\f{\mu_H e^4}{8h^2\varepsilon_0^2}
+				\ee
+				However the reduced mass is
+				\be
+					\mu_H = \f{mM}{m+M} \approx m
+				\ee
+				where $M$ is the proton's mass and $m$ the electron's mass. Now, however, in the positronium:
+				\be
+					\mu_P = \f{m^2}{2m} = \f{m}{2}
+				\ee
+				Thus,
+				\be
+					E_0^P = -\f{\mu_P e^4}{8h^2\varepsilon_0^2} \approx \f{E_0^H}{2} 
 				\ee
 			\end{multianswer}
 			
+			% Part 2
+			\item In this exercise we are interested solely in the spin structure of the ground state of positronium.
+			The space of states to be taken into account is then a four-dimensional space $\mathcal{H}$ , the tensor
+			product of the spaces of spin-1/2 states of the electron and the positron. Following the notation
+			of Section 6.1.2, we use $\ket{\varepsilon_1\varepsilon_2}$ to denote a state in which the z component of the electron spin is
+			$\hbar\varepsilon_1/2$ and that of the positron spin is $\hbar\varepsilon_2/2$, with $\varepsilon = \pm1$. Determine the action of the operators	$\sigma_{1x}\sigma_{2x}$, $\sigma_{1y}\sigma_{ 2y}$, and $\sigma_{1z} \sigma_{2z}$ on the four basis states $\ket{++}$ , $\ket{+-}$ , $\ket{-+}$ , and $\ket{--}$ of $\mathcal{H}$ .
+			Deduce the action of the operator
+			\be
+				\vec{\sigma_1}\cdot\vec{\sigma_2}
+			\ee
+			on these states.
+			\begin{multianswer}
+				In order to do this, we will calculate the matrix elements and build the matrix representation. Using the $\{\ket{++}, \ket{+-}, \ket{-+}, \ket{--}  \}$ order to do so. Then,
+				\be
+					\sigma_{1x}\sigma_{2x} = 
+					\begin{pmatrix}
+						0 & 0 & 0 & 1 \\
+						0 & 0 & 1 & 0 \\
+						0 & 1 & 0 & 0 \\
+						1 & 0 & 0 & 0 \\
+					\end{pmatrix}
+				\ee
+				And
+				\be
+					\sigma_{1y}\sigma_{2y} = 
+					\begin{pmatrix}
+						0 & 0 & 0 & -1 \\
+						0 & 0 & 1 & 0 \\
+						0 & 1 & 0 & 0 \\
+						-1 & 0 & 0 & 0 \\
+					\end{pmatrix}
+				\ee
+				And, at last,
+				\be
+					\sigma_{1z}\sigma_{2z} = 
+					\begin{pmatrix}
+						1 & 0 & 0 & 0 \\
+						0 & -1 & 0 & 0 \\
+						0 & 0 & -1 & 0 \\
+						0 & 0 & 0 & 1 \\
+					\end{pmatrix}
+				\ee
+				Hence,
+				\be
+					\vec{\sigma_1}\cdot\vec{\sigma_2} = 
+					\begin{pmatrix}
+						1 & 0 & 0 & 0 \\
+						0 & -1 & 2 & 0 \\
+						0 & 2 & -1 & 0 \\
+						0 & 0 & 0 & 1 \\
+					\end{pmatrix}
+				\ee
+			\end{multianswer}
+			\item Show that the four vectors form an orthonormal basis of $\mathcal{H}$ and that these vectors are eigenvectors of $\vec{\sigma_1}\cdot\vec{\sigma_2}$ with eigenvalues
+			1 or $-3$.
+			\begin{multianswer}
+				It is easy to see that the vectors are normal and orthogonal by simple calculations. A set of orthonormal vectors with the size of the dimension of the space form a basis, thus this is a orthonormal basis of $\mathcal{H}$. Let us see that they are eigenvectors of the operator $\vec{\sigma_1}\cdot\vec{\sigma_2}$. In respective order:
+				\be
+					\vec{\sigma_1}\cdot\vec{\sigma_2} \ket{I} = 
+					\begin{pmatrix}
+						1 & 0 & 0 & 0 \\
+						0 & -1 & 2 & 0 \\
+						0 & 2 & -1 & 0 \\
+						0 & 0 & 0 & 1 \\
+					\end{pmatrix}
+					\begin{pmatrix}
+						1 \\ 0 \\ 0 \\ 0 \\
+					\end{pmatrix}
+					= 
+					\begin{pmatrix}
+						1 \\ 0 \\ 0 \\ 0 \\
+					\end{pmatrix}
+					=
+					\ket{I}
+				\ee
+				As for $\ket{II}$:
+				\be
+					\vec{\sigma_1}\cdot\vec{\sigma_2} \ket{II} = 
+					\f{1}{\sqrt{2}}
+					\begin{pmatrix}
+						1 & 0 & 0 & 0 \\
+						0 & -1 & 2 & 0 \\
+						0 & 2 & -1 & 0 \\
+						0 & 0 & 0 & 1 \\
+					\end{pmatrix}
+					\begin{pmatrix}
+						0 \\ 1 \\ 1 \\ 0 \\
+					\end{pmatrix}
+					= 
+					\f{1}{\sqrt{2}}
+					\begin{pmatrix}
+						0 \\ 1 \\ 1 \\ 0 \\
+					\end{pmatrix}
+					=
+					\ket{II}
+				\ee
+				And the next:
+				\be
+					\vec{\sigma_1}\cdot\vec{\sigma_2} \ket{III} = 
+					\begin{pmatrix}
+						1 & 0 & 0 & 0 \\
+						0 & -1 & 2 & 0 \\
+						0 & 2 & -1 & 0 \\
+						0 & 0 & 0 & 1 \\
+					\end{pmatrix}
+					\begin{pmatrix}
+						0 \\ 0 \\ 0 \\ 1 \\
+					\end{pmatrix}
+					= 
+					\begin{pmatrix}
+						0 \\ 0 \\ 0 \\ 1 \\
+					\end{pmatrix}
+					=
+					\ket{III}
+				\ee
+				At last
+				\be
+					\vec{\sigma_1}\cdot\vec{\sigma_2} \ket{IV} = 
+					\f{1}{\sqrt{2}}
+					\begin{pmatrix}
+						1 & 0 & 0 & 0 \\
+						0 & -1 & 2 & 0 \\
+						0 & 2 & -1 & 0 \\
+						0 & 0 & 0 & 1 \\
+					\end{pmatrix}
+					\begin{pmatrix}
+						0 \\ 1 \\ -1 \\ 0 \\
+					\end{pmatrix}
+					= 
+					\f{-3}{\sqrt{2}}
+					\begin{pmatrix}
+						0 \\ 1 \\ -1 \\ 0 \\
+					\end{pmatrix}
+					=
+					-3 \ket{IV}
+				\ee
+			\end{multianswer}
 			
-		\end{exercises}
+			% Part 4
+			\item Find the projectors $\mathcal{P}_1$ and $\mathcal{P}_{-3}$ onto the subspaces of the eigenvalues 1 and $-3$, writing these
+			projectors in the form
+			\be
+				\lambda I + \mu\vec{\sigma_1}\cdot\vec{\sigma_2}
+			\ee
+			\begin{multianswer}
+				In the new basis, it is easy to write the projection operators and the $\vec{\sigma_1}\cdot\vec{\sigma_2}$ operator.
+				\be
+					\mathcal{P}_1 = 
+					\begin{pmatrix}
+						1 & 0 & 0 & 0 \\
+						0 & 1 & 0 & 0 \\
+						0 & 0 & 1 & 0 \\
+						0 & 0 & 0 & 0 \\
+					\end{pmatrix}, \quad
+					\mathcal{P}_2 = 
+					\begin{pmatrix}
+						0 & 0 & 0 & 0 \\
+						0 & 0 & 0 & 0 \\
+						0 & 0 & 0 & 0 \\
+						0 & 0 & 0 & -3 \\
+					\end{pmatrix}
+				\ee
+				And also
+				\be
+					\vec{\sigma_1}\cdot\vec{\sigma_2} = 
+					\begin{pmatrix}
+						1 & 0 & 0 & 0 \\
+						0 & 1 & 0 & 0 \\
+						0 & 0 & 1 & 0 \\
+						0 & 0 & 0 & -3 \\
+					\end{pmatrix}
+				\ee
+				Using the matrix elements and comparing, we can write
+				\be
+					\lambda_1 + \mu_1 = 1, \quad \lambda_1 - 3\mu_1 = 0
+				\ee
+				And
+				\be
+					\lambda_2 + \mu_2 = 0, \quad \lambda_2 - 3\mu_2 = -3
+				\ee
+				Hence, solving the equations, this is equivalent to
+				\be
+					\mathcal{P}_1 = \f{1}{4}\Big( 3I + \vec{\sigma_1}\cdot\vec{\sigma_2} \Big), \quad\quad \mathcal{P}_{-3} = \f{1}{4}\Big( I - \vec{\sigma_1}\cdot\vec{\sigma_2} \Big)
+				\ee
+			\end{multianswer}
+			
+			% Part 5
+			\item Show that the operator 
+			\be
+				\mathcal{P}_{12} = \f{1}{2}\Big( I + \vec{\sigma_1}\cdot\vec{\sigma_2} \Big)
+			\ee
+			exchanges the values of $\varepsilon_1$ and $\varepsilon_2$.
+			\begin{multianswer}
+				Using the matrix representation in the old basis:
+				\be
+					\mathcal{P}_{12} = 
+					\begin{pmatrix}
+						1 & 0 & 0 & 0 \\
+						0 & 0 & 1 & 0 \\
+						0 & 1 & 0 & 0 \\
+						0 & 0 & 0 & 1 \\
+					\end{pmatrix}
+				\ee
+				where we can easily see that all vectors get exchanged. 
+			\end{multianswer}
+			
+			% Part 6
+			\item The Hamiltonian H0 of the spin system in the absence of an external field is given by
+			\be
+				H_0 = E_0I + A \vec{\sigma_1}\cdot\vec{\sigma_2}
+			\ee
+			where $E_0$ and $A>0$ are constants. Find the eigenvectors and eigenvalues of $H_0$.
+			\begin{multianswer}
+				The matrix representation of this hamiltonian in the new basis is
+				\be
+					H_0 = 
+					\begin{pmatrix}
+						E_0+A & 0 & 0 & 0 \\
+						0 & E_0+A & 0 & 0 \\
+						0 & 0 & E_0+A & 0 \\
+						0 & 0 & 0 & E_0-3A \\
+					\end{pmatrix}
+				\ee
+				where we trivially see that $\{ \ket{I}, \ket{II}, \ket{III} \}$ are eigenvectors with eigenvector $E_0+A$ and $\{\ket{IV}\}$ is the eigenvector with eigenvalue $E_0-3A$. 
+			\end{multianswer}
+			
+			% Part 7
+			\item The positronium atom is placed in a uniform, constant magnetic field $\vec{B}$ parallel to $O_z$. Show that the Hamiltonian becomes
+			\be
+				H = H_0 - \f{q_e\hbar}{2m}B(\sigma_{1z} - \sigma_{2z})
+			\ee
+			where $m$ is the electron mass and $q_e$ is its charge. Find the matrix representation of $H$ in the basis $\{ \ket{I}, \ket{II}, \ket{III}, \ket{IV} \}$. The parameter $x$ is defined by
+			\be
+				\f{q_e\hbar}{2m} = -Ax
+			\ee
+			Find the eigenvalues of $H$ and graph their behavior as a function of $x$.
+			\begin{multianswer}[true]
+				Using the fact that the electron and positron have opposite magnetic moments,
+				\be
+					H = H_0 - (\vec{\mu}_e + \vec{\mu}_p)\cdot\vec{B} =  H_0 - \f{q_e\hbar}{2m}B(\sigma_{1z} - \sigma_{2z})
+				\ee 
+				where we remember that $\sigma_{1z}=\sigma_{1z}\otimes\mathbb{I}_2$ and vice-versa. Let $\hat{O}=\sigma_{1z} - \sigma_{2z}$. Then, we can easily see that
+				\bea
+					\hat{O}\ket{I} &=& 0 \\
+					\hat{O}\ket{II} &=& 2\ket{IV} \\
+					\hat{O}\ket{III} &=& 0 \\
+					\hat{O}\ket{IV} &=& 2\ket{II}
+				\eea
+				Using this information, we can build the matrix representation of $H$ as
+				\be
+					H = 
+					\begin{pmatrix}
+						E_0 + A & 0 & 0 & 0 \\
+						0 & E_0 + A & 0 & 2Ax \\
+						0 & 0 & E_0 + A & 0 \\
+						0 & 2Ax & 0 & E_0-3A \\
+					\end{pmatrix}
+				\ee
+				The eigenvectors $\{ \ket{I}, \ket{III} \}$ are trivially seen, as well as their eigenvalues $E_0+A$ in both cases. The other two eigenvectors can be found by considering the reduced, $2\times2$ matrix
+				\be
+					H' = E_0\mathbb{I} + A
+					\begin{pmatrix}
+						1 & 2x \\
+						2x & -3 \\
+					\end{pmatrix} \equiv E_0\mathbb{I} + AM
+				\ee
+				where it is the matrix $M$ that we must diagonalize. The eigenvalue equation is
+				\be
+					-(1-\lambda)()\lambda+3) - 4x^2 = 0
+				\ee
+				Or,
+				\be
+					\lambda^2 + 2\lambda - (3+4x^2) = 0
+				\ee
+				which gives
+				\be
+					\lambda_\pm = -1\pm 2\sqrt{1 + x^2}
+				\ee
+				This yields the energy
+				\be
+					E_\pm = E_0 -A \pm 2A\sqrt{1 + x^2}
+				\ee
+				When $x=0$ we get our usual older eigenvectors $E_0+A$ and $E_0-3A$. As $x\to\infty$, the eigenvalues tend to $\pm 2Ax$. 
+			\end{multianswer}
+	\end{exercises}
 	\end{exercise}
 	
 	\begin{exercise}[12]
-		
+		A dinâmica de um sistema de dois spins 1/2 é descrita pelo hamiltoniano:
+		\be
+			\hat{H} = -\f{\hbar\omega}{2}\sigma_1\cdot\sigma_2
+		\ee
+		onde $\omega$ é uma constante. Supondo que em $t = 0$ o vetor de estado dos dois spins era $\ket{+-}$, obtenha a entropia de emaranhamento de um dos elétrons nos instantes $t = 0$ e $t = \pi/2\omega$.
 	\end{exercise}
 	\begin{answer}
+		No instante $t=0$, a matriz densidade é
+		\be
+			\rho = \ket{+-}\bra{+-} = 
+			\begin{pmatrix}
+				0 & 0 & 0 & 0 \\
+				0 & 1 & 0 & 0 \\
+				0 & 0 & 0 & 0 \\
+				0 & 0 & 0 & 0 \\
+			\end{pmatrix}
+		\ee
+		Logo, $\rho_A = \ket{+}\bra{+}$. Isso implica que a entropia de emaranhamento é zero, pois $\ln\rho_A = 0$. 
 		
 	\end{answer}
 
