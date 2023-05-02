@@ -1,0 +1,169 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage[mathscr]{euscript}
+\usepackage{array}
+\usepackage[thinlines]{easytable}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage[margin=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{braket}
+\usepackage{thmtools} 
+\usepackage{hyperref}
+\usepackage{environ}
+\usepackage{enumitem}
+\usepackage[backend=biber, style=numeric]{biblatex} %Imports biblatex package
+\addbibresource{references.bib} %Import the bibliography file
+\usetikzlibrary{angles,quotes}
+
+\usepackage{lipsum} % Pode tirar esse :D
+
+\graphicspath{.Images/}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+	pdftitle={Quântica Avançada - P1 - Lucas Froguel}
+}
+
+
+\def\be{\begin{equation}}
+	\def\ee{\end{equation}}
+\def\bee{\begin{equation*}}
+	\def\eee{\end{equation*}}
+\def\bea{\begin{eqnarray*}}
+	\def\eea{\end{eqnarray*}}
+\def\beaa{\begin{eqnarray}}
+	\def\eeaa{\end{eqnarray}}
+
+\def\f{\frac}
+\def\del{\partial}
+
+\def\R{\mathbb{R}}
+\def\K{\mathbb{K}}
+\def\C{\mathbb{C}}
+\def\I{\mathbb{I}}
+\def\Z{\mathbb{Z}}
+\def\Q{\mathbb{Q}}
+\def\N{\mathbb{N}}
+
+\def\cd{\cdot}
+
+\def\v#1{{\boldsymbol{#1}}}
+\def\ve#1{\hat{\boldsymbol#1}}
+
+\def\l{\left}
+\def\r{\right}
+\def\la{\l\langle}
+\def\ra{\r\rangle}
+\def\div{\nabla\cdot}
+\def\curl{\nabla\times}
+\def\grad{\nabla}
+\def\lap{\nabla^2}
+
+\def\s{\quad}
+\def\ss{\qquad}
+\def\infi{\infty}
+\def\p{\partial}
+\def\u{\cup}%union of two sets
+\def\i{\cap}%intersection of two sets
+\def\ds{\oplus}
+
+
+
+\newtheorem{exercise}{Exercício}
+\newtheorem{partinner}{Item}[exercise]
+
+\newlist{exercises}{enumerate}{1}
+\setlist[exercises]{wide = 0pt, listparindent=\parindent,labelsep = 0pt,leftmargin =\labelwidth}
+\setlist[exercises, 1]{label =\itshape \bfseries Item~\arabic*.\; }
+
+\newenvironment{answer}{\noindent\textbf{\textit{Resposta.}} \normalfont }{\par\noindent\rule{\textwidth}{0.4pt}}
+\NewEnviron{multianswer}[1][false]{%
+	\ifthenelse{\equal{#1}{true}}%
+	{\def\rulewidth{\textwidth}}%
+	{\def\rulewidth{0.7\textwidth}}%
+	\\ \noindent\textbf{\textit{Resposta.}} \normalfont%
+	\BODY%
+	\par\noindent\rule{\rulewidth}{0.1pt}%
+}
+
+
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+
+\DeclareMathOperator{\atan}{atan}
+\DeclareMathOperator{\cotan}{cotan}
+\DeclareMathOperator{\acos}{acos}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\asinh}{asinh}
+\DeclareMathOperator{\atanh}{atanh}
+\DeclareMathOperator{\acoth}{acoth}
+\DeclareMathOperator{\acosh}{acosh}
+\DeclareMathOperator{\acsch}{acsch}
+\DeclareMathOperator{\asech}{asech}
+\DeclareMathOperator{\D}{D}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Res}{Res}
+
+\title{Mecânica Quântica Avançada \\ Prova 1}
+\author{Lucas Froguel \\ IFT}
+\date{}
+
+\begin{document}
+	\maketitle
+	\listoftheorems[title={Prova 1}]
+
+	\begin{exercise}
+		Considere uma molécula constituída de três átomos idênticos nos
+		sítios (vértices) de um triângulo equilátero, conforme mostrado na figura. Vamos considerar que o íon desta molécula é formado adicionando-se um único elétron a ela; como vimos em aula, deve haver um efeito de delocalização, e o elétron deve se acomodar em um estado distribuído ao redor dos sítios. Suponha que o elemento de matriz da Hamiltoniana para o elétron em dois sítios adjacentes $i, j$ é $\braket{i|H|j} = -a, a>0$, para $i\not=j$; por simetria, os elementos diagonais são todos	iguais, $\braket{i|H|i}=E_0$.
+		\begin{exercises}
+			\item Escreva a Hamiltoniana na forma matricial e calcule os níveis de energia.
+			\begin{multianswer}
+				A hamiltoniana é
+				\be
+					H = 
+					\begin{pmatrix}
+						E_0 & -a & -a \\
+						-a & E_0 & -a \\
+						-a & -a & E_0 \\
+					\end{pmatrix}
+				\ee
+				Diagonalizando a matriz (processo feito em aula), achamos que as autoenergias são
+				\be
+					E_s = E_0 -2a\cos\l( \f{2\pi s}{3}\r)
+				\ee
+				Assim, nossas energias são
+				\be
+					E_0 = E_0 - 2a, \quad E_1 = E_0 -2a\cos\l(\f{2\pi}{3}\r), \quad E_2 = E_0 -2a\cos\l(\f{4\pi}{3}\r)
+				\ee
+			\end{multianswer}
+			
+			% Part 2
+			\item Suponha que um campo elétrico na direção $z$ é aplicado, de modo que a energia potencial para o elétron na posição rotulada por “1” diminui por uma parcela $b$
+			$(b>0)$. Calcule os níveis de energia e os autoestados de energia.
+			\begin{multianswer}
+				Agora quebramos a simetria que fazia com que os elementos das diagonais fossem $E_0$, pois podemos distinguir o estado 1 dos estados 2 e 3. Logo, a hamiltoniana modificada é 
+				\be
+				H = 
+				\begin{pmatrix}
+					E_0 - b & -a & -a \\
+					-a & E_0 + b & -a \\
+					-a & -a & E_0 + b \\
+				\end{pmatrix}
+				\ee
+			\end{multianswer}
+			
+		\end{exercises}
+	\end{exercise}
+
+
+\end{document}
