@@ -160,10 +160,226 @@
 					-a & -a & E_0 + b \\
 				\end{pmatrix}
 				\ee
+				Achar os autovalores e vetores de uma matriz $3\times3$ é um processo matemático bem definido e metódico. Fazendo essa operação, obtemos
+				\bea
+					E_1 = E_0 + a + b, &\quad& \ket{1'} = -\ket{2} + \ket{3} \\
+					E_2 = E_0 - \f{1}{2}\l( a + \sqrt{9a^2 - 4ab + 4b^2}\r), &\quad& \ket{2'} = c_2\ket{1} +\ket{2} + \ket{3} \\
+					E_3 = E_0 + \f{1}{2}\l( -a + \sqrt{9a^2 - 4ab + 4b^2}\r), &\quad& \ket{3'} = c_c\ket{1} +\ket{2} + \ket{3}
+				\eea
+				onde
+				\bea
+					c_2 &=& - \f{a -2b - \sqrt{9a^2 -4ab + 4b^2}}{2a} \\					c_2 &=& - \f{a -2b + \sqrt{9a^2 -4ab + 4b^2}}{2a} 
+				\eea
+			\end{multianswer}
+		
+			% Part 3
+			\item Suponha que, no caso do item (b), o elétron está no estado fundamental.
+			Quase instantaneamente, o campo roda de $120^\circ$ e passa a apontar na direção
+			rotulada como “2”. Calcule a probabilidade do elétron permanecer no estado fundamental.
+			\begin{multianswer}[true]
+				Nesse caso, o estado 2 ocupa o antigo estado 1, o estado 3 ocupa o antigo 2 e o estado 1 o antigo 3. Assim,
+				\be
+					p = \l| \braket{} \r|^2
+				\ee
 			\end{multianswer}
 			
 		\end{exercises}
 	\end{exercise}
-
-
+	
+	\begin{exercise}
+		Para cada estado $\ket{\psi}$ de dois spins $1/2$ abaixo, escrito em termos dos autovetores de $S_z$, diga se o estado é emaranhado ou não (justificando sua 		resposta), calcule seu operador estado (matriz densidade) explicitamente, e calcule
+		o operador estado reduzido referente à particula 1 (na notação $\ket{1, 2}$).
+		\begin{enumerate}
+			\item $ \ket{\psi} = \f{1}{\sqrt{2}} (\ket{+-} - \ket{-+}) $
+			\begin{multianswer}
+				Logo de cara vemos que esse é um estado de Bell, um estado que é notoriamente emaranhado. Isso é verdade, pois é impossível escrever esse estado como um produto tensorial disjunto de dois estados de $\ket{1}$ e de $\ket{2}$. O operador de densidade é
+				\bea
+					\rho &=& \ket{\psi}\bra{\psi} \\
+						&=& \f{1}{2} (\ket{+-} - \ket{-+}) (\bra{+-} - \bra{-+}) \\
+						&=& \f{1}{2}\Big( \ket{+-}\bra{+-} - \ket{+-}\bra{-+} - \ket{-+}\bra{+-} + \ket{-+}\bra{-+} \Big) \\
+						&\dot{=}& \f{1}{2}
+						\begin{pmatrix}
+							0 & 0 & 0 & 0 \\
+							0 & 1 & -1 & 0 \\
+							0 & -1 & 1 & 0 \\
+							0 & 0 & 0 & 0 \\
+						\end{pmatrix}
+				\eea
+				onde usamos a sequência $\{ \ket{++}, \ket{+-}, \ket{-+}, \ket{--} \}$. Tomando o traço parcial 
+				\be
+					\rho_1 = \tr_2(\rho) = \f{1}{2}
+					\begin{pmatrix}
+						1 & 0 \\
+						0 & 1 \\
+					\end{pmatrix}
+				\ee
+			\end{multianswer}
+			
+			\item $ \ket{\psi} = \ket{++} $
+			\begin{multianswer}
+				O estado é claramente não emaranhado, pois podemos escrevê-lo como 
+				\be
+					\ket{\psi} = \ket{+} \otimes \ket{+}
+				\ee
+				Seu operador de estado é
+				\be
+					\rho = \ket{++}\bra{++} = 
+					\begin{pmatrix}
+						1 & 0 & 0 & 0 \\
+						0 & 0 & 0 & 0 \\
+						0 & 0 & 0 & 0 \\
+						0 & 0 & 0 & 0 \\
+					\end{pmatrix}
+				\ee
+				e o operador de estado reduzido é
+				\be
+					\rho_1 = \tr_2\rho = 
+					\begin{pmatrix}
+						1 & 0 \\
+						0 & 0 \\
+					\end{pmatrix}
+				\ee
+			\end{multianswer}
+			
+			\item $ \ket{\psi} = \f{1}{5\sqrt{2}} \big( \ket{++} + 3i\ket{+-} - 2i\ket{-+} + 6\ket{--} \big) $
+			\begin{multianswer}[true]
+				Podemos reescrever esse estado como
+				\be
+					\ket{\psi} = \f{1}{5\sqrt{2}} \big( \ket{+} - 2i\ket{-}\big) \otimes \big( \ket{+} + 3i \ket{-}\big) 
+				\ee
+				de modo que vemos que ele não é emaranhado. Seu operador de estado é
+				\bea
+					\rho &=& \f{1}{50}   \\
+						&=&  \frac{1}{50} 
+					\begin{pmatrix}
+						1 & -3i & 2i & 6 \\
+						3i & 9 & -6i & -18i \\
+						-2i & 6i & 4 & -12i \\
+						6 & -18i & 12i & 36 \\
+					\end{pmatrix}					
+				\eea
+				Tomando o traço parcial
+				\be
+					\rho_1 = \f{1}{50} 
+					\begin{pmatrix}
+						10 & -16i \\
+						-20i & 40 \\
+					\end{pmatrix} 
+					= \f{1}{25} 
+					\begin{pmatrix}
+						5 & -8i \\
+						-10i & 20 \\
+					\end{pmatrix} 
+				\ee
+			\end{multianswer}
+		\end{enumerate}
+	\end{exercise}
+	
+	\begin{exercise}
+		Considere um ensemble estatístico de sistemas de um spin-$1/2$. 
+		\begin{exercises}
+			\item Considere que o ensemble é um estado puro, apontando em uma direção $\hat{n}$ (ver figura), e descrito por um ket $\alpha$. Suponha que os valores esperados $\braket{S_x}$ e $\braket{S_z}$ são conhecidos, mas apenas o sinal de $\braket{S_y}$ é conhecido. Construa explicitamente a matriz densidade $2\times 2$ que descreve o sistema.
+			\begin{multianswer}
+				Basicamente precisamos aplicar essas condições dos valores médios e montar um sistema de equações que nos darão as restrições necessárias sobre o estado puro
+				\be
+					\ket{\psi} = \cos\l(\f{\beta}{2}\r)\ket{+} + e^{i\alpha}\sin\l(\f{\beta}{2}\r)\ket{-} 
+				\ee
+				Para $S_z$:
+				\be
+					\f{\hbar}{2}\l( \cos^2\l(\f{\beta}{2}\r) - \sin^2\l(\f{\beta}{2}\r)\r) = \f{\hbar}{2}\cos\beta = \braket{S_z}
+				\ee
+				Para $S_x$:
+				\bea
+					\braket{S_x} &=& \braket{\psi | S_x | \psi} \\
+							&=& \f{\hbar}{2} \braket{\psi \l| \l( \ket{+}\bra{-} + \ket{-}\bra{+} \r) \r| \psi} \\
+							&=& \f{\hbar}{2} \l( \cos\l(\f{\beta}{2}\r) e^{-i\alpha} \sin\l(\f{\beta}{2}\r) + \cos\l(\f{\beta}{2}\r)e^{i\alpha}\sin\l(\f{\beta}{2}\r) \r) \\
+							&=& \f{1}{2}\f{\hbar}{2} \sin(\beta) \l( e^{i\alpha} + e^{-i\alpha} \r)  \\
+							&=& \f{\hbar}{2} \sin\beta\cos\alpha
+				\eea
+				Para $S_y$:
+				\bea
+					\epsilon\braket{S_y} &=& \braket{\psi | S_y | \psi} \\
+					&=& \f{\hbar}{2} \braket{\psi \l| \l( -\ket{+}\bra{-} + \ket{-}\bra{+} \r) \r| \psi} \\
+					&=& \f{\hbar}{2} \l( -\cos\l(\f{\beta}{2}\r) e^{-i\alpha} \sin\l(\f{\beta}{2}\r) + \cos\l(\f{\beta}{2}\r)e^{i\alpha}\sin\l(\f{\beta}{2}\r) \r) \\
+					&=& \f{1}{2}\f{\hbar}{2} \sin(\beta) \l( e^{i\alpha} - e^{-i\alpha} \r)  \\
+					&=& \f{i\hbar}{2} \sin\beta\sin\alpha
+				\eea
+				onde $\epsilon=\pm 1$. Pela primeira,
+				\be
+					\beta = \acos\l( \f{2\braket{S_z}}{\hbar} \r)
+				\ee
+				Somando os quadrados da segunda e terceira expressões
+				\bea
+					\braket{S_x}^2 + \braket{S_y}^2 &=& \f{\hbar^2}{4} \sin^2\beta \l( \cos^2\alpha - \sin^2\alpha \r)   \\
+						&=& \f{\hbar^2}{4} \sin^2\beta \cos(2\alpha) \\
+					\alpha &=& \f{1}{2} \acos \l( \f{4(\braket{S_x}^2 + \braket{S_y}^2)}{\hbar^2\sin^2\beta} \r) \\
+						&=& \f{1}{2} \acos \l( \f{4(\braket{S_x}^2 + \braket{S_y}^2)}{\hbar^2\l( 1 - \f{4\braket{S_z}^2}{\hbar^2}\r)} \r) \\ 
+						&=& \f{1}{2} \acos \l( \f{\braket{S_x}^2 + \braket{S_y}^2}{\f{\hbar^2}{4} - \braket{S_z}^2} \r) \\
+				\eea
+				Assim, fomos capazes de calcular $\alpha$ e  $\beta$ explicitamente em função apenas dos valores médios dados. A matriz de densidade geral é
+				\be
+					\rho = 
+					\begin{pmatrix}
+						\cos^2(\beta/2) & e^{i\alpha} \sin(\beta) / 2 \\
+						e^{-i\alpha}\sin(\beta) / 2 & \sin^2(\beta/2) \\
+					\end{pmatrix}
+				\ee
+				Notamos que 
+				\bea
+					\cos^2\l(\f{\beta}{2}\r) &=& \f{1}{2} + \f{\braket{S_z}}{\hbar} \\
+					\sin^2\l(\f{\beta}{2}\r) &=& \f{1}{2} - \f{\braket{S_z}}{\hbar} \\ 
+					\sin\beta &=& \sqrt{ 1 - \f{4\braket{S_z}^2}{\hbar^2}} \\
+					e^{\pm i\alpha} &=& \sqrt{\f{1}{2} + \f{1}{2} \f{\braket{S_x}^2 + \braket{S_y}^2}{\f{\hbar^2}{4} - \braket{S_z}^2}} \pm i \sqrt{\f{1}{2} - \f{1}{2} \f{\braket{S_x}^2 + \braket{S_y}^2}{\f{\hbar^2}{4} - \braket{S_z}^2}}
+				\eea
+			\end{multianswer}
+		
+			% Part 2
+			\item Considere agora que o ensemble é misturado, de uma maneira genérica (note
+			que não estamos dizendo que ele é o estado de máxima entropia!). Suponha agora
+			que os três valores médios $\braket{S_x}, \braket{S_y}, \braket{S_z}$ são todos conhecidos. Construa explicitamente a matriz densidade $2\times 2$ que descreve o sistema.
+			\begin{multianswer}[true]
+				
+			\end{multianswer}
+			
+		\end{exercises}
+	\end{exercise}
+	
+	
+	\begin{exercise}
+		Considere a seguinte matriz densidade de dois spins-$1/2$:
+		\be
+			\rho = \f{1}{8}\mathbb{I} + \f{1}{2} \ket{\Psi_-}\bra{\Psi_-}
+ 		\ee
+		onde $\ket{\Psi_-}$ é o estado singleto (i.e. o estado de spin total igual a zero). Suponhamos que medimos um dos spins ao longo de um eixo $a$ e o outro ao longo de um eixo $b$, em que $\hat{a}\cdot\hat{b}=\cos\theta$. Qual é a probabilidade (como função de $\theta$) de encontramos $\hbar/2$ para ambos spins nestas medidas?
+	\end{exercise}
+	\begin{answer}
+		Começamos notando que o estado de singleto é
+		\be
+			\ket{\Psi_-} = \f{1}{\sqrt{2}}\big( \ket{+-} - \ket{-+} \big)	
+		\ee
+		Em seguida, percebemos que calcular a probabilidades de $+\hbar/2$ em ambas as medidas é
+		\be
+			p_{++} = \tr( \ket{+}_a\ket{+}_b\bra{+}_a\bra{+}_b \rho)
+		\ee
+		Assim, sem perda de generalidade, vamos supor que $\hat{a}=\hat{z}$ e que $b$ mora no plano $x$-$z$. Então podemos escrever os kets em $b$ em função da base de $a$:
+		\be
+			\ket{+}_b = \cos\f{\theta}{2}\ket{+} + \sin\f{\theta}{2} \ket{-}, \quad \ket{-}_b = \sin\f{\theta}{2}\ket{+}  \cos{\theta}{2} \ket{-}
+		\ee
+		Portanto, o projetor se escreve:
+		\bea
+			P_{++} &=&  \ket{+}\l( \cos\f{\theta}{2}\ket{+} + \sin\f{\theta}{2} \ket{-}\r) \bra{+}\l(\cos\f{\theta}{2}\bra{+} + \sin\f{\theta}{2} \bra{-}\r) \\
+				&=& \cos^2\f{\theta}{2}\ket{++}\bra{++} + \sin\f{\theta}{2}\cos\f{\theta}{2} \ket{++}\bra{+-} + \sin\f{\theta}{2}\cos\f{\theta}{2} \ket{+-}\bra{++} + \sin^2\f{\theta}{2} \ket{+-}\bra{+-} \\
+				&=& \cos^2\f{\theta}{2}\ket{++}\bra{++} + \f{1}{2} \sin\theta \ket{++}\bra{+-} + \f{1}{2} \sin\theta\ket{+-}\bra{++} + \sin^2\f{\theta}{2} \ket{+-}\bra{+-}
+		\eea
+		Consequentemente, a probabilidade é
+		\bea
+			p_{++} &=& \tr{P_++}\rho) \\
+				&=& \f{1}{8} \tr(P_{++}) + \f{1}{2} \tr(P_{++}\ket{\Psi_-}\bra{\Psi_-}) \\
+				&=& \f{1}{8} \l( \cos^2\f{\theta}{2} + \sin^2\f{\theta}{2} \r) + \f{1}{2} \l( \f{1}{2} \l( \sin^2\f{\theta}{2} \r) \r) \\
+				&=& \f{1}{8} + \f{1}{4}\sin^2\l(\f{\theta}{2}\r)
+		\eea
+		
+		
+	\end{answer}
+	
 \end{document}
