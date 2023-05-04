@@ -102,6 +102,7 @@
 \DeclareMathOperator{\atan}{atan}
 \DeclareMathOperator{\cotan}{cotan}
 \DeclareMathOperator{\acos}{acos}
+\DeclareMathOperator{\asin}{asin}
 \DeclareMathOperator{\sech}{sech}
 \DeclareMathOperator{\csch}{csch}
 \DeclareMathOperator{\asinh}{asinh}
@@ -162,9 +163,9 @@
 				\ee
 				Achar os autovalores e vetores de uma matriz $3\times3$ é um processo matemático bem definido e metódico. Fazendo essa operação, obtemos
 				\bea
-					E_1 = E_0 + a + b, &\quad& \ket{1'} = -\ket{2} + \ket{3} \\
-					E_2 = E_0 - \f{1}{2}\l( a + \sqrt{9a^2 - 4ab + 4b^2}\r), &\quad& \ket{2'} = c_2\ket{1} +\ket{2} + \ket{3} \\
-					E_3 = E_0 + \f{1}{2}\l( -a + \sqrt{9a^2 - 4ab + 4b^2}\r), &\quad& \ket{3'} = c_c\ket{1} +\ket{2} + \ket{3}
+					E_1 = E_0 + a + b, &\quad& \ket{1'} = \f{-\ket{2} + \ket{3}}{\sqrt{2}} \\
+					E_2 = E_0 - \f{1}{2}\l( a + \sqrt{9a^2 - 4ab + 4b^2}\r), &\quad& \ket{2'} = \f{c_2\ket{1} +\ket{2} + \ket{3}}{\sqrt{2+c_2^2}} \\
+					E_3 = E_0 + \f{1}{2}\l( -a + \sqrt{9a^2 - 4ab + 4b^2}\r), &\quad& \ket{3'} = \f{c_3\ket{1} +\ket{2} + \ket{3}}{\sqrt{2+c_3^2}}
 				\eea
 				onde
 				\bea
@@ -177,10 +178,12 @@
 			Quase instantaneamente, o campo roda de $120^\circ$ e passa a apontar na direção
 			rotulada como “2”. Calcule a probabilidade do elétron permanecer no estado fundamental.
 			\begin{multianswer}[true]
-				Nesse caso, o estado 2 ocupa o antigo estado 1, o estado 3 ocupa o antigo 2 e o estado 1 o antigo 3. Assim,
-				\be
-					p = \l| \braket{} \r|^2
-				\ee
+				Nesse caso, o estado 2 ocupa o antigo estado 1, o estado 3 ocupa o antigo 2 e o estado 1 o antigo 3. Notamos que o estado fundamental original é $\ket{2'}$ e o novo estado fundamental é $\ket{3'}$. Portanto
+				\bea
+					p &=& \l| \braket{3' | 2'} \r|^2 \\
+						&=& \l(\f{2 + 2c_2c_3}{\sqrt{(2+c_2^2)(2+c_3^2)}}\r)^2 \\
+						&=& \f{4 + 8c_2c_3 + 4c_2^2c_3^2}{4 + 2(c_2^2+c_3^2)+c_2^2c_3^2}
+				\eea
 			\end{multianswer}
 			
 		\end{exercises}
@@ -275,8 +278,10 @@
 		\end{enumerate}
 	\end{exercise}
 	
+	
 	\begin{exercise}
 		Considere um ensemble estatístico de sistemas de um spin-$1/2$. 
+		
 		\begin{exercises}
 			\item Considere que o ensemble é um estado puro, apontando em uma direção $\hat{n}$ (ver figura), e descrito por um ket $\alpha$. Suponha que os valores esperados $\braket{S_x}$ e $\braket{S_z}$ são conhecidos, mas apenas o sinal de $\braket{S_y}$ é conhecido. Construa explicitamente a matriz densidade $2\times 2$ que descreve o sistema.
 			\begin{multianswer}
@@ -324,13 +329,52 @@
 						e^{-i\alpha}\sin(\beta) / 2 & \sin^2(\beta/2) \\
 					\end{pmatrix}
 				\ee
-				Notamos que 
+				que possui determinante notoriamente igual a 0, típico de estados puros, como esperado. Notamos que o que temos até agora é
 				\bea
 					\cos^2\l(\f{\beta}{2}\r) &=& \f{1}{2} + \f{\braket{S_z}}{\hbar} \\
 					\sin^2\l(\f{\beta}{2}\r) &=& \f{1}{2} - \f{\braket{S_z}}{\hbar} \\ 
 					\sin\beta &=& \sqrt{ 1 - \f{4\braket{S_z}^2}{\hbar^2}} \\
 					e^{\pm i\alpha} &=& \sqrt{\f{1}{2} + \f{1}{2} \f{\braket{S_x}^2 + \braket{S_y}^2}{\f{\hbar^2}{4} - \braket{S_z}^2}} \pm i \sqrt{\f{1}{2} - \f{1}{2} \f{\braket{S_x}^2 + \braket{S_y}^2}{\f{\hbar^2}{4} - \braket{S_z}^2}}
 				\eea
+				Podemos melhorar isso. Subtraindo os quadrados da segunda e terceira expressões:
+				\bea
+					\braket{S_x}^2 - \braket{S_y}^2 &=& \f{\hbar^2}{4} \sin^2\beta \l( \cos^2\alpha + \sin^2\alpha \r)   \\
+						&=& \f{\hbar^2}{4}\sin^2\beta \\
+						\sin\beta &=& \f{2}{\hbar} \sqrt{\braket{S_x}^2 - \braket{S_y}^2} 
+				\eea
+				Ora, usando isso:
+				\be
+					\alpha = \f{1}{2}\acos\l( \f{\braket{S_x}^2 + \braket{S_y}^2}{\braket{S_x}^2 - \braket{S_y}^2} \r)
+				\ee
+				Logo,
+				\be
+					e^{\pm i\alpha} = \f{1}{\sqrt{2}} \sqrt{ 1 + \f{\braket{S_x}^2 + \braket{S_y}^2}{\braket{S_x}^2 - \braket{S_y}^2} } \pm i \f{1}{\sqrt{2}} \sqrt{ 1 - \f{\braket{S_x}^2 + \braket{S_y}^2}{\braket{S_x}^2 - \braket{S_y}^2} }
+				\ee
+				Portanto, agora temos uma expressão elegante para o produto:
+				\be
+					e^{\pm i\alpha}\sin\beta = \f{2}{\hbar} \l( \braket{S_x} \mp \lvert\braket{S_y}\rvert \r)
+				\ee 
+				Agora podemos escrever de maneira explícita a matrix:
+				\be
+					\rho = \f{1}{2} 
+					\begin{pmatrix}
+						1 & 0 \\
+						0 & 1 \\ 
+					\end{pmatrix}
+					+ \f{1}{\hbar} 
+					\begin{pmatrix}
+						\braket{S_z} & \braket{S_x} - \lvert\braket{S_y}\rvert \\
+						\braket{S_x} +\lvert\braket{S_y}\rvert & -\braket{S_z} \\
+					\end{pmatrix}
+				\ee
+				com a restrição de que $\det\rho=0$. Ela é satisfeita quando
+				\bea
+					\hbar\det\rho &=& \l( \f{\hbar}{2} + z\r)\l( \f{\hbar}{2} - z\r) - (x-y)(x+y) \\
+						&=& \f{\hbar^2}{4} - z^2 - x^2 + y^2 \\
+						&=& 0 \\
+						\f{\hbar^2}{4} &=& \braket{S_x}^2 - \lvert\braket{S_y}^2\rvert + \braket{S_z}^2
+				\eea
+				
 			\end{multianswer}
 		
 			% Part 2
@@ -338,6 +382,35 @@
 			que não estamos dizendo que ele é o estado de máxima entropia!). Suponha agora
 			que os três valores médios $\braket{S_x}, \braket{S_y}, \braket{S_z}$ são todos conhecidos. Construa explicitamente a matriz densidade $2\times 2$ que descreve o sistema.
 			\begin{multianswer}[true]
+				Sabemos que
+				\be
+					\braket{S_x} = \tr(\rho S_x), \quad \braket{S_y} = \tr(\rho S_y), \quad \braket{S_z} = \tr(\rho S_z)
+				\ee
+				Ademais
+				\be
+					\rho = \f{1}{2}\l( \mathbb{I} + \vec{b}\cdot\vec{\sigma} \r)
+				\ee
+				Como mostramos em sala, vale que
+				\be
+					\braket{\vec{S}} = \f{\hbar}{2} \vec{b}
+				\ee
+				Portanto,
+				\be
+					\rho = \f{1}{2} \l( \mathbb{I} + \f{2\braket{S_x}}{\hbar}\sigma_x + \f{2\braket{S_y}}{\hbar}\sigma_y + \f{2\braket{S_z}}{\hbar}\sigma_z \r)
+				\ee
+				Abrindo de maneira explícita:
+				\be
+					\rho = \f{1}{2} 
+						\begin{pmatrix}
+							1 & 0 \\
+							0 & 1 \\ 
+						\end{pmatrix}
+						+ \f{1}{\hbar} 
+						\begin{pmatrix}
+							\braket{S_z} & \braket{S_x} - i\braket{S_y} \\
+							\braket{S_x} +i\braket{S_y} & -\braket{S_z} \\
+						\end{pmatrix}
+				\ee
 				
 			\end{multianswer}
 			
@@ -378,8 +451,107 @@
 				&=& \f{1}{8} \l( \cos^2\f{\theta}{2} + \sin^2\f{\theta}{2} \r) + \f{1}{2} \l( \f{1}{2} \l( \sin^2\f{\theta}{2} \r) \r) \\
 				&=& \f{1}{8} + \f{1}{4}\sin^2\l(\f{\theta}{2}\r)
 		\eea
-		
-		
 	\end{answer}
+
+	\begin{exercise}
+		Suponha que um sistema de dois níveis tem estados $\ket{+}$ e $\ket{-}$, análogo ao spin-$1/2$. 
+		\begin{exercises}
+			\item Vamos considerar a chamada interação de beam splitter (BS). Suponha que o
+			sistema é sujeito a um Hamiltoniano $H=\varepsilon\sigma_y$ por um tempo $\tau$ tal que $\varepsilon\tau/\hbar = \pi/4$. Mostre que se o sistema estava inicialmente em $\ket{+}$ ou $\ket{-}$, então ele é levado (a menos de uma fase global) para os estados:
+			\be
+				\ket{+} \to \f{\ket{+}+\ket{-}}{\sqrt{2}}, \quad\quad \ket{-} \to \f{\ket{+} - \ket{-}}{\sqrt{2}}
+			\ee
+			\begin{multianswer}
+				Primeiramente, notamos que a evolução temporal é dada por
+				\be
+					U(t) = e^{-iHt/\hbar}
+				\ee
+				Além disso, sabemos que
+				\bea
+					\ket{+}_y &=& \f{\ket{+} + i\ket{-}}{\sqrt{2}} \\
+					\ket{-}_y &=& \f{\ket{+} - i\ket{-}}{\sqrt{2}} 
+				\eea
+				Assim, somando e subtraindo essas equações, obtemos:
+				\bea
+					\ket{+} &=& \f{\ket{+}_y + \ket{-}_y}{\sqrt{2}} \\
+					\ket{-} &=& -i \f{\ket{+}_y - \ket{-}_y}{\sqrt{2}} 
+				\eea	
+				onde lembramos que a ausência de índices implica que os vetores apontam na direção $\hat{z}$. Agora podemos fazer a projeção temporal:
+				\bea
+					e^{-iH\tau/\hbar}\ket{+} &=& e^{-i\pi\sigma_y/4} \l( \f{\ket{+}_y + \ket{-}_y}{\sqrt{2}}\r) \\
+						&=& \f{1}{\sqrt{2}} \l( e^{-i\pi/4}\ket{+}_y + e^{i\pi/4}\ket{-}_y \r) \\
+						&=& \f{1}{2} \l( \ket{+}_y - i\ket{+}_y + \ket{-}_y +i\ket{-}_y \r) \\
+						&=& \f{1}{\sqrt{2}} \l( \f{\ket{+}_y + \ket{-}_y}{\sqrt{2}} -i \f{ \ket{+}_y - \ket{-}_y}{\sqrt{2}} \r) \\
+						&=& \f{\ket{+} + \ket{-}}{\sqrt{2}} 
+				\eea
+				que é a evolução temporal desejada. Para o outro vetor, segue processo análogo:
+				\bea
+					e^{-iH\tau/\hbar}\ket{-} &=& -i e^{-i\pi\sigma_y/4} \l( \f{\ket{+}_y - \ket{-}_y}{\sqrt{2}}\r) \\	
+						&=& -\f{i}{\sqrt{2}} \l( e^{-i\pi/4}\ket{+}_y - e^{i\pi/4}\ket{-}_y \r) \\
+						&=& -\f{i}{2} \l( \ket{+}_y - i\ket{+}_y - \ket{-}_y - i\ket{-}_y \r) \\
+						&=& \f{1}{2} \l( -i\ket{+}_y - \ket{+}_y + i\ket{-}_y - \ket{-}_y \r) \\
+						&=& \f{1}{\sqrt{2}} \l( - \f{\ket{+}_y + \ket{-}_y}{\sqrt{2}} -i \f{\ket{+}_y - \ket{-}_y}{\sqrt{2}} \r) \\
+						&=& \f{-\ket{+} + \ket{-}}{\sqrt{2}} 
+				\eea
+				* corrigir sinal
+			\end{multianswer}
+			
+			% Part 2
+			\item Agora, consideremos a chamada phase shift gate (PS). Suponha agora que o
+			sistema é sujeito a um Hamiltoniano $H=\varepsilon\sigma_z$ por um tempo $\tau$ tal que $\varepsilon\tau/\hbar = \phi/2$. Mostre que isso leva os vetores (a menos de uma fase global) em
+			\be
+				\ket{+} \to \ket{+}, \quad\quad \ket{-} \to e^{i\phi}\ket{-}
+			\ee
+			\begin{multianswer}
+				Como o hamiltoniano possui autoestados $\ket{+}, \ket{-}$, não precisamos fazer nenhuma projeção de spin, de modo que é imediato o resultado. Vejamos
+				\bea
+					e^{-iH\tau/\hbar}\ket{+} &=& e^{-i\sigma_z\phi/2} \ket{+} \\
+						&=& e^{-i\phi/2} \ket{+}
+				\eea
+				Já o outro:
+				\bea
+					e^{-iH\tau/\hbar}\ket{-} &=& e^{-i\sigma_z\phi/2} \ket{-} \\
+					&=& e^{i\phi/2} \ket{-} 
+				\eea
+				Como fazes globais não afetam medições, podemos multiplicar ambos os estados por $e^{i\phi/2}$ para obter os estados desejados
+				\be
+					\ket{+}, \quad\quad e^{i\phi}\ket{-}
+				\ee
+				a menos de alguma fase global. 
+			\end{multianswer}
+			
+			% Part 3
+			\item Considere um sistema inicialmente preparado em $\ket{\Psi_0}=\ket{+}$. Suponha agora que esse sistema evolui por um beam splitter, seguido de um phase shift, seguido de outro beam splitter, evoluindo até um estado $\ket{\Psi}$. Note que isto é possível em laboratório, usando exatamente um sistema de spin-$1/2$ e um campo magnético dependente do tempo. Calcule o estado final  $\ket{\Psi}$.
+			\begin{multianswer}
+				Vamos calcular diretamente passo-a-passo, começando do começo:
+				\bea
+					\ket{+} &\to_{BS}& \f{\ket{+} + \ket{-}}{\sqrt{2}} \\
+						&\to_{PS}& \f{\ket{+} + e^{i\phi}\ket{-}}{\sqrt{2}} \\
+						&\to_{BS}& \f{1}{\sqrt{2}} \l( \f{\ket{+} + \ket{-}}{\sqrt{2}}\r) + \f{e^{i\phi}}{\sqrt{2}} \l( \f{\ket{+} - \ket{-}}{\sqrt{2}} \r) \\
+						&=& \f{1}{2} \l( \l(1 + e^{i\phi} \r)\ket{+} + \l(1 - e^{i\phi} \r) \ket{-} \r)
+				\eea
+				que é o estado final desejado.				
+			\end{multianswer}
+			
+			% Part 4
+			\item Mostre que a probabilidade $P_1$ de encontrar o sistema no estado $\ket{-}$ depois da evolução é dada por
+			\be
+				P_- = \l| \braket{- | \psi} \r|^2 = \sin^2(\phi/2)
+			\ee
+			Essa é a ideia principal por trás da interferometria de Ramsey: a probabilidade
+			oscila dependendo da fase do phase shift.
+			\begin{multianswer}[true]
+				Ora, a probabilidade é trivial de se calcular nesse caso:
+				\bea
+					P_- &=& \l| 1-e^{i\phi} \r|^2 \\
+						&=& \l| (1-\cos\phi) -i\sin\phi \r|^2 \\
+						&=& (1-\cos\phi)^2 + \sin^2\phi \\
+						&=& 1 - 2\cos\phi + \cos^2\phi + \sin^2\phi \\
+						&=& 2 - 2\cos\phi \\
+						&=& \sin^2(\phi/2)
+				\eea
+			\end{multianswer}
+		\end{exercises}		
+	\end{exercise}
 	
 \end{document}
