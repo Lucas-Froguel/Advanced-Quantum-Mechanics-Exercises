@@ -157,19 +157,20 @@
 				H = 
 				\begin{pmatrix}
 					E_0 - b & -a & -a \\
-					-a & E_0 + b & -a \\
-					-a & -a & E_0 + b \\
+					-a & E_0 & -a \\
+					-a & -a & E_0 \\
 				\end{pmatrix}
 				\ee
 				Achar os autovalores e vetores de uma matriz $3\times3$ é um processo matemático bem definido e metódico. Fazendo essa operação, obtemos
 				\bea
 					E_1 = E_0 + a + b, &\quad& \ket{1'} = \f{-\ket{2} + \ket{3}}{\sqrt{2}} \\
-					E_2 = E_0 - \f{1}{2}\l( a + \sqrt{9a^2 - 4ab + 4b^2}\r), &\quad& \ket{2'} = \f{c_2\ket{1} +\ket{2} + \ket{3}}{\sqrt{2+c_2^2}} \\
-					E_3 = E_0 + \f{1}{2}\l( -a + \sqrt{9a^2 - 4ab + 4b^2}\r), &\quad& \ket{3'} = \f{c_3\ket{1} +\ket{2} + \ket{3}}{\sqrt{2+c_3^2}}
+					E_2 = E_0 - \f{1}{2}\l( a + b + \sqrt{9a^2 - 4ab + 4b^2}\r), &\quad& \ket{2'} = \f{c_2\ket{1} +\ket{2} + \ket{3}}{\sqrt{2+c_2^2}} \\
+					E_3 = E_0 + \f{1}{2}\l( -a - b + \sqrt{9a^2 - 4ab + 4b^2}\r), &\quad& \ket{3'} = \f{c_3\ket{1} +\ket{2} + \ket{3}}{\sqrt{2+c_3^2}}
 				\eea
 				onde
 				\bea
-					c_2 &=& - \f{a -2b - \sqrt{9a^2 -4ab + 4b^2}}{2a} \\					c_2 &=& - \f{a -2b + \sqrt{9a^2 -4ab + 4b^2}}{2a} 
+					c_2 &=& - \f{a -b - \sqrt{9a^2 -4ab + 4b^2}}{2a} \\
+					c_2 &=& - \f{a -b + \sqrt{9a^2 -4ab + 4b^2}}{2a} 
 				\eea
 			\end{multianswer}
 		
@@ -178,7 +179,7 @@
 			Quase instantaneamente, o campo roda de $120^\circ$ e passa a apontar na direção
 			rotulada como “2”. Calcule a probabilidade do elétron permanecer no estado fundamental.
 			\begin{multianswer}[true]
-				Nesse caso, o estado 2 ocupa o antigo estado 1, o estado 3 ocupa o antigo 2 e o estado 1 o antigo 3. Notamos que o estado fundamental original é $\ket{2'}$ e o novo estado fundamental é $\ket{3'}$. Portanto
+				Podemos ver que estado 2 ocupa o antigo estado 1, o estado 3 ocupa o antigo 2 e o estado 1 o antigo 3. Notamos que o estado fundamental original é $\ket{2'}$ e o novo estado fundamental é $\ket{3'}$. Portanto
 				\bea
 					p &=& \l| \braket{3' | 2'} \r|^2 \\
 						&=& \l(\f{2 + 2c_2c_3}{\sqrt{(2+c_2^2)(2+c_3^2)}}\r)^2 \\
@@ -491,9 +492,11 @@
 						&=& -\f{i}{2} \l( \ket{+}_y - i\ket{+}_y - \ket{-}_y - i\ket{-}_y \r) \\
 						&=& \f{1}{2} \l( -i\ket{+}_y - \ket{+}_y + i\ket{-}_y - \ket{-}_y \r) \\
 						&=& \f{1}{\sqrt{2}} \l( - \f{\ket{+}_y + \ket{-}_y}{\sqrt{2}} -i \f{\ket{+}_y - \ket{-}_y}{\sqrt{2}} \r) \\
-						&=& \f{-\ket{+} + \ket{-}}{\sqrt{2}} 
+						&=& \f{-\ket{+} + \ket{-}}{\sqrt{2}} \\
+						&=& e^{i\pi} \f{\ket{+} - \ket{-}}{\sqrt{2}} \\
+						&=& \f{\ket{+} - \ket{-}}{\sqrt{2}} 
 				\eea
-				* corrigir sinal
+				onde ignoramos uma fase global. 
 			\end{multianswer}
 			
 			% Part 2
