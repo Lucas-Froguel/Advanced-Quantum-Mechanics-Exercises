@@ -333,7 +333,7 @@
 			\hat{X} = X_1 - X_2, \quad\quad \hat{P} = \f{m_2P_1 - m_1P_2}{m_1 + m_2}
 		\ee
 		\begin{exercises}
-			\item Calculate the commutators$[X, P]$ and $[\hat{X}, \hat{P}]$ and show that they equal zero.
+			\item Calculate the commutators$[X, \hat{P}]$ and $[\hat{X}, P]$ and show that they equal zero.
 			\begin{multianswer}
 				We note that
 				\be
@@ -576,6 +576,8 @@
 		with eigenvalue $m$. Here $\hat{n}$ is the unit vector in the direction $(\theta, \phi)$. Hint: adapt (8.29).		
 	\end{exercise}
 	\begin{answer}
+		First of all, we expect $U(\mathcal{R})\ket{jm}$ to be an eigenvector of $\vec{J}\cdot\hat{n}$ because the first term is the ket $\ket{jm}$ along the $(\theta, \phi)$ direction and the second is the momentum operator projected in the $\hat{n}$ direction, however we see that $\hat{n}$ points along the $(\theta, \phi)$ direction. As $\ket{jm}$ is an eigenket of $\vec{J}$, it is natural to expect their projections along the same axis to also be a pair of eigenket and operator as well. Let us show this mathematically.
+		
 		Equation (10.30) reads
 		\be
 			\mathcal{R}(\theta, \phi) = \mathcal{R}_z(\phi)\mathcal{R}_y(\theta)
@@ -584,7 +586,6 @@
 		\be
 			\mathcal{R}_{\hat{n}(\phi)}(\theta) = \mathcal{R}_z(\phi)\mathcal{R}_y(\theta)\mathcal{R}_z(-\phi)
 		\ee
-		
 	\end{answer}
 	
 	
