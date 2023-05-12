@@ -1,0 +1,591 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage[mathscr]{euscript}
+\usepackage{array}
+\usepackage[thinlines]{easytable}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage[margin=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage[portuguese]{babel}
+\usepackage{braket}
+\usepackage{thmtools} 
+\usepackage{hyperref}
+\usepackage{environ}
+\usepackage{enumitem}
+\usepackage[backend=biber, style=numeric]{biblatex} %Imports biblatex package
+\addbibresource{references.bib} %Import the bibliography file
+\usetikzlibrary{angles,quotes}
+
+\usepackage{lipsum} % Pode tirar esse :D
+
+\graphicspath{.Images/}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+	pdftitle={Quântica Avançada - L4 - Lucas Froguel}
+}
+
+
+\def\be{\begin{equation}}
+	\def\ee{\end{equation}}
+\def\bee{\begin{equation*}}
+	\def\eee{\end{equation*}}
+\def\bea{\begin{eqnarray*}}
+	\def\eea{\end{eqnarray*}}
+\def\beaa{\begin{eqnarray}}
+	\def\eeaa{\end{eqnarray}}
+
+\def\f{\frac}
+\def\del{\partial}
+
+\def\R{\mathbb{R}}
+\def\K{\mathbb{K}}
+\def\C{\mathbb{C}}
+\def\I{\mathbb{I}}
+\def\Z{\mathbb{Z}}
+\def\Q{\mathbb{Q}}
+\def\N{\mathbb{N}}
+
+\def\cd{\cdot}
+
+\def\v#1{{\boldsymbol{#1}}}
+\def\ve#1{\hat{\boldsymbol#1}}
+
+\def\l{\left}
+\def\r{\right}
+\def\la{\l\langle}
+\def\ra{\r\rangle}
+\def\div{\nabla\cdot}
+\def\curl{\nabla\times}
+\def\grad{\nabla}
+\def\lap{\nabla^2}
+
+\def\s{\quad}
+\def\ss{\qquad}
+\def\infi{\infty}
+\def\p{\partial}
+\def\u{\cup}%union of two sets
+\def\i{\cap}%intersection of two sets
+\def\ds{\oplus}
+
+
+
+\newtheorem{exercise}{Exercise}
+\newtheorem{partinner}{Part}[exercise]
+
+\newlist{exercises}{enumerate}{1}
+\setlist[exercises]{wide = 0pt, listparindent=\parindent,labelsep = 0pt,leftmargin =\labelwidth}
+\setlist[exercises, 1]{label =\itshape \bfseries Part~\arabic*.\; }
+
+\newenvironment{answer}{\noindent\textbf{\textit{Answer.}} \normalfont }{\par\noindent\rule{\textwidth}{0.4pt}}
+\NewEnviron{multianswer}[1][false]{%
+	\ifthenelse{\equal{#1}{true}}%
+	{\def\rulewidth{\textwidth}}%
+	{\def\rulewidth{0.7\textwidth}}%
+	\\ \noindent\textbf{\textit{Answer.}} \normalfont%
+	\BODY%
+	\par\noindent\rule{\rulewidth}{0.1pt}%
+}
+
+
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+
+\DeclareMathOperator{\atan}{atan}
+\DeclareMathOperator{\cotan}{cotan}
+\DeclareMathOperator{\acos}{acos}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\asinh}{asinh}
+\DeclareMathOperator{\atanh}{atanh}
+\DeclareMathOperator{\acoth}{acoth}
+\DeclareMathOperator{\acosh}{acosh}
+\DeclareMathOperator{\acsch}{acsch}
+\DeclareMathOperator{\asech}{asech}
+\DeclareMathOperator{\D}{D}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Res}{Res}
+
+\title{Mecânica Quântica Avançada \\ Lista 4}
+\author{Lucas Froguel \\ IFT}
+\date{}
+
+\begin{document}
+	\maketitle
+	\listoftheorems[title={List of Exercises}]
+	
+	\begin{exercise}[6.5.2 - Rotation and $SU(2)$]
+		The $SU(2)$ group is the group of $2\times 2$ unitary matrices of unit determinant.
+		\begin{exercises}
+			\item Show that if $U\in SU(2)$, then $U$ has the form
+			\be
+				U = 
+				\begin{pmatrix}
+					a & b \\
+					-b^* & a^* \\
+				\end{pmatrix}, \quad |a|^2 + |b|^2 = 1
+			\ee
+			\begin{multianswer}
+				Generically, we must have 
+				\be
+					U = 
+					\begin{pmatrix}
+						a & b \\
+						c & d \\
+					\end{pmatrix}
+				\ee
+				First of all, being unitary means that $U^{-1}=U^\dagger$. That means
+				\be
+					\begin{pmatrix}
+						a & b \\
+						c & d \\
+					\end{pmatrix}
+					\begin{pmatrix}
+						a^* & c^* \\
+						b^* & d^* \\
+					\end{pmatrix}
+					=
+					\begin{pmatrix}
+						1 & 0 \\
+						0 & 1 \\
+					\end{pmatrix}
+				\ee
+				This leads to four equations:
+				\be
+					\begin{cases}
+						|a|^2 + |b|^2 = 1 \\
+						ac^* + bd^* = 0 \\
+						a^*c + b^*d= 0 \\
+						|c|^2 + |d|^2 = 1
+					\end{cases}	
+				\ee
+				Moreover, the unit determinant yields the last condition
+				\be
+					ad - bc = 1 
+				\ee
+				Using this equation in the second equation of the system multiplied by $d$ we have:
+				\bea
+					adc^* + bdd^* &=& 0 \\
+					(1 + bc)c^* + b|d|^2 &=& 0 \\
+					c^* + b|c|^2 + b|d^2| &=& 0 \\
+					c^* + b &=& 0 \\
+					c^* &=& -b \\
+					c &=& -b^*
+				\eea
+				Using this in the second equation:
+				\bea
+					ac^* + bd^* &=& 0 \\
+					-ab + bd^* &=& 0 \\
+					a &=& d^* \\
+					d &=& a^*
+				\eea
+				Thus, we can write the most general $SU(2)$ matrix as 
+				\be
+					U = \begin{pmatrix}
+						a & b \\
+						-b^* & a^* \\
+					\end{pmatrix}
+				\ee				
+			\end{multianswer}
+			
+			% Part 2 
+			\item  Show that in the neighborhood of the identity we can write
+			\be
+				U = I - i\tau, \quad \tau=\tau^\dagger
+			\ee
+			and that $\tau$ is expressed as a function of the Pauli matrices as
+			\be
+				\tau =  \f{1}{2} \sum_{i=1}^3 \theta_i\sigma_i, \quad \theta_i \to 0
+			\ee
+			\begin{multianswer}
+				In the neighborhood of the identity, we can write our (complex) coefficients as:
+				\be
+					a = x +iy \approx 1 + i\f{\theta_3}{2}
+				\ee
+				And
+				\be
+					b = w + iz \approx \f{1}{2}\l(\theta_2 + i\theta_1\r)
+				\ee
+				with $\theta_i\to0$. That is
+				\bea
+					U &=& \f{1}{2}
+					\begin{pmatrix}
+						2 +i\theta_3 & \theta_2 + i\theta_1 \\
+						-\theta_2 + i\theta_1 & 2-i\theta_3 \\
+					\end{pmatrix} \\
+					&=&
+					\begin{pmatrix}
+						1 & 0 \\
+						0 & 1 \\
+					\end{pmatrix}
+					+ \f{i}{2} \l(
+					\begin{pmatrix}
+						\theta_3 & 0 \\
+						0 & -\theta_3 \\
+					\end{pmatrix}
+					+
+					\begin{pmatrix}
+						0 & \theta_1 \\
+						\theta_1 & 0 \\
+					\end{pmatrix}
+					-i
+					\begin{pmatrix}
+						0 & \theta_2 \\
+						-\theta_2 & 0 \\
+					\end{pmatrix}
+					\r) \\
+					&=& I + \f{i}{2}\l( \sigma_3\theta_3 + \sigma_1\theta_1 + \sigma_2\theta_2 \r) \\
+					&=& I +i\tau 
+				\eea
+				as desired. 
+			\end{multianswer}
+			
+			% Part 3
+			\item We take $\theta=(\Sigma_i\theta_i^2)^{1/2}$ and $\theta_i=\theta\hat{n}$, where $\hat{n}$ is a unit vector. Assuming that the $\theta_i$ are finite, we define $U_{\hat{n}}(\theta)$ as 
+			\be
+				U_{\hat{n}}(\theta) = \lim_{N\to\infty} \l( U_{\hat{n}}\l(\f{\theta}{N}\r)\r)^N
+			\ee
+			Show that
+			\be
+				U_{\hat{n}}(\theta) = e^{-i\theta \vec{\sigma}\cdot\hat{n}/2}
+			\ee
+			Conversely, any $SU(2)$ matrix of this form. 
+			\begin{multianswer}
+				Since $\theta/N$ is small, we can taylor-expand $U$:
+				\be
+					U_{\hat{n}}\l(\f{\theta}{N}\r) = I - \f{i\theta}{2N}(\vec{\sigma}\cdot\hat{n})
+				\ee
+				Thus, we can use the well-known limit
+				\be
+					\lim_{n\to\infty}\l(1 + \f{1}{n} \r)^n = e
+				\ee
+				Thus,
+				\be
+					U_{\hat{n}}(\theta) = e^{-i\theta \vec{\sigma}\cdot\hat{n}/2}
+				\ee				
+			\end{multianswer}
+			
+			% Part 4
+			\item Let $\vec{V}$ be a vector in $\mathbb{R}^3$ and $\mathcal{V}$ be a Hermitian matrix of zero trace:
+			\be
+				\mathcal{V} = 
+				\begin{pmatrix}
+					V_z & V_x - iV_y \\
+					V_x + iV_y & -V_z
+				\end{pmatrix} 
+				= \vec{\sigma}\cdot\vec{V}
+			\ee
+			What is the determinant of $\mathcal{V}$? Let $\mathcal{W}$ be the matrix $U \in SU(2)$
+			\be
+				\mathcal{W} = U\mathcal{V}U^{-1}
+			\ee
+			Show that $\mathcal{W}$ has the form $\sigma\cdot\vec{\mathcal{W}}$ and that $\vec{\mathcal{W}}$ is derived from $\vec{\mathcal{V}}$ by a rotation. Has this property been completely proved at this stage? 
+			\begin{multianswer}
+				The determinant of $\mathcal{V}$ is simply
+				\be
+					\det\mathcal{V} = -V_z^2 - V_x^2 - V_y^2 = -\vec{V}^2
+				\ee
+				Now we note that 
+				\be
+					\det(U\mathcal{V}U^{-1}) = \det(\mathcal{V})
+				\ee
+				Hence, $\det\mathcal{V} = \det\mathcal{W}$, which shows that $\vec{W}^2 = \vec{V}^2$. Thus, $\vec{W}$ must be a rotation of $\vec{V}$. 
+				
+			\end{multianswer}
+			
+			% Part 5
+			\item We define $\vec{V}(\theta)$ as
+			\be
+				\vec{\sigma}\cdot\vec{V}(\theta) = U_{\hat{n}}(\theta)\l(\vec{\sigma}\cdot\vec{V}\r)U^{-1}_{\hat{n}}(\theta), \quad\quad \vec{V}(0) =\vec{V}
+			\ee
+			Show that
+			\be
+				\f{d\vec{V}(\theta)}{d\theta} = \hat{n}\times\vec{V}(\theta)
+			\ee
+			\begin{multianswer}[true]
+				Using the same argument of the last item, we can easily show that $\mathcal{W}=\vec{\sigma}\cdot\vec{W}$. Now, for the derivative:
+				\bea
+					\f{d\vec{\sigma}\cdot\vec{V}(\theta)}{d\theta} &=& \f{d}{d\theta} \l( e^{-i\theta \vec{\sigma}\cdot\hat{n}/2} \vec{\sigma}\cdot\vec{V} e^{i\theta \vec{\sigma}\cdot\hat{n}/2} \r) \\
+						&=& -\l(\f{i \hat{n}\cdot\vec{\sigma}}{2}\r)  \l( e^{-i\theta \vec{\sigma}\cdot\hat{n}/2} \vec{\sigma}\cdot\vec{V} e^{i\theta \vec{\sigma}\cdot\hat{n}/2} \r) + \f{i\vec{\sigma}\cdot\hat{n}}{2} \l( e^{-i\theta \vec{\sigma}\cdot\hat{n}/2} \vec{\sigma}\cdot\vec{V} e^{i\theta \vec{\sigma}\cdot\hat{n}/2} \r) \\
+						&=& -\f{i}{2} \l[ \vec{\sigma}\cdot\hat{n}, \vec{\sigma}\cdot \vec{V}(\theta)\r] \\
+						&=& \sigma\cdot (\hat{n}\times\vec{V})
+				\eea
+				which is the desired identity. Finally, there is a two to one correspondence between $SU(2)$ and $SO(3)$, because both $U_{\hat{n}}(\theta)$ and $-U_{\hat{n}}(\theta) = U_{\hat{n}}(\theta + 2\pi)$ point to the same matrix in $SO(3)$. 
+			\end{multianswer}
+		\end{exercises}
+	\end{exercise}
+	
+	\begin{exercise}[6.5.6 -  The center of mass and the reduced mass]
+		Let us take two particles of masses $m_1$ and $m_2$ moving on a line. We use $X_1$ and $X_2$ to denote their position operators and $P_1$ and $P_2$ to denote their momentum operators. The position and momentum operators of two different particles commute. We define the operators $X$ and $P$ as
+		\be
+			X = \f{m_1X_1 + m_2X_2}{m_1+m_2}, \quad\quad P = P_1 + P_2
+		\ee
+		and $\hat{X}$ and $\hat{P}$ as
+		\be
+			\hat{X} = X_1 - X_2, \quad\quad \hat{P} = \f{m_2P_1 - m_1P_2}{m_1 + m_2}
+		\ee
+		\begin{exercises}
+			\item Calculate the commutators$[X, P]$ and $[\hat{X}, \hat{P}]$ and show that they equal zero.
+			\begin{multianswer}
+				We note that
+				\be
+					[X_i, P_j] = i\hbar \delta_{ij}, \quad [X_i, X_j] = [P_i, P_j] = 0
+				\ee
+				So, with $k=1/(m_1+m_2)$,
+				\bea
+					[X, P] &=& k [m_1X_1 + m_2X_2, P_1 + P_2] \\
+						&=& k\l( m_1( [X_1, P_1] + [X_1, P_2]) + m_2 ([X_2, P_1] + [X_2, P_2]) \r) \\
+						&=& i\hbar
+				\eea
+				And
+				\bea
+					[X, \hat{P}] &=& k^2 \l( [m_1X_1 + m_2X_2, m_2P_1 - m_1P_2] \r) \\
+						&=& k^2 \l( m_1m_2[X_1, P_1] - m_1^2[X_1, P_2] + m_2^2[X_2, P_1] - m_1m_2[X_2, P_2] \r) \\
+						&=& 0 
+				\eea
+				At last
+				\bea
+					[\hat{X}, P] &=& [X_1 - X_2, P_1 + P_2] \\
+						&=& [X_1, P_1] + [X_1, P_2] - [X_2, P_1] - [X_2, P_2] \\
+						&=& i\hbar - i\hbar \\
+						&=& 0 
+				\eea
+			\end{multianswer}
+			
+			\item Write the hamiltonian
+			\be
+				H = \f{P_1^2}{2m_1} + \f{P_2^2}{2m_2} + V(X_1-X_2)
+			\ee
+			in terms of the new operators.
+			\begin{multianswer}
+				We begin noting that $V(X_1-X_2) = V(\hat{X})$. Moreover,
+				\bea
+					\hat{P}^2 &=& \f{m_2^2P_1^2 - m_1m_2P_1P_2 - m_1m_2 P_2P_1 + m_1^2P_2^2}{(m_1+m_2)^2} \\
+						&=& \f{m_2^2P_1^2 + m_1^2P_2^2}{(m_1+m_2)^2} - 2 \f{m_1m_2 P_1P_2}{(m_1+m_2)^2}
+				\eea
+				Now let us add to this $m_1m_2P^2/(m_1+m_2)^2$:
+				\bea
+					\hat{P}^2 +\f{m_1m_2P^2}{(m_1+m_2)^2} &=& \f{1}{(m_1+m_2)^2} \l( m_2^2P_1^2 + m_1^2P_2^2 + m_1m_2P_1^2 + m_1m_2P_2^2 \r) \\
+						&=& \f{1}{(m_1+m_2)^2} \l( m_2P_1^2(m_2 + m_1) + m_1P_2^2(m_1+m_2) \r) \\
+					\f{1}{2m_1m_2} \l(\hat{P}^2 +\f{m_1m_2P^2}{(m_1+m_2)^2}\r) &=& 
+							 \f{1}{(m_1+m_2)} \l( \f{P_1^2}{2m_1} +  \f{P_2^2}{2m_2} \r) \\ 
+					\f{\hat{P}^2}{2\mu} + \f{P^2}{2M} &=& \f{P_1^2}{2m_1} +  \f{P_2^2}{2m_2}
+				\eea
+				Hence, putting everything together:
+				\be
+					H = \f{\hat{P}^2}{2\mu} + \f{P^2}{2M} + V(\hat{X})
+				\ee
+				As we only make use of the squares of the $X$'s and $P$'s, that is, of their norms, we can generalize this result to three dimensions without almost any extra effort whatsoever. The differences are that $P_1P_2\to \vec{P}_1\cdot\vec{P}_2$ (still commute, as shown) and also $\hat{X} \to \vec{\hat{X}}$. Thus, we would have
+				\be
+					H = \f{\hat{P}^2}{2\mu} + \f{P^2}{2M} + V(\vec{\hat{X}})
+				\ee
+			\end{multianswer}
+			
+			% Part 3
+			\item The following example of an entangled state was used in the original article of Einstein, Podolsky,
+			and Rosen (Section 6.2.1). The wave function of two particles is written as
+			\be
+				\psi(x_1, x_2; p_1, p_2) = \delta(x_1 - x_2 - L) \delta( p_1 + p_2 )
+			\ee
+			where $L$ is a constant length. Why is it possible to write such a wave function? What is its physical interpretation? Measurement of $x_1$ determines $x_2$, and measurement of $p_1$ determines $p_2$. Develop the analogy with the example of Section 6.3.1.
+			\begin{multianswer}[true]
+				This wavefunction characterizes a pair of particles whose CM has a definite position and momentum. It is clear that because of this definiteness, measuring one position or one momentum gives away the value of the other. It is normalized, as must be. This wavefunction is the most "deterministic" allowed by the hamiltonian we derived in the last item. 
+			\end{multianswer}
+		\end{exercises}
+	\end{exercise}
+	
+	\begin{exercise}
+		So far we have considered Galilean boosts by a speed $v$ (in one spatial dimension) at $t = 0$ and obtained, by demanding that the expectation values of the
+		position $\hat{X}$, speed $d\hat{X}/dt$ and momentum $\hat{P}$ transform like their classical counter-parts, that the unitary operator $\hat{U}(v)$ that implements such boosts in a Hilbert space is given by (employing the active point of view of the boost)
+		\be
+			\hat{U}(v) = e^{imv\hat{X}/\hbar}
+		\ee
+		where $m$ is the mass of the particle. Show that this generalizes for an arbitrary time $t$ to
+		\be
+			\hat{U}(v) = e^{imv\hat{X}/\hbar}e^{-itv\hat{P}/\hbar}e^{-imv^2t/2\hbar} =  e^{-itv\hat{P}/\hbar}e^{imv\hat{X}/\hbar}e^{imv^2t/2\hbar}
+		\ee
+		Show also that the last result generalizes in three dimensions.	
+	\end{exercise}
+	\begin{answer}
+		If we consider the galilean transformation at a time $t$, we must ensure that
+		\bea
+			U^\dagger \hat{X}_i U &=& \hat{X}_i - \hat{V_0}t \\
+			U^\dagger \hat{P}_i U &=& \hat{P}_i - \hat{V_0}m_i
+		\eea
+		Let us assume
+		\be
+			U = U_XU_P
+		\ee
+		with $U_X$ depending only on $\hat{X}$ and $U_P$ only on $\hat{P}$. Then, we can write
+		\bea
+			U_P^\dagger \hat{X}_i U_P &=& \hat{X}_i - \hat{V_0}t \\
+			U_X^\dagger \hat{P}_i U_X &=& \hat{P}_i - \hat{V_0}m_i
+		\eea
+		from which follows that
+		\bea
+			[U_P, \hat{X}_i] &=& \hat{V}_0tU_P \\   
+			\text{and}\quad [U_P, \hat{X}_i] &=& \hat{V}_0 m_i U_X
+		\eea
+		Using Schrödinger's equation:
+		\bea
+			-i\hbar\f{\partial U_p}{\partial p_{ik}} &=& v_{0k} tU_P \\
+			i\hbar\f{\partial U_x}{\partial x_{ik}} &=& v_{0k} m_1U_x
+		\eea
+		We can easily integrate this equations to give:
+		\bea
+			U_p &=& c_p e^{p\hat{P}\cdot\vec{v_0}t/\hbar} \\
+			U_x &=& c_x e^{-(i/\hbar)\sum m_i\hat{x}_i\cdot\vec{v}_0}
+		\eea
+		However, $|c_p|=|c_x|=1|$ (by the unitarity). Thus,
+		\be
+			U = c(t, \vec{v}_0) e^{p\hat{P}\cdot\vec{v_0}t/\hbar} e^{iM\hat{X}\cdot\vec{v}_0/\hbar}
+		\ee
+		where $\hat{X}$ describes the position of the center of mass. Now we use the identity
+		\be
+			e^{A+B} = e^{-[A, B]/2}e^Ae^B
+		\ee
+		And using the fact that $e^{A+B}=e^{B+A}$, we can write
+		\be
+			e^Ae^B = e^{[A, B]}e^Be^A
+		\ee
+		Using this in our case is
+		\be
+			e^{p\hat{P}\cdot\vec{v_0}t/\hbar} e^{iM\hat{X}\cdot\vec{v}_0/\hbar} = e^{iMv_0^2t/\hbar} e^{i\hat{P}\cdot\vec{v}_0t/\hbar} e^{-iM\hat{X}\cdot\vec{v_0}}
+		\ee
+		Thus, in three dimensions, we can write:
+		\be
+			\hat{U}(v) = e^{i\hat{P}\cdot\vec{v}_0t/\hbar} e^{-iM\hat{X}\cdot\vec{v_0}}e^{iMv_0^2t/\hbar}
+		\ee
+	\end{answer}
+	
+	\begin{exercise}
+		The Galilean boosts, a.k.a. pure Galilean transformations, form a
+		subgroup of a larger, 10-dimensional group named Galilei (or Galileo) group of space-time transformations:
+		\bea
+			\vec{x} &\to& \vec{x}'=R\vec{x} + \vec{a} + \vec{v}t \\
+			t &\to& t' = t + s
+		\eea
+		where in the addition to the displacement $\vec{a}$ and boost velocity	 $\vec{v}$ studied so far, one also has a spatial rotation $R$ and time displacement $s$. Let $g = (R,  \vec{a}, \vec{v} , s)$ denote such a transformation. Show that the composition law for $g_3 = g_2g_1$, with $g_3 = (R_3 , a_3 , v_3 , s_3)$ is:
+		\bea
+			R_3 &=& R_2R_1 \\
+			\vec{a}_3 &=& \vec{a}_2 + R\vec{a}_1 + \vec{v}_2s_1 \\
+			\vec{v}_3 &=& \vec{v}_2 + R_2\vec{v}_1 \\
+			s_3 &=& s_2 + s_1
+		\eea
+	\end{exercise}
+	\begin{answer}
+		If we apply $g_3$ to the pair $\{\vec{v}, t\}$, we get:
+		\bea
+			\vec{x} &\to& \vec{x}''=R_3\vec{x} + \vec{a}_3 + \vec{v}_3t \\
+			t &\to& t'' = t + s_3
+		\eea
+		Now let us apply $g_1$ to the initial pair, so that later we may apply $g_2$ as well:
+		\bea
+			\vec{x} &\to& \vec{x}'= R_1\vec{x} + \vec{a}_1 + \vec{v}_1t \\
+			t &\to& t' = t + s_1
+		\eea
+		Applying $g_2$ here:
+		\bea
+			\vec{x}' &\to& \vec{x}'' = R_2(R_1\vec{x} + \vec{a}_1 + \vec{v}_1t) + \vec{a}_2 + \vec{v}_2t' \\
+			t' &\to& t'' = (t + s_1) + s_2 = t + (s_2 + s_1)
+		\eea
+		Rearrenging terms in the first of these equations
+		\bea
+			\vec{x}'' &=& R_2R_1\vec{x} + R_2\vec{a}_1 +\vec{a}_2 + R_2\vec{v}_1t + \vec{v_2}t + \vec{v}_2s_1 \\
+				&=& (R_2R_1)\vec{x} + (R_2\vec{a}_1 +\vec{a}_2 + \vec{v}_2s_1) + (R_2\vec{v}_1 + \vec{v_2})t
+		\eea
+		Equating this to the transformation of $g_3$, we get:
+		\bea
+			R_3 &=& R_2R_1 \\
+			\vec{a}_3 &=& R_2\vec{a}_1 + \vec{a}_2 + \vec{v}_2s_1 \\
+			\vec{v}_3 &=& R_2\vec{v}_1 + \vec{v}_2 \\
+			s_3 &=& s_2 + s_1
+		\eea		
+	\end{answer}
+	
+	
+	\begin{exercise}[10.6.1 - Properties of $\vec{J}$]
+		Show by explicit calculation that $[J^2, J_z]=0$. Also verify the identities (10.5) to (10.9).		
+	\end{exercise}
+	\begin{answer}
+		Let us begin proving the commutation relation. We can write $J^2 = J_x^2 + J_y^2 + J_z^2$. It is easy to see that:
+		\bea
+			[J^2, J_z] &=& [J_x^2, J_z] + [J_y^2, J_z] + [J_z^2, J_z] \\
+			&=& J_x[J_x, J_z] + [J_x, J_z]J_x + J_y[J_y, J_z] + [J_y, J_z]J_y \\
+			&=& J_x (-i\hbar J_y) + (-i\hbar J_y)J_x + J_y(i\hbar J_x) + (i\hbar J_x)J_y \\
+			&=& 0
+		\eea
+		The next property is $[J_z, J_\pm]=\pm J_\pm$:
+		\bea
+			[J_z, J_\pm] &=& [J_z, J_+ \pm iJ_y] \\
+				&=& [J_z, J_x] \pm i [J_z, J_y] \\
+				&=& iJ_y \pm (-i^2)J_x \\
+				&=& \pm (J_x \pm i J_y) \\
+				&=& \pm J_\pm
+		\eea
+		The next one is $[J_+, J_-]=2J_z$:
+		\bea
+			[J_+, J_-] &=& [J_x + iJ_y, J_x - iJ_y] \\
+				&=& [J_x, J_x] -i[J_x, J_y] + i[J_y, J_x] + [J_y, J_y] \\
+				&=& -i (iJ_z) + i (-iJ_z) \\
+				&=& 2J_z
+		\eea
+		The next one is $J^2 = \f{1}{2}(J_-J_+ + J_+J_-) + J_z^2$:
+		\bea
+			\f{1}{2}(J_-J_+ + J_+J_-) + J_z^2 &=& \f{1}{2}\Big( (J_x-iJ_y)(J_x+iJ_y) + (J_x+iJ_y)(J_x-iJ_y) \Big) + J_z^2 \\
+				&=& \f{1}{2}\Big( (J_x^2 + iJ_xJ_y -iJ_yJ_x + J_y^2) + (J_x^2 -iJ_xJ_y + iJ_yJ_x + J_y^2) \Big) + J_z^2 \\
+				&=& J_x^2 + J_y^2 + J_z^2 \\
+				&=& J^2
+		\eea
+		The next one is $J_+J_- = J^2 - J_z(J_z-1)$: 
+		\bea
+			J_+J_- &=& (J_x+iJ_y)(J_x-iJ_y) \\
+				&=& J_x^2 -iJ_xJ_y + iJ_yJ_x + J_y^2 \\
+				&=& J^2 - J_z^2 -i[J_x, J_y] \\
+				&=& J^2 - J_z^2 + J_z \\
+				&=& J^2 -J_z(J_z-1)
+		\eea
+		The next one is $J_+J_- = J^2 - J_z(J_z+1)$: 
+		\bea
+			J_+J_- &=& (J_x-iJ_y)(J_x+iJ_y) \\
+			&=& J_x^2 +iJ_xJ_y - iJ_yJ_x + J_y^2 \\
+			&=& J^2 - J_z^2 +i[J_x, J_y] \\
+			&=& J^2 - J_z^2 - J_z \\
+			&=& J^2 -J_z(J_z+1)
+		\eea
+	\end{answer}
+	
+	
+	\begin{exercise}[10.7.2 - Rotation of angular momentum]
+		Let $\mathcal{R}$ be a rotation (10.30) by angles $(\theta, \phi)$. Show that the vector
+		\be
+			U(\mathcal{R})\ket{jm} = e^{-i\phi J_z}e^{-i\theta J_y}\ket{jm}
+		\ee
+		is an eigenvector of the operator
+		\be
+			J_x \sin\theta \cos\phi + J_y \sin\theta\sin\phi + J_z \cos\theta = \vec{J}\cdot\hat{n}
+		\ee
+		with eigenvalue $m$. Here $\hat{n}$ is the unit vector in the direction $(\theta, \phi)$. Hint: adapt (8.29).		
+	\end{exercise}
+	\begin{answer}
+		Equation (10.30) reads
+		\be
+			\mathcal{R}(\theta, \phi) = \mathcal{R}_z(\phi)\mathcal{R}_y(\theta)
+		\ee
+		Also, a rotational in respect to $\hat{n}(\phi)$ ca be written as
+		\be
+			\mathcal{R}_{\hat{n}(\phi)}(\theta) = \mathcal{R}_z(\phi)\mathcal{R}_y(\theta)\mathcal{R}_z(-\phi)
+		\ee
+		
+	\end{answer}
+	
+	
+\end{document}
