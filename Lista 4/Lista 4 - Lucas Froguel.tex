@@ -577,16 +577,268 @@
 	\end{exercise}
 	\begin{answer}
 		First of all, we expect $U(\mathcal{R})\ket{jm}$ to be an eigenvector of $\vec{J}\cdot\hat{n}$ because the first term is the ket $\ket{jm}$ along the $(\theta, \phi)$ direction and the second is the momentum operator projected in the $\hat{n}$ direction, however we see that $\hat{n}$ points along the $(\theta, \phi)$ direction. As $\ket{jm}$ is an eigenket of $\vec{J}$, it is natural to expect their projections along the same axis to also be a pair of eigenket and operator as well. Let us show this mathematically.
+
+		Let $\alpha$ be an auxiliary, small angle. Then a rotation about $\hat{n}$ of an angle $\alpha$ is
+		\be
+			R_{\hat{n}}(\alpha) = e^{-i\alpha \vec{J}\cdot\hat{n}}
+		\ee
+		Or, as a product of rotations (decomposing):
+		\be
+			R_{\hat{n}(\theta, \phi)}(\alpha) = R_z(\phi)R_y(\theta)R_z(\alpha)R_y(-\theta)R_z(-\phi)
+		\ee
+		Using the generators (exponential forms) and letting $\alpha\to0$, we can show that
+		\be
+			\vec{J}\cdot\hat{n}(\theta, \phi) = e^{-i\phi J_z}e^{-i\theta J_y} J_z e^{i\theta J_y} e^{i\phi J_z}
+		\ee
+		Let us show this more explicitly:
+		\bea
+			\vec{J}\cdot\hat{n} &=& J_x \sin\theta \cos\phi + J_y \sin\theta\sin\phi + J_z \cos\theta \\
+				&=& \l(J_x \cos\phi + J_y \sin\phi\r)\sin\theta + J_z \cos\theta \\
+				&=& e^{-i\phi J_z} J_x e^{i\phi J_z}\sin\theta + J_z\cos\theta\l (e^{-i \phi J_z}e^{i\phi J_z} \r) \\
+				&=& e^{-i\phi J_z} \l( J_x \sin\theta + J_z\cos\theta\r)e^{i\phi J_z} \\
+				&=& e^{-i\phi J_z} e^{-i\theta J_y\theta} J_z e^{i\theta J_y}e^{i\phi J_z}
+		\eea
+		where we used the fact that $J_z$ commutes with any $f(J_z)$. Now, applying this form of the angular momentum rotated operator onto our rotated vector, we get
+		\bea
+			\vec{J}\cdot\hat{n}(\theta, \phi)\mathcal{R}(\theta, \phi)\ket{jm} &=& \l(e^{-i\phi J_z}e^{-i\theta J_y} J_z e^{i\theta J_y} e^{i\phi J_z} \r)  e^{-i\phi J_z}e^{-i\theta J_y}\ket{jm} \\
+				&=& e^{-i\phi J_z}e^{-i\theta J_y} J_z \ket{jm} \\
+				&=& m e^{-i\phi J_z}e^{-i\theta J_y} \ket{jm} \\
+				&=& m \mathcal{R}(\theta, \phi)\ket{jm}
+		\eea
+		as we wanted to show. 
 		
-		Equation (10.30) reads
-		\be
-			\mathcal{R}(\theta, \phi) = \mathcal{R}_z(\phi)\mathcal{R}_y(\theta)
-		\ee
-		Also, a rotational in respect to $\hat{n}(\phi)$ ca be written as
-		\be
-			\mathcal{R}_{\hat{n}(\phi)}(\theta) = \mathcal{R}_z(\phi)\mathcal{R}_y(\theta)\mathcal{R}_z(-\phi)
-		\ee
 	\end{answer}
+	
+	
+	\begin{exercise}[10.7.4 - The angular momenta $j=1/2$ and $j = 1$.] 
+		\begin{exercises}
+			\item  Use (10.23) to find the operators $S_x$, $S_y$, and $S_z$ for spin $1/2$.
+			\begin{multianswer}
+				Let us calculate the values. As $j=1/2$, $m=\pm 1/2$. Then,
+				\bea
+					\Braket{ \f{1}{2} | J_\pm | \f{1}{2}} &=& \sqrt{ \f{3}{4} - \f{1}{4}} \delta_{1/2, 1/2\pm1} = 0 \\
+					\Braket{ \f{1}{2} | J_- | -\f{1}{2}} &=& 0 \\
+					\Braket{ \f{1}{2} | J_+ | -\f{1}{2}} &=& \sqrt{ \f{3}{4} + \f{1}{4}}  = \f{1}{2} \\ 
+					\Braket{ -\f{1}{2} | J_- | +\f{1}{2}} &=& \sqrt{ \f{3}{4} + \f{1}{4}}  = \f{1}{2} \\
+					\Braket{ -\f{1}{2} | J_+ | +\f{1}{2}} &=& 0 \\
+					\Braket{ -\f{1}{2} | J_\pm | -\f{1}{2}} &=& 0 \\
+				\eea
+				Here we remember that
+				\be
+					J_\pm = J_x \pm i J_y 
+				\ee
+				which means that
+				\be
+					J_x = \f{J_+ + J_-}{2}, \quad J_y = \f{J_+ - J_y}{2i}
+				\ee
+				Now, using the order $\{\Ket{\f{1}{2}}, \Ket{-\f{1}{2}}\}$ we have:
+				\be
+					J_+ = \f{1}{2}
+						\begin{pmatrix}
+							0 & 1 \\
+							0 & 0 \\
+						\end{pmatrix}
+				\ee
+				and
+				\be
+					J_- = 
+					\begin{pmatrix}
+						0 & 0 \\
+						1 & 0 \\
+					\end{pmatrix}
+				\ee
+				Thus, we see that $J_x=\sigma_x/2$ and $J_y=\sigma_y/2$. Using (10.22), we easily see that $J_z=\sigma_z/2$. 
+			\end{multianswer}
+			
+			% Part 2
+			\item Again using (10.23), calculate the $3\times3$ matrix representations of $J_x$, $J_y$, and $J_z$ for angular momentum $j = 1$.
+			\begin{multianswer}
+				In this case as $j=1$, we have $m=-1, 0 , 1$. We have the mean values:
+				\bea
+					\braket{1, J_\pm, 1} = 0, &\quad& \braket{-1, J_\pm, -1} = 0 \\
+					\braket{1, J_+, 0} = \sqrt{2}, &\quad& \braket{1, J_-, 0} = 0 \\
+					\braket{1, J_+, -1} = 0, &\quad& \braket{1, J_-, -1} = 0 \\
+					\braket{0, J_+, 1} = 0, &\quad& \braket{0, J_-, 1} = \sqrt{2} \\
+					\braket{0, J_+, 0} = 0, &\quad& \braket{0, J_-, 0} = 0 \\
+					\braket{0, J_+, -1} = \sqrt{2}, &\quad& \braket{0, J_-, -1} = 0 \\
+					\braket{-1, J_+, 1} = 0, &\quad& \braket{-1, J_-, 1} = 0 \\
+					\braket{-1, J_+, 0} = 0, &\quad& \braket{-1, J_-, 0} = \sqrt{2} 
+				\eea
+				Thus, using the $\{ 1, 0, -1\}$ ordering
+				\be
+					J_+ = \sqrt{2}
+					\begin{pmatrix}
+						0 & 1 & 0 \\
+						0 & 0 & 1 \\
+						0 & 0 & 0 \\
+					\end{pmatrix}
+				\ee
+				And
+				\be
+				J_- = \sqrt{2}
+				\begin{pmatrix}
+					0 & 0 & 0 \\
+					1 & 0 & 0 \\
+					0 & 1 & 0 \\
+				\end{pmatrix}
+				\ee
+				Again using
+				\be
+					J_x = \f{J_+ + J_-}{2}, \quad J_y = \f{J_+ - J_y}{2i}
+				\ee
+				we have
+				\bea
+					J_x = \f{1}{\sqrt{2}}
+					\begin{pmatrix}
+						0 & 1 & 0 \\
+						1 & 0 & 1 \\
+						0 & 1 & 0 \\
+					\end{pmatrix} \\
+					J_y = \f{i}{\sqrt{2}}
+					\begin{pmatrix}
+						0 & -1 & 0 \\
+						1 & 0 & -1 \\
+						0 & 1 & 0 \\
+					\end{pmatrix}
+				\eea
+				And, finally, $J_z$ from (10.22):
+				\bee
+					= 
+					\begin{pmatrix}
+						1 & 0 & 0 \\
+						0 & 0 & 0 \\
+						0 & 0 & -1 \\
+					\end{pmatrix}
+				\eee
+			\end{multianswer}
+			
+			% Part 3
+			\item Show that for $j = 1$, $J_x$, $J_y$, and $J_z$ are related to the infinitesimal generators (8.26) $T_x$, $T_y$, and $T_z$ by a unitary transformation which takes the Cartesian components of $\hat{r}$ to the spherical
+			components (10.64): $J_i = U^\dagger T_i U$ with
+			\be
+				U = \f{1}{\sqrt{2}}
+				\begin{pmatrix}
+					-1 & 0 & 1 \\
+					-i & 0 & -i \\
+					0 & \sqrt{2} & 0 \\
+				\end{pmatrix}
+			\ee
+			\begin{multianswer}
+				This exercises boils down to a simple calculation and matrix multiplication:
+				\bea
+					J_x &=& \f{1}{2} 
+					\begin{pmatrix}
+						-1 & i & 0 \\
+						0 & 0 & \sqrt{2} \\
+						1 & i & 0 \\
+					\end{pmatrix}
+					\begin{pmatrix}
+						0 & 0 & 0 \\
+						0 & 0 & -i \\
+						0 & i & 0 \\
+					\end{pmatrix}
+					\begin{pmatrix}
+						-1 & 0 & 1 \\
+						-i & 0 & -i \\
+						0 & \sqrt{2} & 0 \\
+					\end{pmatrix} 
+						= \f{1}{2}
+					\begin{pmatrix}
+						0 & \sqrt{2} & 0 \\
+						\sqrt{2} & 0 & \sqrt{2} \\
+						0 & \sqrt{2} & 0 \\
+					\end{pmatrix}
+						= J_x \\
+					J_y &=& \f{1}{2} 
+					\begin{pmatrix}
+						-1 & i & 0 \\
+						0 & 0 & \sqrt{2} \\
+						1 & i & 0 \\
+					\end{pmatrix}
+					\begin{pmatrix}
+						0 & 0 & i \\
+						0 & 0 & 0 \\
+						-i & 0 & 0 \\
+					\end{pmatrix}
+					\begin{pmatrix}
+						-1 & 0 & 1 \\
+						-i & 0 & -i \\
+						0 & \sqrt{2} & 0 \\
+					\end{pmatrix} 
+					= \f{1}{2}
+					\begin{pmatrix}
+						0 & -i\sqrt{2} & 0 \\
+						-i\sqrt{2} & 0 & i\sqrt{2} \\
+						0 & i\sqrt{2} & 0 \\
+					\end{pmatrix}
+					= J_y \\
+					J_z &=& \f{1}{2} 
+					\begin{pmatrix}
+						-1 & i & 0 \\
+						0 & 0 & \sqrt{2} \\
+						1 & i & 0 \\
+					\end{pmatrix}
+					\begin{pmatrix}
+						0 & -i & 0 \\
+						i & 0 & 0 \\
+						0 & 0 & 0 \\
+					\end{pmatrix}
+					\begin{pmatrix}
+						-1 & 0 & 1 \\
+						-i & 0 & -i \\
+						0 & \sqrt{2} & 0 \\
+					\end{pmatrix} 
+					= \f{1}{2}
+					\begin{pmatrix}
+						2 & 0 & 0 \\
+						0 & 0 & 0 \\
+						0 & 0 & -2 \\
+					\end{pmatrix}
+					= J_z 
+				\eea
+			\end{multianswer}
+			
+			% Part 4
+			\item Calculate the rotation matrix $d^{(1)}(\theta)$:
+			\be
+				d^{(1)}(\theta) = e^{-i\theta J_y}
+			\ee
+			and verify (10.39).
+			\begin{multianswer}[true]
+				We first begin noting that
+				\be
+					J_y^3 = -\f{i}{2\sqrt{2}}
+					\begin{pmatrix}
+						0 & -1 & 0 \\
+						1 & 0 & -1 \\
+						0 & 1 & 0 \\
+					\end{pmatrix}^3 = -\f{i}{2\sqrt{2}}
+					\begin{pmatrix}
+						0 & 2 & 0 \\
+						-2 & 0 & 2 \\
+						0 & -2 & 0 \\
+					\end{pmatrix} = J_y
+				\ee
+				Thus, when we taylor expand the exponential:
+				\bea
+					e^{-i\theta J_y} &=& 1 -i\theta J_y +\f{\theta^2}{2}J_y^2 -i\f{\theta^3}{3!}J_y^3 + \f{\theta^4}{4!}J_y^4 + \cdots \\
+						&=& 1 + \Big( \f{\theta^2}{2} + \f{\theta^4}{4!} + \cdots \Big)J_y^2 - i\Big( \theta + \f{\theta^3}{3!} + \cdots \Big)J_y \\
+						&=& 1 -(1-\cos\theta)J_y^2 -i\sin\theta J_y
+				\eea
+				where $1$ is the identity. Plugging the matrices, we easily see that
+				\be
+					d^{(1)}(\theta)=\left(\begin{array}{ccc}
+						\frac{1}{2}(1+\cos \theta) & -\frac{1}{\sqrt{2}} \sin \theta & \frac{1}{2}(1-\cos \theta) \\
+						\frac{1}{\sqrt{2}} \sin \theta & \cos \theta & -\frac{1}{\sqrt{2}} \sin \theta \\
+						\frac{1}{2}(1-\cos \theta) & \frac{1}{\sqrt{2}} \sin \theta & \frac{1}{2}(1+\cos \theta)
+					\end{array}\right)	
+				\ee
+			\end{multianswer}
+			
+		\end{exercises}
+		
+		
+	\end{exercise}
 	
 	
 \end{document}
