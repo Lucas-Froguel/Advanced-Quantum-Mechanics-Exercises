@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.4.14)  2 MAY 2023 10:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Arch Linux) (preloaded format=pdflatex 2023.4.14)  5 JUN 2023 18:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1247,17 +1247,17 @@ mr/m/n/12 0$\T1/cmr/m/it/12 , $\OML/cmm/m/it/12 ^^Z[] \OMS/cmsy/m/n/12 ^^U \OT1
  []
 
 [3] [4] [5]
-Overfull \hbox (13.99115pt too wide) in alignment at lines 362--369
+Overfull \hbox (13.99115pt too wide) in alignment at lines 363--370
  [][][] []
  []
 
 [6]
-Overfull \hbox (59.47995pt too wide) in alignment at lines 391--396
+Overfull \hbox (59.47995pt too wide) in alignment at lines 392--397
  [][][] []
  []
 
 [7] [8] [9]
-Overfull \hbox (4.45235pt too wide) in paragraph at lines 577--579
+Overfull \hbox (4.45235pt too wide) in paragraph at lines 578--580
 \T1/cmr/m/n/12 Isso gera uma ma-triz $\OT1/cmr/m/n/12 4 \OMS/cmsy/m/n/12 ^^B \O
 T1/cmr/m/n/12 4$\T1/cmr/m/n/12 . Va-mos con-sid-erar a seguinte or-de-nação dos
  ve-tores de base $\OMS/cmsy/m/n/12 f[] \OML/cmm/m/it/12 ; [] ; [] 
@@ -1300,7 +1300,7 @@ xmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf-dist/fonts/
 type1/public/cm-super/sfrm1440.pfb></usr/share/texmf-dist/fonts/type1/public/cm
 -super/sfrm2074.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfti1200
 .pfb>
-Output written on "Lista 2.pdf" (14 pages, 283763 bytes).
+Output written on "Lista 2.pdf" (14 pages, 283791 bytes).
 PDF statistics:
  295 PDF objects out of 1000 (max. 8388607)
  244 compressed objects within 3 object streams

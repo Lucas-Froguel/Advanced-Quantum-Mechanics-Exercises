@@ -44,10 +44,10 @@
   <internal package="biblatex" priority="9" active="0">
     <generic>latex</generic>
     <provides type="dynamic">
-      <file>"Prova 1 - Lucas Froguel".bcf</file>
+      <file>"Prova 2".bcf</file>
     </provides>
     <requires type="dynamic">
-      <file>"Prova 1 - Lucas Froguel".bbl</file>
+      <file>"Prova 2".bbl</file>
     </requires>
     <requires type="static">
       <file>blx-dm.def</file>
@@ -57,28 +57,26 @@
       <file>numeric.bbx</file>
       <file>numeric.cbx</file>
       <file>biblatex.cfg</file>
+      <file>english.lbx</file>
     </requires>
   </internal>
   <external package="biblatex" priority="5" active="0">
     <generic>biber</generic>
     <cmdline>
       <binary>biber</binary>
-      <infile>"Prova 1 - Lucas Froguel"</infile>
+      <infile>"Prova 2"</infile>
     </cmdline>
     <input>
-      <file>"Prova 1 - Lucas Froguel".bcf</file>
+      <file>"Prova 2".bcf</file>
     </input>
     <output>
-      <file>"Prova 1 - Lucas Froguel".bbl</file>
+      <file>"Prova 2".bbl</file>
     </output>
     <provides type="dynamic">
-      <file>"Prova 1 - Lucas Froguel".bbl</file>
+      <file>"Prova 2".bbl</file>
     </provides>
     <requires type="dynamic">
-      <file>"Prova 1 - Lucas Froguel".bcf</file>
-    </requires>
-    <requires type="editable">
-      <file>references.bib</file>
+      <file>"Prova 2".bcf</file>
     </requires>
   </external>
 </requests>

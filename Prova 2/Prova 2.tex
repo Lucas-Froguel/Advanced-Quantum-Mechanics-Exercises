@@ -1,0 +1,689 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage[mathscr]{euscript}
+\usepackage{array}
+\usepackage[thinlines]{easytable}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usepackage[margin=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage[portuguese]{babel}
+\usepackage{braket}
+\usepackage{thmtools} 
+\usepackage{hyperref}
+\usepackage{environ}
+\usepackage{enumitem}
+\usepackage[backend=biber, style=numeric]{biblatex} %Imports biblatex package
+%\addbibresource{references.bib} %Import the bibliography file
+\usetikzlibrary{angles,quotes}
+
+\usepackage{lipsum} % Pode tirar esse :D
+
+\graphicspath{.Images/}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,      
+	urlcolor=cyan,
+	pdftitle={Quântica Avançada - P1 - Lucas Froguel}
+}
+
+
+\def\be{\begin{equation}}
+	\def\ee{\end{equation}}
+\def\bee{\begin{equation*}}
+	\def\eee{\end{equation*}}
+\def\bea{\begin{eqnarray*}}
+	\def\eea{\end{eqnarray*}}
+\def\beaa{\begin{eqnarray}}
+	\def\eeaa{\end{eqnarray}}
+
+\def\f{\frac}
+\def\del{\partial}
+
+\def\R{\mathbb{R}}
+\def\K{\mathbb{K}}
+\def\C{\mathbb{C}}
+\def\I{\mathbb{I}}
+\def\Z{\mathbb{Z}}
+\def\Q{\mathbb{Q}}
+\def\N{\mathbb{N}}
+
+\def\cd{\cdot}
+
+\def\v#1{{\boldsymbol{#1}}}
+\def\ve#1{\hat{\boldsymbol#1}}
+
+\def\l{\left}
+\def\r{\right}
+\def\la{\l\langle}
+\def\ra{\r\rangle}
+\def\div{\nabla\cdot}
+\def\curl{\nabla\times}
+\def\grad{\nabla}
+\def\lap{\nabla^2}
+
+\def\s{\quad}
+\def\ss{\qquad}
+\def\infi{\infty}
+\def\p{\partial}
+\def\u{\cup}%union of two sets
+\def\i{\cap}%intersection of two sets
+\def\ds{\oplus}
+
+
+
+\newtheorem{exercise}{Exercise}
+\newtheorem{partinner}{Item}[exercise]
+
+\newlist{exercises}{enumerate}{1}
+\setlist[exercises]{wide = 0pt, listparindent=\parindent,labelsep = 0pt,leftmargin =\labelwidth}
+\setlist[exercises, 1]{label =\itshape \bfseries Item~\arabic*.\; }
+
+\newenvironment{answer}{\noindent\textbf{\textit{Answer.}} \normalfont }{\par\noindent\rule{\textwidth}{0.4pt}}
+\NewEnviron{multianswer}[1][false]{%
+	\ifthenelse{\equal{#1}{true}}%
+	{\def\rulewidth{\textwidth}}%
+	{\def\rulewidth{0.7\textwidth}}%
+	\\ \noindent\textbf{\textit{Answer.}} \normalfont%
+	\BODY%
+	\par\noindent\rule{\rulewidth}{0.1pt}%
+}
+
+
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+
+\DeclareMathOperator{\atan}{atan}
+\DeclareMathOperator{\cotan}{cotan}
+\DeclareMathOperator{\acos}{acos}
+\DeclareMathOperator{\asin}{asin}
+\DeclareMathOperator{\sech}{sech}
+\DeclareMathOperator{\csch}{csch}
+\DeclareMathOperator{\asinh}{asinh}
+\DeclareMathOperator{\atanh}{atanh}
+\DeclareMathOperator{\acoth}{acoth}
+\DeclareMathOperator{\acosh}{acosh}
+\DeclareMathOperator{\acsch}{acsch}
+\DeclareMathOperator{\asech}{asech}
+\DeclareMathOperator{\D}{D}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\Res}{Res}
+
+\title{Mecânica Quântica Avançada \\ Prova 2}
+\author{Lucas Froguel \\ IFT}
+\date{}
+
+\begin{document}
+	\maketitle
+	\listoftheorems[title={Prova 2}]
+	
+	\begin{exercise}
+		The Galilean boosts, a.k.a. pure Galilean transformations, form a
+		subgroup of a larger, 10-dimensional group named Galilei (or Galileo) group of space-time transformations:
+		\bea
+		\vec{x} &\to& \vec{x}'=R\vec{x} + \vec{a} + \vec{v}t \\
+		t &\to& t' = t + s
+		\eea
+		where in the addition to the displacement $\vec{a}$ and boost velocity	 $\vec{v}$ studied so far, one also has a spatial rotation $R$ and time displacement $s$. Let $g = (R,  \vec{a}, \vec{v} , s)$ denote such a transformation. Show that the composition law for $g_3 = g_2g_1$, with $g_3 = (R_3 , a_3 , v_3 , s_3)$ is:
+		\bea
+		R_3 &=& R_2R_1 \\
+		\vec{a}_3 &=& \vec{a}_2 + R\vec{a}_1 + \vec{v}_2s_1 \\
+		\vec{v}_3 &=& \vec{v}_2 + R_2\vec{v}_1 \\
+		s_3 &=& s_2 + s_1
+		\eea
+	\end{exercise}
+	\begin{answer}
+		If we apply $g_3$ to the pair $\{\vec{v}, t\}$, we get:
+		\bea
+		\vec{x} &\to& \vec{x}''=R_3\vec{x} + \vec{a}_3 + \vec{v}_3t \\
+		t &\to& t'' = t + s_3
+		\eea
+		Now let us apply $g_1$ to the initial pair, so that later we may apply $g_2$ as well:
+		\bea
+		\vec{x} &\to& \vec{x}'= R_1\vec{x} + \vec{a}_1 + \vec{v}_1t \\
+		t &\to& t' = t + s_1
+		\eea
+		Applying $g_2$ here:
+		\bea
+		\vec{x}' &\to& \vec{x}'' = R_2(R_1\vec{x} + \vec{a}_1 + \vec{v}_1t) + \vec{a}_2 + \vec{v}_2t' \\
+		t' &\to& t'' = (t + s_1) + s_2 = t + (s_2 + s_1)
+		\eea
+		Rearrenging terms in the first of these equations
+		\bea
+		\vec{x}'' &=& R_2R_1\vec{x} + R_2\vec{a}_1 +\vec{a}_2 + R_2\vec{v}_1t + \vec{v_2}t + \vec{v}_2s_1 \\
+		&=& (R_2R_1)\vec{x} + (R_2\vec{a}_1 +\vec{a}_2 + \vec{v}_2s_1) + (R_2\vec{v}_1 + \vec{v_2})t
+		\eea
+		Equating this to the transformation of $g_3$, we get:
+		\bea
+		R_3 &=& R_2R_1 \\
+		\vec{a}_3 &=& R_2\vec{a}_1 + \vec{a}_2 + \vec{v}_2s_1 \\
+		\vec{v}_3 &=& R_2\vec{v}_1 + \vec{v}_2 \\
+		s_3 &=& s_2 + s_1
+		\eea		
+	\end{answer}
+	
+	% Exercise 2
+	\begin{exercise}
+		\begin{exercises}
+			\item Use the relations
+			\be
+				\begin{aligned}
+					\braket{j'm' | \vec{J}^2 | jm} &= j(j+1)\hbar^2\delta_{jj'}\delta{mm'} \\
+					\braket{j'm' | J_0 | jm} &= m\hbar \delta_{mm'} \\
+					\braket{j'm' | J_\pm | jm} &= \hbar \sqrt{j(j+1) - m(m \pm 1)} \delta_{jj'}\delta_{m',m\pm1}
+				\end{aligned}
+			\ee
+			to find the operators $S_x, S_y, S_z$ for spin $j=1/2$.
+			\begin{multianswer}
+				First of all, when $j=1/2$, then $m=\pm 1/2$. The easiest is $S_z$:
+				\be
+					S_z = \f{\hbar}{2}
+					\begin{pmatrix}
+						1 & 0 \\
+						0 & -1 \\
+					\end{pmatrix}
+				\ee
+				The other two we can find as following:
+				\be
+					S_\pm = S_x \pm iS_y
+				\ee
+				Thus, inverting:
+				\bea
+					S_x &=& \f{S_+ + S_-}{2} \\
+					S_y &=& \f{S_+ - S_-}{2i}
+				\eea
+				We must only find $S\pm$:
+				\bea
+					S_+ &=& \hbar
+						\begin{pmatrix}
+							0 & 1 \\
+							0 & 0 \\
+						\end{pmatrix} \\
+					S_- &=& \hbar
+					\begin{pmatrix}
+						0 & 0 \\
+						1 & 0 \\
+					\end{pmatrix}
+				\eea
+				Therefore, we see that
+				\bea
+					S_x &=& \f{\hbar}{2}
+						\begin{pmatrix}
+							0 & 1 \\
+							1 & 0 \\
+						\end{pmatrix} \\
+					S_y &=& \f{\hbar}{2i}
+					\begin{pmatrix}
+						0 & 1 \\
+						-1 & 0 \\
+					\end{pmatrix} 
+				\eea 
+			\end{multianswer}
+			
+			\item Using the same relations, find the matrix representations of $J_x, J_y, J_z$ for $j=1$. 
+			\begin{multianswer}
+				Now with $j=1$, we have $m=-1, 0, 1$. Again, the easiest is $J_z$:
+				\be
+					J_z = \hbar \begin{pmatrix}
+						1 & 0 & 0 \\
+						0 & 0 & 0 \\
+						0 & 0 & -1 \\
+					\end{pmatrix}
+				\ee
+				We can again find $J_{x, y}$ by means of $J_\pm$, thus we shall find them first. 
+				\bea
+					J_+ &=& \hbar 
+						\begin{pmatrix}
+							0 & \sqrt{2} & 0 \\
+							0 & 0 & \sqrt{2} \\
+							0 & 0 & 0 \\
+						\end{pmatrix} \\
+					J_- &=& \hbar 
+					\begin{pmatrix}
+						0 & 0 & 0 \\
+						\sqrt{2} & 0 & 0 \\
+						0 & \sqrt{2} & 0 \\
+					\end{pmatrix}
+				\eea
+				Summing and subtracting accordingly:
+				\bea
+					J_x &=& \f{\hbar}{\sqrt{2}} \begin{pmatrix}
+						0 & 1 & 0 \\
+						1 & 0 & 1 \\
+						0 & 1 & 0 \\
+					\end{pmatrix} \\
+					J_y &=& \f{\hbar}{i\sqrt{2}} \begin{pmatrix}
+						0 & 1 & 0 \\
+						-1 & 0 & 1 \\
+						0 & -1 & 0 \\
+					\end{pmatrix}
+				\eea				
+			\end{multianswer}
+			
+			\item Show that, for $j=1$, the cartesian components are related to the infinitesiaml generators $T_x, T_y, T_z$ by a unitary transformation
+			\be
+				U = \f{1}{\sqrt{2}} 
+					\begin{pmatrix}
+						-1 & 0 & 1 \\
+						-i & 0 & -i \\
+						0 & \sqrt{2} & 0 \\
+					\end{pmatrix}
+			\ee
+			with $J_i=U^\dagger T_i U$. 
+			\begin{multianswer}
+				All we need to do is two matrix multiplications for each coordinate in order to check that the expression works. Let us begin with the first one:
+				\bea
+					U^\dagger T_x U &=& \f{1}{2} 
+						\begin{pmatrix}
+							-1 & i & 0 \\
+							0 & 0 & \sqrt{2} \\
+							1 & i & 0 \\
+						\end{pmatrix}
+						\begin{pmatrix}
+							0 & 0 & 0 \\
+							0 & 0 & -i \\
+							0 & i & 0 \\
+						\end{pmatrix}
+						\begin{pmatrix}
+							-1 & 0 & 1 \\
+							-i & 0 & -i \\
+							0 & \sqrt{2} & 0 \\
+						\end{pmatrix} \\
+					&=& \f{1}{2} 
+						\begin{pmatrix}
+							-1 & i & 0 \\
+							0 & 0 & \sqrt{2} \\
+							1 & i & 0 \\
+						\end{pmatrix}
+						\begin{pmatrix}
+							0 & 0 & 0 \\
+							0 & -i\sqrt{2} & 0 \\
+							1 & 0 & 1 \\
+						\end{pmatrix} \\
+					&=& \f{1}{2} 
+						\begin{pmatrix}
+							0 & \sqrt{2} & 0 \\
+							\sqrt{2} & 0 & \sqrt{2} \\
+							0 & \sqrt{2} & 0 \\
+						\end{pmatrix} \\
+					&=& \f{1}{\sqrt{2}} 
+						\begin{pmatrix}
+							0 & 1 & 0 \\
+							1 & 0 & 1 \\
+							0 & 1 & 0 \\
+						\end{pmatrix} \\
+					&=& J_x
+				\eea
+				Doing the same for the next:
+				\bea
+					U^\dagger T_y U &=& \f{1}{2} 
+						\begin{pmatrix}
+							-1 & i & 0 \\
+							0 & 0 & \sqrt{2} \\
+							1 & i & 0 \\
+						\end{pmatrix}
+						\begin{pmatrix}
+							0 & 0 & i \\
+							0 & 0 & 0 \\
+							-i & 0 & 0 \\
+						\end{pmatrix}
+						\begin{pmatrix}
+							-1 & 0 & 1 \\
+							-i & 0 & -i \\
+							0 & \sqrt{2} & 0 \\
+						\end{pmatrix} \\
+					&=& \f{1}{2} 
+						\begin{pmatrix}
+							-1 & i & 0 \\
+							0 & 0 & \sqrt{2} \\
+							1 & i & 0 \\
+						\end{pmatrix}
+						\begin{pmatrix}
+							0 & i\sqrt{2} & 0 \\
+							0 & 0 & 0 \\
+							i & 0 & -i \\
+						\end{pmatrix} \\
+						&=& \f{1}{2} 
+						\begin{pmatrix}
+							0 & -i\sqrt{2} & 0 \\
+							i\sqrt{2} & 0 & -i\sqrt{2} \\
+							0 & i\sqrt{2} & 0 \\
+						\end{pmatrix} \\
+					&=& \f{1}{i\sqrt{2}} 
+						\begin{pmatrix}
+							0 & 1 & 0 \\
+							-1 & 0 & 1 \\
+							0 & -1 & 0 \\
+						\end{pmatrix} \\
+					&=& J_y
+				\eea
+				Finally,
+				\bea
+					U^\dagger T_z U &=& \f{1}{2} 
+						\begin{pmatrix}
+							-1 & i & 0 \\
+							0 & 0 & \sqrt{2} \\
+							1 & i & 0 \\
+						\end{pmatrix}
+						\begin{pmatrix}
+							0 & -i & 0 \\
+							i & 0 & 0 \\
+							0 & 0 & 0 \\
+						\end{pmatrix}
+						\begin{pmatrix}
+							-1 & 0 & 1 \\
+							-i & 0 & -i \\
+							0 & \sqrt{2} & 0 \\
+						\end{pmatrix} \\
+					&=& \f{1}{2} 
+						\begin{pmatrix}
+							-1 & i & 0 \\
+							0 & 0 & \sqrt{2} \\
+							1 & i & 0 \\
+						\end{pmatrix}
+						\begin{pmatrix}
+							-1 & 0 & -1 \\
+							-i & 0 & i \\
+							0 & 0 & 0 \\
+						\end{pmatrix} \\
+					&=& \f{1}{2} 
+						\begin{pmatrix}
+							2 & 0 & 0 \\
+							0 & 0 & 0 \\
+							0 & 0 & 2 \\
+						\end{pmatrix} \\
+					&=& \begin{pmatrix}
+							1 & 0 & 0 \\
+							0 & 0 & 0 \\
+							0 & 0 & 1 \\
+						\end{pmatrix} \\
+					&=& J_z 
+				\eea
+			\end{multianswer}
+			
+			\item Find the rotation matrix $d^{(1)}(\theta)$
+			\be
+				d^{(1)} = e^{-i\theta J_y}
+			\ee
+			\begin{multianswer}[true]
+				Let us first show that $J_y=J_y^3$:
+				\bea
+					J_y^3 &=& -\f{1}{2i\sqrt{2}} 
+						\begin{pmatrix}
+							0 & 1 & 0 \\
+							-1 & 0 & 1 \\
+							0 & -1 & 0 \\
+						\end{pmatrix}
+						\begin{pmatrix}
+							0 & 1 & 0 \\
+							-1 & 0 & 1 \\
+							0 & -1 & 0 \\
+						\end{pmatrix}
+						\begin{pmatrix}
+							0 & 1 & 0 \\
+							-1 & 0 & 1 \\
+							0 & -1 & 0 \\
+						\end{pmatrix} \\ 
+					&=& \f{1}{2i\sqrt{2}} 
+						\begin{pmatrix}
+							0 & 1 & 0 \\
+							-1 & 0 & 1 \\
+							0 & -1 & 0 \\
+						\end{pmatrix}
+						\begin{pmatrix}
+							-1 & 0 & 1 \\
+							0 & -2 & 0 \\
+							1 & 0 & -1 \\
+						\end{pmatrix} \\
+					&=& \f{1}{2i\sqrt{2}}
+						\begin{pmatrix}
+							0 & -2 & 0 \\
+							2 & 0 & -2 \\
+							0 & 2 & 0 \\
+						\end{pmatrix} \\
+					&=& J_y
+				\eea
+				Now, we can taylor expand the exponential:
+				\bea
+					d^{(1)}(\theta) &=& 1 - i\theta J_y + \f{\theta^2}{2} J_y^2 - i\f{\theta^3}{3!} J_y^3 + \cdots \\
+						&=& \mathbb{I} + \l(\f{\theta^2}{2} + \f{\theta^4}{4!} + \cdots \r) J_y^2 - i\l(\theta + \f{\theta^3}{3!} + \cdots \r) J_y \\
+						&=& \mathbb{I} + (1-\cos(\theta))J_y^2 - i\sin(\theta) J_y
+				\eea
+				where we used that $J_y^4=J_y^2$. Now, we only need to plug the matrix definition of $\mathbb{I}, J_y$ and $J_y^2$ to finish. 
+				\bea
+					d^{(1)}(\theta) &=& 
+						\begin{pmatrix}
+							1 & 0 & 0 \\
+							0 & 1 & 0 \\
+							0 & 0 & 1 \\
+						\end{pmatrix}
+						- \f{1-\cos\theta}{2}
+						\begin{pmatrix}
+							-1 & 0 & 1 \\
+							0 & -2 & 0 \\
+							1 & 0 & -1 \\
+						\end{pmatrix}
+						+ \f{\sin\theta}{\sqrt{2}}
+						\begin{pmatrix}
+							0 & 1 & 0 \\
+							-1 & 0 & 1 \\
+							0 & -1 & 0 \\
+						\end{pmatrix} \\
+					&=& \begin{pmatrix}
+							(1+\cos\theta/2 & -\sin\theta/\sqrt{2} & (1-\cos\theta)/2 \\
+							\sin\theta/\sqrt{2} & \cos\theta & -\sin\theta/\sqrt{2} \\
+							(1-\cos\theta)/2 & \sin\theta/\sqrt{2} & (1+\cos\theta)/2 \\
+						\end{pmatrix}
+				\eea
+			\end{multianswer}
+		\end{exercises}
+	\end{exercise}
+	
+	\begin{exercise}
+		Consider the quantum harmonic oscilator. 
+	\end{exercise}
+	\begin{answer}
+		The non relativistic relation is
+		\be
+			T = \f{p^2}{2M}
+		\ee
+		However, if we consider relativity, we should use
+		\be
+			T = E - mc^2
+		\ee
+		Moreover, we also have the relation
+		\be
+			E^2 = (mc^2)^2 + (pc)^2
+		\ee
+		Thus, we can write
+		\bea
+			T &=& \sqrt{(mc^2)^2 + (pc)^2} - mc^2 \\
+			&=& mc^2\l( \sqrt{1 + \l(\f{p}{mc}\r)^2} - 1 \r)
+		\eea
+		If we taylor expand with $p\geq mc^2$ up to first order, we get the original expression for $T$, which indicates this equation is correct. Now, let us consider also second order corrections:
+		\bea
+			T &=& mc^2\l( \sqrt{1 + \l(\f{p}{mc}\r)^2} - 1 \r) \\
+				&=& mc^2 \l( \f{1}{2}\l(\f{p}{mc}\r)^2 - \f{1}{8}\l(\f{p}{mc}\r)^4 \r) \\
+				&=& \f{p^2}{2m} - \f{p^4}{8m^3c^2}
+		\eea
+		Using this, we can write our hamiltonian as:
+		\be
+			H = H_0 + W
+		\ee
+		where 
+		\bea
+			H_0 &=& \f{P^2}{2m} + \f{1}{2}m\omega^2 X^2 \\
+			W &=& -\f{P^4}{8m^3c^2}
+		\eea
+		We know, then, that our $1/c^2$ correction to the ground state eigenenergy is:
+		\be
+			\Delta E = \braket{0^{(0)} | W | 0^{(0)} }
+		\ee
+		where $\ket{0^{(0)}}$ is the non-perturbed ground state ket. We can write
+		\be
+			\hat{P} = i\sqrt{\f{\hbar m \omega}{2}}(a^\dagger - a)
+		\ee
+		Thus,
+		\bea
+			\hat{P}^4 &=& \l( \f{\hbar m\omega}{2} \r)^2 (a^\dagger-a)^4 \\
+				&=& \l( \f{\hbar m\omega}{2} \r)^2 (a^\dagger-a)(a^\dagger-a)(a^\dagger-a)(a^\dagger-a) \\
+				&=& \l( \f{\hbar m\omega}{2} \r)^2 ((a^\dagger)^2 - 2N +a^2)((a^\dagger)^2 - 2N +a^2) \\
+				&=& \l( \f{\hbar m\omega}{2} \r)^2 ( (a^\dagger)^4 -2(a^\dagger)^2N + (a^\dagger)^2a^2 - 2N(a^\dagger)^2 + 4N^2 -2Na^2 + a^2(a^\dagger)^2 -2a^2N + a^4 ) 
+		\eea
+		where we used the hermiticity of $N$. Now, let us find the braket of interest, writing the constants in front of $\hat{P}^4$ simply as $c$ for now. 
+		\bea
+			\hat{P}^4 &=& c \braket{0 | (a^\dagger)^4 -2(a^\dagger)^2N + (a^\dagger)^2a^2 - 2N(a^\dagger)^2 + 4N^2 -2Na^2 + a^2(a^\dagger)^2 -2a^2N + a^4 | 0} \\
+				&=& c\braket{0 | (a^\dagger)^4 - 2N(a^\dagger)^2 + a^2(a^\dagger)^2 | 0} \\
+				&=& c( 2\sqrt{6}\braket{0 | 4} -4\sqrt{2}\braket{0 | 2} + 2\braket{0 | 0} ) \\
+				&=& 2c
+		\eea
+		Thus,
+		\be
+			\Delta E = -2\l( \f{\hbar m \omega}{2} \r)^2 \l( \f{1}{8m^3c^2} \r) = -\f{\hbar^2\omega^2}{16 m c^2}
+		\ee
+	\end{answer}
+	
+	\begin{exercise}
+		Consider two spin-1, identical, non-interacting particles.
+		\begin{exercises}
+			\item Suppose the spacial part of the vector state is symmetric under pair exchange. Let $\ket{m}=\{ +, 0, - \}$. If possible, build the 3-particle state in the following scenarios. Can the state be written as a eigenket of the total spin $\vec{S}$? If yes, do it and find the total spin. 
+			\begin{enumerate}
+				\item All particles in the state $\ket{+}$. 
+				\begin{multianswer}
+					The total state is:
+					\be
+						\ket{\psi} = \ket{+++}
+					\ee
+					The total spin is $\vec{S} = \vec{S}_1 + \vec{S}_2 + \vec{S}_3$, thus
+					\bea
+						\vec{S}\ket{+++} &=& \l(\vec{S}_1 + \vec{S}_2 + \vec{S}_3\r)\ket{+++} \\
+							&=& 3\hbar \ket{+++}
+					\eea
+					so the total spin is $3\hbar$ and our ket is an eigenket of $\vec{S}$. 
+				\end{multianswer}
+				\item Two particles is the $\ket{+}$ state and one in the $\ket{0}$ state. 
+				\begin{multianswer}
+					We can write:
+					\be
+						\ket{\psi} = \f{1}{\sqrt{3}}\l( \ket{++0} + \ket{+0+} + \ket{0++} \r)
+					\ee
+					The total spin is:
+					\bea
+						\vec{S}\ket{\psi} &=& \f{1}{\sqrt{3}} \l(\vec{S}_1 + \vec{S}_2 + \vec{S}_3\r) \l( \ket{++0} + \ket{+0+} + \ket{0++} \r) \\
+							&=& \f{\hbar}{\sqrt{3}} \l( 2\ket{++0} + 2\ket{+0+} + 2\ket{0++} \r) \\
+							&=& \f{2\hbar}{\sqrt{3}} \l( \ket{++0} + \ket{+0+} + \ket{0++} \r)
+					\eea
+					so, again, our ket is an eigenket of the total spin with value $2\hbar$. 
+				\end{multianswer}
+				\item The three particles in different states.
+				\begin{multianswer}
+					We can write
+					\be
+						\ket{\psi} = \f{1}{\sqrt{3!}}\l( \ket{+0-} + \ket{+-0} + \ket{-+0} + \ket{-0+} + \ket{0-+} + \ket{0+-} \r)
+					\ee
+					As for the total spin, it is quite easy to see that $\vec{S}=0$, because $\vec{S}\ket{kk'k''}=(+\hbar) + (0\hbar) + (-\hbar) = 0$ if all states are different. Thus, $\ket{\psi}$ is also an eigenket of the total spin with eigenvalue 0. 
+				\end{multianswer}
+			\end{enumerate}
+			
+			\item Now do the same, but supposing an anti-symmetric state vector.
+			\begin{enumerate}
+				\item All states in the $\ket{+}$ state.
+				\begin{multianswer}
+					There is no such anti-symmetrical state like this. 
+				\end{multianswer}
+				\item Two particles is the $\ket{+}$ state and one in the $\ket{0}$ state. 
+				\begin{multianswer}
+					We can write the state using the slater determinant:
+					\bea
+						\ket{\psi} &=& \f{1}{\sqrt{3}}
+						\det \begin{bmatrix}
+							\ket{+} & \ket{+} & \ket{0} \\
+							\ket{+} & \ket{+} & \ket{0} \\
+							\ket{+} & \ket{+} & \ket{0} \\
+						\end{bmatrix} \\
+							&=&  0
+					\eea
+					so the answer is again no.
+					\item The three particles in different states.
+					We can write the state using the slater determinant:
+					\bea
+						\ket{\psi} &=& \f{1}{\sqrt{3!}}
+						\det \begin{bmatrix}
+							\ket{+} & \ket{+} & \ket{-} \\
+							\ket{+} & \ket{+} & \ket{-} \\
+							\ket{+} & \ket{+} & \ket{-} \\
+						\end{bmatrix} \\
+						&=&  \f{1}{\sqrt{3!}}\l( \ket{+0-} - \ket{+-0} + \ket{-+0} - \ket{-0+} + \ket{0-+} - \ket{0+-} \r)
+					\eea
+					Here, the total spin is again zero and our state is an eigenket of $\vec{S}$. 
+				\end{multianswer}
+			\end{enumerate}
+		\end{exercises}
+	\end{exercise}
+	
+	
+	\begin{exercise}
+		Consider the hamiltonian:
+		\be
+			\hat{H} = \sum_\alpha T_\alpha a^\dagger_\alpha a_\alpha + \sum_{\alpha, \beta, \gamma} V_{\alpha\beta\gamma}\l( a^\dagger_\alpha a_\beta a_\gamma + a^\dagger_\alpha a^\dagger_\beta a_\gamma \r)
+		\ee
+		where $V_{\alpha, \beta, \gamma}=V^*_{\alpha, \beta, \gamma}$ and $T_\alpha = T^*_\alpha$ are symmetrical in all indices	and the operators $a_\alpha, a^\dagger_\alpha$ satisfy the bosonic commutation relations.
+		\begin{exercises}
+			\item Is this hamiltonian hermitian? Prove your answer.
+			\begin{multianswer}
+				Let us calculate it, element by element. The first term is
+				\bea
+					T^\dagger &=& \l(\sum_\alpha T_\alpha a^\dagger_\alpha a_\alpha \r)^\dagger \\
+						&=& \sum_\alpha T^*_\alpha (a^\dagger_\alpha)(a^\dagger_\alpha)^\dagger \\
+						&=& \sum_\alpha T_\alpha a^\dagger_\alpha a_\alpha \\
+						&=& T
+				\eea
+				The second term is:
+				\bea
+					V^\dagger &=& \l(\sum_{\alpha, \beta, \gamma} V_{\alpha\beta\gamma}\l( a^\dagger_\alpha a_\beta a_\gamma + a^\dagger_\alpha a^\dagger_\beta a_\gamma \r)\r)^\dagger \\
+						&=& \sum_{\alpha, \beta, \gamma} V^*_{\alpha\beta\gamma}\l( a^\dagger_\gamma a_\beta^\dagger a_\alpha + a^\dagger_\gamma a_\beta a_\alpha \r) \\
+						&=& \sum_{\alpha, \beta, \gamma} V_{\gamma\beta\alpha}\l(  a^\dagger_\alpha a_\beta^\dagger a_\gamma + a^\dagger_\alpha a_\beta a_\gamma \r) \\
+						&=& \sum_{\alpha, \beta, \gamma} V_{\alpha\beta\gamma}\l( a^\dagger_\alpha a_\beta a_\gamma + a^\dagger_\alpha a^\dagger_\beta a_\gamma \r) \\
+						&=& V
+				\eea
+				where we exchanged $\alpha$ and $\gamma$ because they are just symbols we can assign any name to and then we used the fact that $V_{\alpha\beta\gamma}$ is symmetrical. Thus, 
+				\be
+					H = H^\dagger
+				\ee
+			\end{multianswer}
+			
+			\item Does this hamiltonian conserve the number of particles $N=\sum_\alpha a^\dagger_\alpha a_\alpha$?
+			\begin{multianswer}[true]
+				We know $N$ is a conserved quantity if it commutes with the hamiltonian $H$. So, let us calculate it. We can separate our in two steps by considering:
+				\bea
+					[H, N] &=& HN - NH \\
+						&=& (T+V)N - N(T+V) \\
+						&=& (TN - NT) + (VN - NV) \\
+						&=& [T, N] + [V, N]
+				\eea
+				So, let's to it in the appropriate order.
+				\bea
+					[T, N] &=& TN - NT \\
+						&=& \l(\sum_\alpha T_\alpha a^\dagger_\alpha a_\alpha \r) \l( \sum_\beta a^\dagger_\beta a_\beta \r) - \l( \sum_\beta a^\dagger_\beta a_\beta \r)\l(\sum_\alpha T_\alpha a^\dagger_\alpha a_\alpha \r) \\
+						&=& \sum_{\alpha, \beta} T_\alpha a^\dagger_\alpha a_\alpha a^\dagger_\beta a_\beta - a^\dagger_\beta a_\beta T_\alpha a^\dagger_\alpha a_\alpha \\
+						&=& \sum_{\alpha, \beta} T_\alpha( a^\dagger_\beta a_\beta - a^\dagger_\beta a_\beta )a^\dagger_\alpha a_\alpha \\
+						&=& 0
+				\eea
+				where we used the fact that $[N_\alpha, N_\beta] = 0$ and that $T_\alpha$ is real. Now for the second term, we must do something similar:
+				\bea
+					[V, N] &=& \l(\sum_{\alpha, \beta, \gamma} V_{\alpha\beta\gamma}\l( a^\dagger_\alpha a_\beta a_\gamma + a^\dagger_\alpha a^\dagger_\beta a_\gamma \r)\r) \l( \sum_\sigma a^\dagger_\sigma a_\sigma \r) - \l( \sum_\sigma a^\dagger_\sigma a_\sigma \r) \l(\sum_{\alpha, \beta, \gamma} V_{\alpha\beta\gamma}\l( a^\dagger_\alpha a_\beta a_\gamma + a^\dagger_\alpha a^\dagger_\beta a_\gamma \r)\r) \\
+					&=& 
+				\eea 
+			\end{multianswer}
+			
+		\end{exercises}		
+	\end{exercise}
+	
+	
+\end{document}
